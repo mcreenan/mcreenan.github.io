@@ -66,32 +66,32 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | — | Pending |
-| INFRA-02 | — | Pending |
-| INFRA-03 | — | Pending |
-| INFRA-04 | — | Pending |
-| INFRA-05 | — | Pending |
-| SWITCH-01 | — | Pending |
-| SWITCH-02 | — | Pending |
-| SWITCH-03 | — | Pending |
-| WIN31-01 | — | Pending |
-| WIN31-02 | — | Pending |
-| WIN31-03 | — | Pending |
-| WIN31-04 | — | Pending |
-| WIN95-01 | — | Pending |
-| WIN95-02 | — | Pending |
-| WIN95-03 | — | Pending |
-| WIN95-04 | — | Pending |
-| WIN95-05 | — | Pending |
-| SHELL-01 | — | Pending |
-| SHELL-02 | — | Pending |
-| SHELL-03 | — | Pending |
+| INFRA-01 | Phase 2 | Pending |
+| INFRA-02 | Phase 2 | Pending |
+| INFRA-03 | Phase 2 | Pending |
+| INFRA-04 | Phase 2 | Pending |
+| INFRA-05 | Phase 2 | Pending |
+| SWITCH-01 | Phase 2 | Pending |
+| SWITCH-02 | Phase 2 | Pending |
+| SWITCH-03 | Phase 2 | Pending |
+| WIN31-01 | Phase 3 | Pending |
+| WIN31-02 | Phase 3 | Pending |
+| WIN31-03 | Phase 3 | Pending |
+| WIN31-04 | Phase 3 | Pending |
+| WIN95-01 | Phase 4 | Pending |
+| WIN95-02 | Phase 4 | Pending |
+| WIN95-03 | Phase 4 | Pending |
+| WIN95-04 | Phase 4 | Pending |
+| WIN95-05 | Phase 4 | Pending |
+| SHELL-01 | Phase 5 | Pending |
+| SHELL-02 | Phase 5 | Pending |
+| SHELL-03 | Phase 5 | Pending |
 
 **Coverage:**
 - v2.0 requirements: 20 total
-- Mapped to phases: 0
-- Unmapped: 20
+- Mapped to phases: 20
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-21*
-*Last updated: 2026-03-21 after initial definition*
+*Last updated: 2026-03-21 after roadmap creation*
