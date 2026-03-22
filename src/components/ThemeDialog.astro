@@ -1,0 +1,72 @@
+---
+---
+
+<dialog id="theme-dialog" class="theme-dialog">
+	<div class="theme-dialog-content">
+		<div class="theme-dialog-title">Select Theme</div>
+		<div class="theme-dialog-options">
+			<label class="theme-option">
+				<input type="radio" name="theme" value="retro" />
+				<span>Retro</span>
+			</label>
+			<label class="theme-option">
+				<input type="radio" name="theme" value="win31" />
+				<span>Win 3.1</span>
+			</label>
+			<label class="theme-option">
+				<input type="radio" name="theme" value="win95" />
+				<span>Win 95</span>
+			</label>
+		</div>
+		<button class="button theme-dialog-close" type="button">Apply Theme</button>
+	</div>
+</dialog>
+
+<script>
+	function initThemeDialog() {
+		const dialog = document.getElementById('theme-dialog') as HTMLDialogElement | null;
+		if (!dialog) return;
+
+		const radios = dialog.querySelectorAll<HTMLInputElement>('input[name="theme"]');
+		const currentTheme = localStorage.getItem('theme') || 'retro';
+
+		radios.forEach((r) => {
+			if (r.value === currentTheme) {
+				r.checked = true;
+			}
+			r.addEventListener('change', () => {
+				localStorage.setItem('theme', r.value);
+				document.documentElement.setAttribute('data-theme', r.value);
+			});
+		});
+
+		const closeBtn = dialog.querySelector('.theme-dialog-close');
+		if (closeBtn) {
+			closeBtn.addEventListener('click', () => {
+				dialog.close();
+			});
+		}
+
+		dialog.addEventListener('click', (e) => {
+			if (e.target === dialog) {
+				dialog.close();
+			}
+		});
+	}
+
+	document.addEventListener('astro:after-swap', initThemeDialog);
+	initThemeDialog();
+
+	(window as any).openThemeDialog = function () {
+		const dialog = document.getElementById('theme-dialog') as HTMLDialogElement | null;
+		if (!dialog) return;
+
+		const radios = dialog.querySelectorAll<HTMLInputElement>('input[name="theme"]');
+		const currentTheme = localStorage.getItem('theme') || 'retro';
+		radios.forEach((r) => {
+			r.checked = r.value === currentTheme;
+		});
+
+		dialog.showModal();
+	};
+</script>
