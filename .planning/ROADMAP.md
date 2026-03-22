@@ -22,7 +22,7 @@ A single-phase migration: replace Yarn with Bun as the package manager for the A
 **Plans:** 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — Run Bun migration, verify local builds, deploy to GitHub Pages
+- [x] 01-01-PLAN.md — Run Bun migration, verify local builds, deploy to GitHub Pages
 
 ## Progress
 

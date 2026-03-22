@@ -7,9 +7,9 @@
 
 ### Package Manager Migration
 
-- [ ] **PKG-01**: Replace yarn.lock with bun.lockb by running `bun install`
-- [ ] **PKG-02**: Remove yarn.lock from the repository
-- [ ] **PKG-03**: All existing npm scripts (dev, start, build, preview, astro) work via `bun run`
+- [x] **PKG-01**: Replace yarn.lock with bun.lockb by running `bun install`
+- [x] **PKG-02**: Remove yarn.lock from the repository
+- [x] **PKG-03**: All existing npm scripts (dev, start, build, preview, astro) work via `bun run`
 
 ### CI/CD
 
@@ -18,8 +18,8 @@
 
 ### Verification
 
-- [ ] **VER-01**: Local dev server starts and serves pages correctly
-- [ ] **VER-02**: Production build completes without errors
+- [x] **VER-01**: Local dev server starts and serves pages correctly
+- [x] **VER-02**: Production build completes without errors
 
 ## v2 Requirements
 
@@ -38,13 +38,13 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PKG-01 | Phase 1 | Pending |
-| PKG-02 | Phase 1 | Pending |
-| PKG-03 | Phase 1 | Pending |
+| PKG-01 | Phase 1 | Complete |
+| PKG-02 | Phase 1 | Complete |
+| PKG-03 | Phase 1 | Complete |
 | CI-01 | Phase 1 | Pending |
 | CI-02 | Phase 1 | Pending |
-| VER-01 | Phase 1 | Pending |
-| VER-02 | Phase 1 | Pending |
+| VER-01 | Phase 1 | Complete |
+| VER-02 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 7 total
