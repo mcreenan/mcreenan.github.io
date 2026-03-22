@@ -1,45 +1,32 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: Yarn to Bun Migration
-status: complete
-stopped_at: Milestone v1.0 complete
-last_updated: "2026-03-22"
+milestone: v2.0
+milestone_name: Theme System
+status: active
+stopped_at: Defining requirements
+last_updated: "2026-03-21"
 progress:
-  total_phases: 1
-  completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-22)
+See: .planning/PROJECT.md (updated 2026-03-21)
 
-**Core value:** Replace Yarn with Bun cleanly without breaking the build, dev server, or GitHub Pages deployment.
-**Current focus:** Milestone v1.0 complete — no next milestone planned
+**Core value:** A theme-switchable personal site where each theme authentically recreates its target OS aesthetic.
+**Current focus:** Defining requirements for v2.0
 
 ## Current Position
 
-Milestone: v1.0 (complete)
-Phase: All complete
-Plan: All complete
-
-## Performance Metrics
-
-**Velocity:**
-
-- Total plans completed: 1
-- Average duration: ~15min
-- Total execution time: ~15min
-
-**By Phase:**
-
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| Phase 01 | 1 | 15min | 15min |
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-03-21 — Milestone v2.0 started
 
 ## Accumulated Context
 
@@ -55,10 +42,10 @@ None.
 
 ### Blockers/Concerns
 
-None — all resolved.
+None.
 
 ## Session Continuity
 
-Last session: 2026-03-22
-Stopped at: Milestone v1.0 complete
+Last session: 2026-03-21
+Stopped at: Defining requirements for v2.0
 Resume file: None

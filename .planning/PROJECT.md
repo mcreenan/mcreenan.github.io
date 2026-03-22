@@ -1,12 +1,22 @@
-# Yarn to Bun Migration
+# matt.creenan.me
 
 ## What This Is
 
-Personal site (matt.creenan.me) — an Astro-based static site deployed to GitHub Pages. Now uses Bun as the package manager (migrated from Yarn in v1.0).
+Personal site (matt.creenan.me) — an Astro-based static site deployed to GitHub Pages with a retro desktop OS aesthetic. Features a switchable theme system with three themes: the current retro desktop, Windows 3.1, and Windows 95. Each theme provides authentic OS chrome, and the Windows themes present sections as clickable desktop apps that open in themed windows.
 
 ## Core Value
 
-Replace Yarn with Bun cleanly without breaking the build, dev server, or GitHub Pages deployment.
+A theme-switchable personal site where each theme authentically recreates its target OS aesthetic, with sections presented as native-feeling apps within each theme's window chrome.
+
+## Current Milestone: v2.0 Theme System
+
+**Goal:** Add a switchable theme system with three authentic OS themes
+
+**Target features:**
+- Theme switcher accessible from all pages
+- Windows 3.1 theme with period-accurate chrome and app metaphor
+- Windows 95 theme with period-accurate chrome and app metaphor
+- Refactored page structure to support theme-driven layouts
 
 ## Requirements
 
@@ -22,18 +32,25 @@ Replace Yarn with Bun cleanly without breaking the build, dev server, or GitHub 
 
 ### Active
 
-(None — migration complete)
+- [ ] Theme switcher UI accessible from all pages
+- [ ] Windows 3.1 theme with authentic chrome and app metaphor
+- [ ] Windows 95 theme with authentic chrome and app metaphor
+- [ ] Refactored page/component structure to support theme-driven layouts
+- [ ] Current theme preserved as default option
 
 ### Out of Scope
 
-- Application code changes — this is tooling only
 - Switching away from Astro — framework stays the same
 - Adding ESLint/Prettier/Biome — not currently used, not adding
 - Using Bun as runtime (replacing Node.js) — Astro expects Node.js runtime
+- Mobile-native theme variants — responsive but not separate mobile themes
+- Theme persistence across sessions — nice-to-have, not required for v2.0
 
 ## Context
 
 Shipped v1.0 with Bun as package manager. Tech stack: Astro 4.16.8, Tailwind CSS, MDX, TypeScript. Deployed via `withastro/action@v2` with explicit `package-manager: bun@latest`. Simple dependency tree — 8 direct dependencies. `dist/` excluded from git tracking.
+
+Current site has a retro desktop OS aesthetic with Window components, Button components, and a teal background with pixel grid pattern. The existing design already uses window chrome concepts (title bars, content areas) which will serve as the foundation for the theme system.
 
 ## Constraints
 
@@ -54,5 +71,18 @@ Shipped v1.0 with Bun as package manager. Tech stack: Astro 4.16.8, Tailwind CSS
 
 This document evolves at phase transitions and milestone boundaries.
 
+**After each phase transition** (via `/gsd:transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd:complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
 ---
-*Last updated: 2026-03-22 after v1.0 milestone*
+*Last updated: 2026-03-21 after v2.0 milestone start*
