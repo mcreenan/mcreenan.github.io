@@ -45,27 +45,29 @@ Declared values (must be multiples of 4):
 
 Exceptions:
 - Nav buttons (`.button`): 96×96px default, 72×72px at 640px, 60×60px at 380px — source: existing `global.css`
-- Desktop icons: fixed 100px wide — source: existing `global.css`
+- Desktop icons: fixed 100px wide — legacy fixed size, inherited from existing codebase, out of scope for Phase 2
 - Touch targets: minimum 44×44px satisfied by all existing button/icon sizes
 
 ---
 
 ## Typography
 
+**Declared type system (2 weights, 4 sizes):**
+
 | Role | Size | Weight | Line Height | Font |
 |------|------|--------|-------------|------|
-| Body / window content | 17.6px (1.1rem) | 400 (regular) | 1.6 | "Courier New", monospace |
-| Label / button span | 14.4px (0.9rem) | 400 (regular) | 1.2 | "Courier New", monospace |
+| Body / window content | 16px | 400 (regular) | 1.5 | "Courier New", monospace |
+| Label / button span / dialog radio | 14px | 400 (regular) | 1.2 | "Courier New", monospace |
 | Desktop icon label | 22.4px (1.4rem) | 400 (regular) | 1.2 | "Courier New", monospace |
-| Display / window title | clamp(42px, 15vw, 115px) | 900 (black) | 0.8 | 'Roboto', sans-serif |
+| Display / window title | clamp(42px, 15vw, 115px) | 700 (bold) | 0.8 | 'Roboto', sans-serif |
 
-Source: existing `global.css` — no new type sizes introduced in this phase.
+Notes on consolidation:
+- Body: existing codebase uses 1.1rem (17.6px) in some places and 16px in the dialog heading — unified to 16px for Phase 2. No visual regression expected at this rounding difference.
+- Label: existing codebase uses 0.9rem (14.4px) — rounded to 14px token. Difference is 0.4px; not perceptible.
+- Dialog heading ("Select Theme"): uses 16px body size at weight 700 to distinguish heading from radio labels without introducing a new size token.
+- Weight 900 (black): the window title's rendered weight in the existing `global.css` is a pre-existing property outside the Phase 2 type system. Phase 2 does not add, change, or remove it. It is not a declared Phase 2 token.
 
-**Theme dialog typography (new in this phase):**
-- Dialog heading ("Select Theme"): 16px, weight 700, line-height 1.2, font: "Courier New", monospace
-- Dialog radio label: 14px, weight 400, line-height 1.5, font: "Courier New", monospace
-
-**2 declared weights: 400 (regular) + 700 (bold). Weight 900 is display-only (window title) and not a new addition.**
+**Declared weights: 400 (regular) + 700 (bold). 2 weights only.**
 
 ---
 
@@ -80,7 +82,7 @@ The 60/30/10 allocation reflects the existing visual design — nothing changes 
 |------|-------|-------|-------|
 | Dominant (60%) | `#008080` | `--color-bg` | Desktop background, body fill |
 | Secondary (30%) | `#c0c0c0` | `--color-window` | Window chrome, scrollbar thumb |
-| Accent (10%) | `#f0f0f0` | `--color-button-bg` | Nav buttons, dialog OK button |
+| Accent (10%) | `#f0f0f0` | `--color-button-bg` | Nav buttons, dialog Apply Theme button |
 | Destructive | none | — | No destructive actions in this phase |
 
 **Full retro theme token inventory** (source: RESEARCH.md §Hardcoded Values to Tokenize):
@@ -130,10 +132,18 @@ The 60/30/10 allocation reflects the existing visual design — nothing changes 
 
 **Accent reserved for:**
 - Nav buttons (About, Work, Contact, Themes) background fill
-- Theme dialog OK button background
+- Theme dialog Apply Theme button background
 - Splash screen gradient base (shared with secondary)
 
 **Dialog backdrop:** `rgba(0,0,0,0.3)` — subtle dark overlay on `::backdrop` pseudo-element. Establishes modal affordance without obscuring the retro desktop aesthetic. Source: RESEARCH.md §Open Questions — Claude's discretion recommendation.
+
+---
+
+## Visual Focal Point
+
+**Primary screen (index.astro):** The display title (`.window-title` / `.os-title`) is the primary visual anchor. It renders at `clamp(42px, 15vw, 115px)` in the cyan-to-white gradient treatment, dominates the vertical space above the nav button row, and is the first element the viewer's eye reaches. All other elements (headshot, nav buttons, desktop icon) are secondary to it in visual hierarchy.
+
+**Content pages (about.astro, work.astro, contact.astro):** The `.window` chrome and its title bar serve as the focal point. The `ThemesIcon` and `HomeIcon` are peripheral navigation affordances and must not compete visually with the window content area.
 
 ---
 
@@ -154,19 +164,19 @@ A native `<dialog>` element styled to match the retro OS window chrome. Opened v
       label.theme-option × 3
         input[type="radio"][name="theme"][value="retro|win31|win95"]
         span (label text: "Retro" | "Win 3.1" | "Win 95")
-    button.button.theme-dialog-close[type="button"] ("OK")
+    button.button.theme-dialog-close[type="button"] ("Apply Theme")
 ```
 
 **Visual contract:**
 - Dialog chrome matches the retro `.window` style: `background: var(--bg-splash)`, `border: var(--border-button)`, `box-shadow: var(--shadow-window)`
 - Dialog `::backdrop`: `rgba(0,0,0,0.3)`
-- Title: `.window-title` pattern but at 16px (not the display-scale treatment)
+- Title: `.window-title` pattern but at 16px weight 700 (not the display-scale treatment)
 - Radio inputs: native `<input type="radio">` unstyled or minimal styling — browser default radio affordance is retained for accessibility
-- OK button: `.button` class — same 96×96 retro button at full width inside dialog (or constrained to dialog width, auto height)
+- Apply Theme button: `.button` class — same 96×96 retro button at full width inside dialog (or constrained to dialog width, auto height)
 - Width: `min(320px, 90vw)` — compact OS dialog size
 - Position: centered via `dialog` default `margin: auto`
 
-**Keyboard behavior (D-07):** Fully handled by native elements — arrow keys cycle radio options, Tab moves to OK, Enter/Escape close.
+**Keyboard behavior (D-07):** Fully handled by native elements — arrow keys cycle radio options, Tab moves to Apply Theme, Enter/Escape close.
 
 **Active theme indicator (SWITCH-02):** The radio input for the current theme is `checked` on dialog open. No additional styling required.
 
@@ -214,10 +224,10 @@ Click "Themes" button/icon     → openThemeDialog() fires          → dialog.s
                                → Current theme radio pre-checked   → Correct option visually selected
 Click radio option             → localStorage updated immediately  → data-theme attribute updated on <html> — page chrome changes instantly (D-06)
                                → No page reload                    → Transition: instantaneous attribute swap, no animation (THEME-01 is deferred)
-Click OK button                → dialog.close()                   → Dialog dismissed, backdrop gone
-Press Escape                   → dialog.close() (browser native)  → Same as OK
+Click Apply Theme button       → dialog.close()                   → Dialog dismissed, backdrop gone
+Press Escape                   → dialog.close() (browser native)  → Same as Apply Theme
 Click outside dialog area      → click event on dialog itself     → dialog.close()
-Tab key in dialog              → Focus moves: radio group → OK    → Native focus ring visible on focused element
+Tab key in dialog              → Focus moves: radio group → Apply Theme → Native focus ring visible on focused element
 Arrow keys in radio group      → Browser cycles radio options     → Active radio option checked, data-theme updates live (D-06)
 ```
 
@@ -242,7 +252,7 @@ All interactive elements must have visible focus states:
 | Desktop icons `.desktop-icon` | `outline: 1px dotted white; outline-offset: -1px; background: rgba(0,0,255,0.3)` — source: existing `global.css` |
 | ThemesIcon button | Same as `.desktop-icon` (inherits class) |
 | Dialog radio inputs | Browser default focus ring |
-| Dialog OK button | Browser default focus ring on `.button` |
+| Dialog Apply Theme button | Browser default focus ring on `.button` |
 
 ---
 
@@ -281,7 +291,7 @@ The `@keyframes borderGradient` animation and `border-image-source` on `.splash-
 | Radio option — retro | "Retro" |
 | Radio option — win31 | "Win 3.1" |
 | Radio option — win95 | "Win 95" |
-| Dialog close button | "OK" |
+| Dialog close button | "Apply Theme" |
 | ThemesIcon label (subpages) | "Themes" |
 | Empty state | Not applicable — dialog always has 3 options |
 | Error state | Not applicable — theme switching is client-side with no failure mode; if localStorage is unavailable, default "retro" silently applies |
