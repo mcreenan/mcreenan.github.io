@@ -23,8 +23,8 @@ Migrate the personal site (matt.creenan.me) from Yarn to Bun as the package mana
 - JavaScript - Configuration files and runtime
 ## Runtime
 - Node.js 20 (specified in GitHub Actions workflow)
-- Yarn (lockfile present: `yarn.lock`)
-- Lockfile: `yarn.lock` (199.7K)
+- Bun (lockfile present: `bun.lock`)
+- Lockfile: `bun.lock`
 ## Frameworks
 - Astro 4.16.8 - Static site generator and framework
 - Tailwind CSS 3.4.14 - Utility-first CSS framework with @astrojs/tailwind integration
@@ -49,16 +49,16 @@ Migrate the personal site (matt.creenan.me) from Yarn to Bun as the package mana
 - `tailwind.config.mjs` - Tailwind CSS configuration
 ## Platform Requirements
 - Node.js 20
-- Yarn package manager
+- Bun package manager
 - TypeScript 5.6.3
 - Deployed on GitHub Pages
 - Hosting: GitHub Pages (github-pages environment)
 - Static site output to dist directory
 ## Build & Development Commands
-- `yarn dev` or `yarn start` - Start local development server via `astro dev`
-- `yarn build` - Type check with `astro check` then build with `astro build`
-- `yarn preview` - Preview production build locally
-- `yarn astro` - Direct access to Astro CLI
+- `bun run dev` or `bun run start` - Start local development server via `astro dev`
+- `bun run build` - Type check with `astro check` then build with `astro build`
+- `bun run preview` - Preview production build locally
+- `bun run astro` - Direct access to Astro CLI
 ## CI/CD Pipeline
 - GitHub Actions workflow: `.github/workflows/deploy.yml`
 - Trigger: Push to main branch or manual workflow dispatch
