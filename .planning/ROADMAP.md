@@ -50,7 +50,10 @@ Plans:
   2. Buttons in Windows 3.1 theme render with the raised flat gray style, not the current retro style
   3. A period-appropriate bitmap-style font is visible on UI labels and window titles
   4. The About, Work, and Contact sections appear as icon groups inside a Program Manager-style window on the desktop
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 03-01-PLAN.md — W95FA font, CSS tokens, win31 component overrides, Window.astro variant
+- [ ] 03-02-PLAN.md — ProgramManager component, index.astro wiring, subpage win31 chrome
 
 ### Phase 4: Windows 95 Theme
 **Goal**: Users can experience the site in an authentic Windows 95 aesthetic using 98.css-powered beveled window chrome, a pixel font, and a taskbar
@@ -81,6 +84,6 @@ Plans:
 |-------|-----------|----------------|--------|-----------|
 | 1. Migrate to Bun | v1.0 | 1/1 | Complete | 2026-03-22 |
 | 2. CSS Foundation and Theme Infrastructure | v2.0 | 3/3 | Complete   | 2026-03-22 |
-| 3. Windows 3.1 Theme | v2.0 | 0/TBD | Not started | - |
+| 3. Windows 3.1 Theme | v2.0 | 0/2 | In progress | - |
 | 4. Windows 95 Theme | v2.0 | 0/TBD | Not started | - |
 | 5. Desktop Shell and Polish | v2.0 | 0/TBD | Not started | - |
