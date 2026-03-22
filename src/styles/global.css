@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "W95FA";
+  src: url("/fonts/w95fa.woff2") format("woff2"),
+       url("/fonts/w95fa.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 [data-theme="retro"] {
   /* Colors */
   --color-bg:                    #008080;
@@ -45,6 +54,333 @@
   --bg-pixel-dark:               rgba(0,0,0,0.05);
   --bg-splash:                   linear-gradient(145deg, #f0f0f0 0%, #e0e0e0 25%, #c8c8c8 50%, #b8b8b8 75%, #a8a8a8 100%);
   --bg-content-window:           linear-gradient(145deg, #ffffff 0%, #fafafa 50%, #f5f5f5 100%);
+}
+
+[data-theme="win31"] {
+  --color-bg:                    #008080;
+  --color-window:                #C0C0C0;
+  --color-button-bg:             #C0C0C0;
+  --color-button-text:           #000000;
+  --color-button-border:         #000000;
+  --color-link:                  #008000;
+  --color-link-hover:            #006600;
+  --color-desktop-icon:          #FFFFFF;
+  --color-desktop-icon-shadow:   rgba(0,0,0,0.7);
+  --color-desktop-icon-highlight: rgba(0,0,128,0.3);
+  --outline-desktop-icon:        1px dotted #000080;
+  --color-desktop-label-stroke:  #000;
+  --filter-desktop-icon:         none;
+  --color-scrollbar-track:       #C0C0C0;
+  --border-scrollbar:            1px solid #000;
+  --color-scrollbar-thumb:       #808080;
+  --color-scrollbar-thumb-hover: #606060;
+  --color-title:                 #FFFFFF;
+  --color-title-gradient-start:  #FFFFFF;
+  --color-title-gradient-end:    #FFFFFF;
+  --color-title-shadow:          transparent;
+  --color-title-glow-1:          transparent;
+  --color-title-glow-2:          transparent;
+  --font-body:                   "W95FA", Arial, sans-serif;
+  --font-title:                  "W95FA", Arial, sans-serif;
+  --border-button:               2px solid #000000;
+  --border-headshot:             2px solid #000000;
+  --shadow-button:               none;
+  --shadow-button-hover:         none;
+  --shadow-headshot:             none;
+  --shadow-window:               none;
+  --bg-gradient-fade:            transparent;
+  --bg-pixel-light:              transparent;
+  --bg-pixel-dark:               transparent;
+  --bg-splash:                   #C0C0C0;
+  --bg-content-window:           #C0C0C0;
+}
+
+/* Win 3.1 body override — remove retro pixel-grid pattern */
+[data-theme="win31"] body {
+  background-image: none;
+  background-color: #008080;
+}
+
+/* Win 3.1 window chrome — flat gray, 2px black border */
+[data-theme="win31"] .window {
+  background-color: var(--color-window);
+  border: 2px solid #000000;
+  box-shadow: none;
+}
+
+/* Win 3.1 splash screen — override retro 21px border hack */
+[data-theme="win31"] .splash-screen {
+  border: 2px solid #000000;
+  border-top-width: 2px;
+  border-image: none;
+  animation: none;
+  box-shadow: none;
+}
+
+/* Win 3.1 title bar — solid navy, white text, no retro hacks */
+[data-theme="win31"] .window-titlebar {
+  background: #000080;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px;
+  height: 18px;
+  margin: 0;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 11px;
+  -webkit-font-smoothing: none;
+}
+
+/* Win 3.1 title text — strip all retro effects */
+[data-theme="win31"] .window-title {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: #FFFFFF;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  text-shadow: none;
+  transform: none;
+  letter-spacing: 0;
+  filter: none;
+  line-height: 1;
+  position: static;
+  z-index: auto;
+}
+
+/* Win 3.1 window inner — no top margin offset */
+[data-theme="win31"] .window-inner {
+  height: calc(100% - 18px);
+  margin-top: 0;
+}
+
+/* Win 3.1 button — flat gray, no hover lift */
+[data-theme="win31"] .button:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Win 3.1 scrollbar — standard properties */
+[data-theme="win31"] .window-content {
+  scrollbar-color: #808080 #C0C0C0;
+  scrollbar-width: thin;
+}
+
+/* Win 3.1 scrollbar — WebKit legacy */
+[data-theme="win31"] .window-content::-webkit-scrollbar {
+  width: 16px;
+}
+[data-theme="win31"] .window-content::-webkit-scrollbar-track {
+  background: #C0C0C0;
+  border: 1px solid #000;
+}
+[data-theme="win31"] .window-content::-webkit-scrollbar-thumb {
+  background: #808080;
+  border: 1px solid #000;
+}
+
+/* Win 3.1 content window — flat gray */
+[data-theme="win31"] .content-window {
+  background: #C0C0C0;
+}
+
+/* Win 3.1 headshot — flat border, no shadow */
+[data-theme="win31"] .headshot-image {
+  border: 2px solid #000000;
+  box-shadow: none;
+}
+
+/* Win 3.1 os-title — bitmap font, no retro text-shadow */
+[data-theme="win31"] .os-title {
+  font-family: "W95FA", Arial, sans-serif;
+  text-shadow: none;
+  color: var(--color-title);
+}
+
+/* Win 3.1 theme dialog scoped styles */
+[data-theme="win31"] .theme-dialog-content {
+  background: #C0C0C0;
+  border: 2px solid #000000;
+  box-shadow: none;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+[data-theme="win31"] .theme-dialog-title {
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  color: #000000;
+}
+
+[data-theme="win31"] .theme-dialog-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+[data-theme="win31"] .theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+[data-theme="win31"] .theme-option:hover {
+  background: rgba(0,0,128,0.3);
+}
+
+/* Win 3.1 Program Manager / retro layout CSS toggle */
+.program-manager { display: none; }
+[data-theme="win31"] .program-manager { display: flex; }
+[data-theme="win31"] .retro-layout { display: none; }
+
+/* Win 3.1 menu bar */
+[data-theme="win31"] .menubar {
+  display: flex;
+  align-items: center;
+  background: #C0C0C0;
+  border-bottom: 1px solid #808080;
+  padding: 0;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+}
+
+[data-theme="win31"] .menubar-item {
+  position: relative;
+  padding: 2px 6px;
+  cursor: default;
+}
+
+[data-theme="win31"] .menubar-item[aria-disabled="true"] {
+  color: #000000;
+}
+
+[data-theme="win31"] .menubar-item:not([aria-disabled="true"]):hover,
+[data-theme="win31"] .menubar-item:not([aria-disabled="true"]):focus-within {
+  background: #000080;
+  color: #FFFFFF;
+}
+
+[data-theme="win31"] .menubar-item:focus-within .menubar-dropdown {
+  display: block;
+}
+
+[data-theme="win31"] .menubar-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #C0C0C0;
+  border: 1px solid #000000;
+  padding: 2px 0;
+  min-width: 160px;
+  z-index: 200;
+  list-style: none;
+  margin: 0;
+}
+
+[data-theme="win31"] .menubar-dropdown li {
+  list-style: none;
+}
+
+[data-theme="win31"] .menubar-dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 2px 16px;
+  background: none;
+  border: none;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  cursor: pointer;
+}
+
+[data-theme="win31"] .menubar-dropdown button:hover {
+  background: #000080;
+  color: #FFFFFF;
+}
+
+/* Win 3.1 program manager icon grid */
+[data-theme="win31"] .pm-icon-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+}
+
+[data-theme="win31"] .pm-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #000000;
+  padding: 4px;
+  cursor: pointer;
+}
+
+[data-theme="win31"] .pm-icon:hover {
+  background: rgba(0,0,128,0.3);
+}
+
+[data-theme="win31"] .pm-icon:focus {
+  outline: 1px dotted #000080;
+  background: rgba(0,0,128,0.3);
+}
+
+[data-theme="win31"] .pm-icon-label {
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Win 3.1 title bar decorative chrome buttons */
+[data-theme="win31"] .win31-chrome-btn {
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 9px;
+  color: #000000;
+  background: #C0C0C0;
+  border: 1px solid #000000;
+  padding: 0 2px;
+  line-height: 1;
+  display: inline-block;
+  height: 14px;
+  min-width: 14px;
+  text-align: center;
+}
+
+/* Win 3.1 title bar left/right groups */
+[data-theme="win31"] .win31-titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+[data-theme="win31"] .win31-titlebar-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+[data-theme="win31"] .win31-titlebar-center {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 body {
