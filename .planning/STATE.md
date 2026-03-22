@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Theme System
 status: unknown
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-22T02:51:58.228Z"
+stopped_at: "Checkpoint 02-03 Task 3: awaiting human verification"
+last_updated: "2026-03-22T02:52:36.778Z"
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State
@@ -43,6 +43,7 @@ Plan: 3 of 3
 *Updated after each plan completion*
 | Phase 02-css-foundation-theme-infrastructure P01 | 2m | 2 tasks | 3 files |
 | Phase 02 P02 | 1m | 2 tasks | 1 files |
+| Phase 02 P03 | 8m | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -54,6 +55,9 @@ Plan: 3 of 3
 - [Phase 02]: Scoped .window under [data-theme='retro'] to prevent Phase 4 collision with 98.css
 - [Phase 02]: @keyframes borderGradient kept hardcoded (retro-only per D-09)
 - [Phase 02]: Two separate scripts in BaseHead.astro: is:inline for anti-flash (synchronous), bundled for astro:after-swap (deferred/deduplicated)
+- [Phase 02]: ThemeDialog uses native dialog.showModal() for accessible modal with focus trap and Escape-to-close
+- [Phase 02]: openThemeDialog() exposed as window global to decouple trigger from dialog component
+- [Phase 02]: ThemesIcon uses button not anchor — dialog trigger is not navigation
 
 ### Research Flags
 
@@ -71,6 +75,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-22T02:51:58.225Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-03-22T02:52:36.626Z
+Stopped at: Checkpoint 02-03 Task 3: awaiting human verification
 Resume file: None
