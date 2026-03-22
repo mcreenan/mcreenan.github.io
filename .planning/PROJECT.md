@@ -32,11 +32,11 @@ A theme-switchable personal site where each theme authentically recreates its ta
 
 ### Active
 
-- [ ] Theme switcher UI accessible from all pages
+- [x] Theme switcher UI accessible from all pages — Validated in Phase 02
+- [x] Current theme preserved as default option — Validated in Phase 02
 - [ ] Windows 3.1 theme with authentic chrome and app metaphor
 - [ ] Windows 95 theme with authentic chrome and app metaphor
 - [ ] Refactored page/component structure to support theme-driven layouts
-- [ ] Current theme preserved as default option
 
 ### Out of Scope
 
@@ -44,7 +44,7 @@ A theme-switchable personal site where each theme authentically recreates its ta
 - Adding ESLint/Prettier/Biome — not currently used, not adding
 - Using Bun as runtime (replacing Node.js) — Astro expects Node.js runtime
 - Mobile-native theme variants — responsive but not separate mobile themes
-- Theme persistence across sessions — nice-to-have, not required for v2.0
+- Theme persistence across sessions — implemented in Phase 02 (localStorage + anti-flash)
 
 ## Context
 
@@ -85,4 +85,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-21 after v2.0 milestone start*
+*Last updated: 2026-03-21 after Phase 02 completion — CSS token foundation and theme switcher UI*
