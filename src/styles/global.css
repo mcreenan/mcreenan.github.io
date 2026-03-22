@@ -101,27 +101,22 @@
   background-color: #008080;
 }
 
-/* Win 3.1 window chrome — layered 3D frame
-   Outside→in: 1px black | 1px white(TL)/dark(BR) | 2px gray frame */
+/* Win 3.1 window chrome: 1px black outer, 2px gray, 1px black inner */
 [data-theme="win31"] .window {
   background-color: var(--color-window);
   border: 2px solid #C0C0C0;
   outline: 1px solid #000000;
-  box-shadow:
-    inset 1px 1px 0 0 #FFFFFF,
-    inset -1px -1px 0 0 #808080;
+  box-shadow: inset 0 0 0 1px #000000;
 }
 
-/* Win 3.1 splash screen — override retro 21px border hack */
+/* Win 3.1 splash screen — override retro border hack */
 [data-theme="win31"] .splash-screen {
   padding: 0;
   border: 2px solid #C0C0C0;
   border-image: none;
   animation: none;
   outline: 1px solid #000000;
-  box-shadow:
-    inset 1px 1px 0 0 #FFFFFF,
-    inset -1px -1px 0 0 #808080;
+  box-shadow: inset 0 0 0 1px #000000;
 }
 
 /* Win 3.1 title bar — solid navy, buttons fill full height */
@@ -384,17 +379,13 @@
   text-align: center;
 }
 
-/* Win 3.1 title bar chrome buttons — full height, 3D beveled */
+/* Win 3.1 title bar chrome buttons — base style */
 [data-theme="win31"] .win31-chrome-btn {
   font-family: "W95FA", Arial, sans-serif;
   font-size: 9px;
   color: #000000;
   background: #C0C0C0;
-  border-top: 1px solid #FFFFFF;
-  border-left: 1px solid #FFFFFF;
-  border-bottom: 1px solid #000000;
-  border-right: 1px solid #000000;
-  box-shadow: inset -1px -1px 0 0 #808080;
+  border: 1px solid #000000;
   padding: 0;
   display: inline-flex;
   align-items: center;
@@ -404,6 +395,15 @@
   box-sizing: border-box;
   text-decoration: none;
   line-height: 1;
+  box-shadow: none;
+}
+
+/* Right-side buttons get raised 3D bevel inside the 1px black border */
+[data-theme="win31"] .win31-chrome-btn.win31-btn-raised {
+  border: 1px solid #000000;
+  box-shadow:
+    inset 1px 1px 0 0 #FFFFFF,
+    inset -1px -1px 0 0 #808080;
 }
 
 /* Win 3.1 title bar left/right groups — flush to edges */
