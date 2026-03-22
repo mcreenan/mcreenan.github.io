@@ -6,7 +6,7 @@ A single-phase migration: replace Yarn with Bun as the package manager for the A
 
 ## Phases
 
-- [ ] **Phase 1: Migrate to Bun** - Replace Yarn with Bun across local tooling and CI, verify the build and deployment work
+- [x] **Phase 1: Migrate to Bun** - Replace Yarn with Bun across local tooling and CI, verify the build and deployment work (completed 2026-03-22)
 
 ## Phase Details
 
@@ -19,7 +19,7 @@ A single-phase migration: replace Yarn with Bun as the package manager for the A
   2. `bun run dev`, `bun run build`, and `bun run preview` all work locally
   3. The GitHub Actions workflow installs dependencies and builds using Bun
   4. The site deploys successfully to GitHub Pages after a push
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
 - [x] 01-01-PLAN.md — Run Bun migration, verify local builds, deploy to GitHub Pages
@@ -31,4 +31,4 @@ Phases execute in numeric order: 1
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Migrate to Bun | 0/1 | Not started | - |
+| 1. Migrate to Bun | 1/1 | Complete   | 2026-03-22 |

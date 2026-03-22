@@ -13,8 +13,8 @@
 
 ### CI/CD
 
-- [ ] **CI-01**: GitHub Actions workflow uses Bun instead of Yarn/Node for install and build
-- [ ] **CI-02**: Site deploys successfully to GitHub Pages after migration
+- [x] **CI-01**: GitHub Actions workflow uses Bun instead of Yarn/Node for install and build
+- [x] **CI-02**: Site deploys successfully to GitHub Pages after migration
 
 ### Verification
 
@@ -41,8 +41,8 @@
 | PKG-01 | Phase 1 | Complete |
 | PKG-02 | Phase 1 | Complete |
 | PKG-03 | Phase 1 | Complete |
-| CI-01 | Phase 1 | Pending |
-| CI-02 | Phase 1 | Pending |
+| CI-01 | Phase 1 | Complete |
+| CI-02 | Phase 1 | Complete |
 | VER-01 | Phase 1 | Complete |
 | VER-02 | Phase 1 | Complete |
 

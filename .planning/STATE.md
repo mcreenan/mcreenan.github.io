@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-01-PLAN.md Task 1, checkpoint pending for Task 2 (human-verify)
-last_updated: "2026-03-22T01:24:07.854Z"
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-03-22T01:33:18.313Z"
 progress:
   total_phases: 1
   completed_phases: 1
@@ -47,6 +47,7 @@ Plan: 1 of 1
 
 *Updated after each plan completion*
 | Phase 01 P01 | 2min | 1 tasks | 3 files |
+| Phase 01 P01 | 15min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -54,6 +55,7 @@ Plan: 1 of 1
 
 - Pending: Use Bun as package manager only (not runtime) — Astro expects Node.js runtime; Bun as PM is drop-in
 - [Phase 01]: Used bun.lock text format (Bun 1.3.9 default) -- withastro/action@v2 detects both formats
+- [Phase 01]: withastro/action@v2 requires explicit package-manager: bun@latest config -- does NOT auto-detect from bun.lock
 
 ### Pending Todos
 
@@ -65,6 +67,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-22T01:24:07.852Z
-Stopped at: Completed 01-01-PLAN.md Task 1, checkpoint pending for Task 2 (human-verify)
+Last session: 2026-03-22T01:33:18.310Z
+Stopped at: Completed 01-01-PLAN.md
 Resume file: None
