@@ -13,7 +13,7 @@ const { title, height = "auto", contentWindow = false, variant = "retro" } = Ast
     class={`window fixed splash-screen ${contentWindow ? "content-window" : ""}`}
     style={`height: ${height};`}
 >
-    {title && variant === "win31" ? (
+    {title && (
         <div class="window-titlebar">
             <div class="win31-titlebar-left">
                 {contentWindow ? (
@@ -22,17 +22,13 @@ const { title, height = "auto", contentWindow = false, variant = "retro" } = Ast
                     <span class="win31-chrome-btn" aria-hidden="true">-</span>
                 )}
             </div>
-            <span class="win31-titlebar-center">{title}</span>
+            <span class="window-title">{title}</span>
             <div class="win31-titlebar-right">
                 <span class="win31-chrome-btn" aria-hidden="true">&#9650;</span>
                 <span class="win31-chrome-btn" aria-hidden="true">&#9660;</span>
             </div>
         </div>
-    ) : title ? (
-        <div class="window-titlebar">
-            <span class="window-title">{title}</span>
-        </div>
-    ) : null}
+    )}
     <div class="window-inner">
         <div class="window-content">
             <slot />
