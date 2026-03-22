@@ -1,0 +1,104 @@
+---
+// ProgramManager.astro — Win 3.1 Program Manager for home page
+// Visible only when [data-theme="win31"] via CSS toggle in global.css
+---
+
+<div class="program-manager flex-col items-center justify-center h-full">
+  <div class="window splash-screen" style="height: auto; max-height: 90vh;">
+    <!-- Win 3.1 title bar -->
+    <div class="window-titlebar">
+      <div class="win31-titlebar-left">
+        <span class="win31-chrome-btn" aria-hidden="true">-</span>
+      </div>
+      <span class="win31-titlebar-center">Program Manager</span>
+      <div class="win31-titlebar-right">
+        <span class="win31-chrome-btn" aria-hidden="true">&#9650;</span>
+        <span class="win31-chrome-btn" aria-hidden="true">&#9660;</span>
+      </div>
+    </div>
+
+    <!-- Menu bar (per D-03, D-04, D-05, D-06) -->
+    <nav class="menubar" aria-label="Program Manager menu">
+      <span class="menubar-item" aria-disabled="true">File</span>
+      <div class="menubar-item" tabindex="0">
+        Options
+        <ul class="menubar-dropdown" role="menu">
+          <li role="none">
+            <button role="menuitem" onclick="window.openThemeDialog()">Change Theme...</button>
+          </li>
+        </ul>
+      </div>
+      <span class="menubar-item" aria-disabled="true">Window</span>
+      <span class="menubar-item" aria-disabled="true">Help</span>
+    </nav>
+
+    <!-- Icon grid (per D-01, D-02, D-07) -->
+    <div class="pm-icon-grid">
+      <!-- About icon: person/user silhouette -->
+      <a href="/about" class="pm-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; image-rendering: crisp-edges;">
+          <!-- Head -->
+          <rect x="12" y="2" width="8" height="8" fill="#000080"/>
+          <rect x="13" y="3" width="6" height="6" fill="#FFFFFF"/>
+          <!-- Shoulders/body -->
+          <rect x="8" y="12" width="16" height="10" fill="#000080"/>
+          <rect x="9" y="13" width="14" height="8" fill="#C0C0C0"/>
+          <!-- Tie/accent -->
+          <rect x="15" y="12" width="2" height="6" fill="#800000"/>
+          <!-- Base -->
+          <rect x="6" y="22" width="20" height="4" fill="#000080"/>
+          <rect x="7" y="23" width="18" height="2" fill="#808080"/>
+          <!-- Border -->
+          <rect x="6" y="26" width="20" height="2" fill="#000000"/>
+        </svg>
+        <span class="pm-icon-label">About</span>
+      </a>
+
+      <!-- Work icon: briefcase -->
+      <a href="/work" class="pm-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; image-rendering: crisp-edges;">
+          <!-- Handle -->
+          <rect x="11" y="4" width="10" height="4" fill="#808000"/>
+          <rect x="12" y="5" width="8" height="2" fill="#C0C0C0"/>
+          <!-- Case body -->
+          <rect x="4" y="8" width="24" height="16" fill="#808000"/>
+          <rect x="5" y="9" width="22" height="14" fill="#C0C0C0"/>
+          <!-- Clasp -->
+          <rect x="14" y="14" width="4" height="4" fill="#808000"/>
+          <rect x="15" y="15" width="2" height="2" fill="#FFFF00"/>
+          <!-- Bottom -->
+          <rect x="4" y="24" width="24" height="4" fill="#808000"/>
+          <rect x="5" y="25" width="22" height="2" fill="#808080"/>
+        </svg>
+        <span class="pm-icon-label">Work</span>
+      </a>
+
+      <!-- Contact icon: envelope -->
+      <a href="/contact" class="pm-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; image-rendering: crisp-edges;">
+          <!-- Envelope body -->
+          <rect x="2" y="8" width="28" height="18" fill="#000080"/>
+          <rect x="3" y="9" width="26" height="16" fill="#FFFFFF"/>
+          <!-- Flap (top triangle approximation) -->
+          <rect x="3" y="9" width="2" height="2" fill="#000080"/>
+          <rect x="5" y="11" width="2" height="2" fill="#000080"/>
+          <rect x="7" y="13" width="2" height="2" fill="#000080"/>
+          <rect x="9" y="15" width="2" height="2" fill="#000080"/>
+          <rect x="11" y="17" width="2" height="2" fill="#000080"/>
+          <rect x="13" y="19" width="2" height="2" fill="#000080"/>
+          <rect x="15" y="17" width="2" height="2" fill="#000080"/>
+          <rect x="17" y="15" width="2" height="2" fill="#000080"/>
+          <rect x="19" y="13" width="2" height="2" fill="#000080"/>
+          <rect x="21" y="11" width="2" height="2" fill="#000080"/>
+          <rect x="23" y="9" width="2" height="2" fill="#000080"/>
+          <rect x="25" y="9" width="2" height="2" fill="#000080"/>
+          <rect x="27" y="9" width="2" height="2" fill="#000080"/>
+          <!-- Stamp area -->
+          <rect x="22" y="11" width="6" height="6" fill="#FF0000"/>
+          <rect x="23" y="12" width="4" height="4" fill="#FFFF00"/>
+        </svg>
+        <span class="pm-icon-label">Contact</span>
+      </a>
+    </div>
+  </div>
+</div>

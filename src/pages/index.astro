@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import ThemeDialog from "../components/ThemeDialog.astro";
+import ProgramManager from "../components/ProgramManager.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
@@ -12,56 +13,59 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 	<body>
 		<main class="h-screen overflow-hidden">
 			<section class="flex flex-col items-center justify-center h-full">
-				<div class="window fixed splash-screen">
-					<div class="window-inner">
-						<div
-							class="flex items-center justify-center mt-8 gap-6"
-						>
-							<img
-								src="/images/headshot.png"
-								alt="Matt Creenan"
-								class="headshot-image"
-							/>
-							<h1 class="text-6xl font-bold os-title">
-								Matt Creenan
-							</h1>
-						</div>
-						<div
-							class="flex justify-center items-center mt-8 md:mt-12 flex-wrap gap-4"
-							style="height: auto; min-height: 120px;"
-						>
-							<a
-								href="/about"
-								class="button flex flex-col justify-between py-2"
+				<div class="retro-layout flex flex-col items-center justify-center h-full">
+					<div class="window fixed splash-screen">
+						<div class="window-inner">
+							<div
+								class="flex items-center justify-center mt-8 gap-6"
 							>
-								<i class="ph ph-user text-4xl"></i>
-								<span>About</span>
-							</a>
-							<a
-								href="/work"
-								class="button flex flex-col justify-between py-2"
+								<img
+									src="/images/headshot.png"
+									alt="Matt Creenan"
+									class="headshot-image"
+								/>
+								<h1 class="text-6xl font-bold os-title">
+									Matt Creenan
+								</h1>
+							</div>
+							<div
+								class="flex justify-center items-center mt-8 md:mt-12 flex-wrap gap-4"
+								style="height: auto; min-height: 120px;"
 							>
-								<i class="fa-regular fa-building text-4xl"></i>
-								<span>Work</span>
-							</a>
-							<a
-								href="/contact"
-								class="button flex flex-col justify-between py-2"
-							>
-								<i class="ph ph-envelope text-4xl"></i>
-								<span>Contact</span>
-							</a>
-							<button
-								class="button flex flex-col justify-between py-2"
-								type="button"
-								onclick="window.openThemeDialog()"
-							>
-								<i class="ph ph-palette text-4xl"></i>
-								<span>Themes</span>
-							</button>
+								<a
+									href="/about"
+									class="button flex flex-col justify-between py-2"
+								>
+									<i class="ph ph-user text-4xl"></i>
+									<span>About</span>
+								</a>
+								<a
+									href="/work"
+									class="button flex flex-col justify-between py-2"
+								>
+									<i class="fa-regular fa-building text-4xl"></i>
+									<span>Work</span>
+								</a>
+								<a
+									href="/contact"
+									class="button flex flex-col justify-between py-2"
+								>
+									<i class="ph ph-envelope text-4xl"></i>
+									<span>Contact</span>
+								</a>
+								<button
+									class="button flex flex-col justify-between py-2"
+									type="button"
+									onclick="window.openThemeDialog()"
+								>
+									<i class="ph ph-palette text-4xl"></i>
+									<span>Themes</span>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
+				<ProgramManager />
 			</section>
 		<ThemeDialog />
 	</main>
