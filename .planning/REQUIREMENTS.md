@@ -17,9 +17,9 @@ Requirements for theme system release. Each maps to roadmap phases.
 
 ### Theme Switcher
 
-- [ ] **SWITCH-01**: User can switch between three themes from any page
-- [ ] **SWITCH-02**: Switcher visually indicates which theme is currently active
-- [ ] **SWITCH-03**: Switcher is keyboard-accessible
+- [x] **SWITCH-01**: User can switch between three themes from any page
+- [x] **SWITCH-02**: Switcher visually indicates which theme is currently active
+- [x] **SWITCH-03**: Switcher is keyboard-accessible
 
 ### Windows 3.1 Theme
 
@@ -71,9 +71,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-03 | Phase 2 | Complete |
 | INFRA-04 | Phase 2 | Complete |
 | INFRA-05 | Phase 2 | Complete |
-| SWITCH-01 | Phase 2 | Pending |
-| SWITCH-02 | Phase 2 | Pending |
-| SWITCH-03 | Phase 2 | Pending |
+| SWITCH-01 | Phase 2 | Complete |
+| SWITCH-02 | Phase 2 | Complete |
+| SWITCH-03 | Phase 2 | Complete |
 | WIN31-01 | Phase 3 | Pending |
 | WIN31-02 | Phase 3 | Pending |
 | WIN31-03 | Phase 3 | Pending |

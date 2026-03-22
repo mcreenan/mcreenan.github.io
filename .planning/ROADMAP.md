@@ -18,7 +18,7 @@
 
 **Milestone Goal:** Add a switchable three-theme system (retro, Windows 3.1, Windows 95) where each theme authentically recreates its target OS aesthetic and sections are presented as native apps.
 
-- [ ] **Phase 2: CSS Foundation and Theme Infrastructure** - Tokenize existing CSS and wire up theme switching machinery
+- [x] **Phase 2: CSS Foundation and Theme Infrastructure** - Tokenize existing CSS and wire up theme switching machinery (completed 2026-03-22)
 - [ ] **Phase 3: Windows 3.1 Theme** - Hand-rolled flat gray chrome with period-accurate fonts and Program Manager
 - [ ] **Phase 4: Windows 95 Theme** - 98.css-powered beveled chrome with taskbar
 - [ ] **Phase 5: Desktop Shell and Polish** - App icon metaphor, accessibility, and switcher polish
@@ -80,7 +80,7 @@ Plans:
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1. Migrate to Bun | v1.0 | 1/1 | Complete | 2026-03-22 |
-| 2. CSS Foundation and Theme Infrastructure | v2.0 | 1/3 | In Progress|  |
+| 2. CSS Foundation and Theme Infrastructure | v2.0 | 3/3 | Complete   | 2026-03-22 |
 | 3. Windows 3.1 Theme | v2.0 | 0/TBD | Not started | - |
 | 4. Windows 95 Theme | v2.0 | 0/TBD | Not started | - |
 | 5. Desktop Shell and Polish | v2.0 | 0/TBD | Not started | - |
