@@ -19,6 +19,16 @@ const { title, description } = Astro.props;
   })();
 </script>
 
+<script>
+  function applyTheme() {
+    const theme = localStorage.getItem('theme') || 'retro';
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+
+  document.addEventListener('astro:after-swap', applyTheme);
+  applyTheme();
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
