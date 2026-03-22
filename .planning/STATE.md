@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Theme System
 status: unknown
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-03-22T02:49:37.036Z"
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-03-22T02:51:58.228Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-21)
 ## Current Position
 
 Phase: 02 (css-foundation-theme-infrastructure) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 
 ## Performance Metrics
 
@@ -42,6 +42,7 @@ Plan: 2 of 3
 
 *Updated after each plan completion*
 | Phase 02-css-foundation-theme-infrastructure P01 | 2m | 2 tasks | 3 files |
+| Phase 02 P02 | 1m | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -52,6 +53,7 @@ Plan: 2 of 3
 - [Phase 01]: withastro/action@v2 requires explicit package-manager: bun@latest config
 - [Phase 02]: Scoped .window under [data-theme='retro'] to prevent Phase 4 collision with 98.css
 - [Phase 02]: @keyframes borderGradient kept hardcoded (retro-only per D-09)
+- [Phase 02]: Two separate scripts in BaseHead.astro: is:inline for anti-flash (synchronous), bundled for astro:after-swap (deferred/deduplicated)
 
 ### Research Flags
 
@@ -69,6 +71,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-22T02:49:37.033Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-03-22T02:51:58.225Z
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None

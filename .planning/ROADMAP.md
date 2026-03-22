@@ -38,7 +38,7 @@
 **Plans**: 3 plans
 Plans:
 - [x] 02-01-PLAN.md — CSS tokenization and data-theme attribute
-- [ ] 02-02-PLAN.md — Anti-flash script and View Transitions persistence
+- [x] 02-02-PLAN.md — Anti-flash script and View Transitions persistence
 - [ ] 02-03-PLAN.md — Theme switcher dialog, buttons, and wiring
 
 ### Phase 3: Windows 3.1 Theme

@@ -11,9 +11,9 @@ Requirements for theme system release. Each maps to roadmap phases.
 
 - [x] **INFRA-01**: All hardcoded CSS values in global.css converted to CSS custom properties
 - [x] **INFRA-02**: Theme state managed via data-theme attribute on `<html>` element
-- [ ] **INFRA-03**: Anti-flash inline script prevents theme flash on page load
-- [ ] **INFRA-04**: Theme persists across sessions via localStorage
-- [ ] **INFRA-05**: Theme state survives Astro View Transitions page navigation
+- [x] **INFRA-03**: Anti-flash inline script prevents theme flash on page load
+- [x] **INFRA-04**: Theme persists across sessions via localStorage
+- [x] **INFRA-05**: Theme state survives Astro View Transitions page navigation
 
 ### Theme Switcher
 
@@ -68,9 +68,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | INFRA-01 | Phase 2 | Complete |
 | INFRA-02 | Phase 2 | Complete |
-| INFRA-03 | Phase 2 | Pending |
-| INFRA-04 | Phase 2 | Pending |
-| INFRA-05 | Phase 2 | Pending |
+| INFRA-03 | Phase 2 | Complete |
+| INFRA-04 | Phase 2 | Complete |
+| INFRA-05 | Phase 2 | Complete |
 | SWITCH-01 | Phase 2 | Pending |
 | SWITCH-02 | Phase 2 | Pending |
 | SWITCH-03 | Phase 2 | Pending |
