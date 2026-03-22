@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import ThemeDialog from "../components/ThemeDialog.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
@@ -50,10 +51,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 								<i class="ph ph-envelope text-4xl"></i>
 								<span>Contact</span>
 							</a>
+							<button
+								class="button flex flex-col justify-between py-2"
+								type="button"
+								onclick="window.openThemeDialog()"
+							>
+								<i class="ph ph-palette text-4xl"></i>
+								<span>Themes</span>
+							</button>
 						</div>
 					</div>
 				</div>
 			</section>
-		</main>
+		<ThemeDialog />
+	</main>
 	</body>
 </html>
