@@ -23,9 +23,9 @@ Requirements for theme system release. Each maps to roadmap phases.
 
 ### Windows 3.1 Theme
 
-- [ ] **WIN31-01**: Windows have flat gray chrome with solid navy title bars and 2px black borders
-- [ ] **WIN31-02**: Buttons render with flat Win3.1 style (raised gray, black border)
-- [ ] **WIN31-03**: Period-appropriate bitmap-style font applied to UI elements
+- [x] **WIN31-01**: Windows have flat gray chrome with solid navy title bars and 2px black borders
+- [x] **WIN31-02**: Buttons render with flat Win3.1 style (raised gray, black border)
+- [x] **WIN31-03**: Period-appropriate bitmap-style font applied to UI elements
 - [ ] **WIN31-04**: Desktop shows Program Manager window with icon groups for each section
 
 ### Windows 95 Theme
@@ -74,9 +74,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SWITCH-01 | Phase 2 | Complete |
 | SWITCH-02 | Phase 2 | Complete |
 | SWITCH-03 | Phase 2 | Complete |
-| WIN31-01 | Phase 3 | Pending |
-| WIN31-02 | Phase 3 | Pending |
-| WIN31-03 | Phase 3 | Pending |
+| WIN31-01 | Phase 3 | Complete |
+| WIN31-02 | Phase 3 | Complete |
+| WIN31-03 | Phase 3 | Complete |
 | WIN31-04 | Phase 3 | Pending |
 | WIN95-01 | Phase 4 | Pending |
 | WIN95-02 | Phase 4 | Pending |

@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Theme System
 status: unknown
-stopped_at: Completed 02-03-PLAN.md
-last_updated: "2026-03-22T02:59:22.967Z"
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-03-22T03:47:26.624Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 5
+  completed_plans: 4
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-21)
 
 **Core value:** A theme-switchable personal site where each theme authentically recreates its target OS aesthetic.
-**Current focus:** Phase 02 — css-foundation-theme-infrastructure
+**Current focus:** Phase 03 — windows-31-theme
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
+Phase: 03 (windows-31-theme) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -44,6 +44,7 @@ Plan: Not started
 | Phase 02-css-foundation-theme-infrastructure P01 | 2m | 2 tasks | 3 files |
 | Phase 02 P02 | 1m | 2 tasks | 1 files |
 | Phase 02 P03 | 8m | 2 tasks | 5 files |
+| Phase 03 P01 | 3m | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -58,6 +59,8 @@ Plan: Not started
 - [Phase 02]: ThemeDialog uses native dialog.showModal() for accessible modal with focus trap and Escape-to-close
 - [Phase 02]: openThemeDialog() exposed as window global to decouple trigger from dialog component
 - [Phase 02]: ThemesIcon uses button not anchor — dialog trigger is not navigation
+- [Phase 03]: W95FA font sourced from verkcuos/w95fa GitHub repo, OTF converted to WOFF via fonttools
+- [Phase 03]: Window.astro variant prop pattern: components accept variant='retro'|'win31' for structurally different markup
 
 ### Research Flags
 
@@ -75,6 +78,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-22T02:55:23.572Z
-Stopped at: Completed 02-03-PLAN.md
+Last session: 2026-03-22T03:47:26.621Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None

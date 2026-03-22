@@ -52,7 +52,7 @@ Plans:
   4. The About, Work, and Contact sections appear as icon groups inside a Program Manager-style window on the desktop
 **Plans**: 2 plans
 Plans:
-- [ ] 03-01-PLAN.md — W95FA font, CSS tokens, win31 component overrides, Window.astro variant
+- [x] 03-01-PLAN.md — W95FA font, CSS tokens, win31 component overrides, Window.astro variant
 - [ ] 03-02-PLAN.md — ProgramManager component, index.astro wiring, subpage win31 chrome
 
 ### Phase 4: Windows 95 Theme
