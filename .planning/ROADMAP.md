@@ -35,7 +35,11 @@
   3. User can click the theme switcher and the page chrome updates immediately without a page reload
   4. The active theme is visually indicated in the switcher UI
   5. Navigating between pages via View Transitions preserves the selected theme without flicker
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 02-01-PLAN.md — CSS tokenization and data-theme attribute
+- [ ] 02-02-PLAN.md — Anti-flash script and View Transitions persistence
+- [ ] 02-03-PLAN.md — Theme switcher dialog, buttons, and wiring
 
 ### Phase 3: Windows 3.1 Theme
 **Goal**: Users can experience the site in an authentic Windows 3.1 aesthetic with flat gray chrome, solid navy title bars, and period-accurate fonts
@@ -76,7 +80,7 @@
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1. Migrate to Bun | v1.0 | 1/1 | Complete | 2026-03-22 |
-| 2. CSS Foundation and Theme Infrastructure | v2.0 | 0/TBD | Not started | - |
+| 2. CSS Foundation and Theme Infrastructure | v2.0 | 0/3 | Planning complete | - |
 | 3. Windows 3.1 Theme | v2.0 | 0/TBD | Not started | - |
 | 4. Windows 95 Theme | v2.0 | 0/TBD | Not started | - |
 | 5. Desktop Shell and Polish | v2.0 | 0/TBD | Not started | - |
