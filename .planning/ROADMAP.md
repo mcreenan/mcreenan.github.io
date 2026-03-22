@@ -37,7 +37,7 @@
   5. Navigating between pages via View Transitions preserves the selected theme without flicker
 **Plans**: 3 plans
 Plans:
-- [ ] 02-01-PLAN.md — CSS tokenization and data-theme attribute
+- [x] 02-01-PLAN.md — CSS tokenization and data-theme attribute
 - [ ] 02-02-PLAN.md — Anti-flash script and View Transitions persistence
 - [ ] 02-03-PLAN.md — Theme switcher dialog, buttons, and wiring
 
@@ -80,7 +80,7 @@ Plans:
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1. Migrate to Bun | v1.0 | 1/1 | Complete | 2026-03-22 |
-| 2. CSS Foundation and Theme Infrastructure | v2.0 | 0/3 | Planning complete | - |
+| 2. CSS Foundation and Theme Infrastructure | v2.0 | 1/3 | In Progress|  |
 | 3. Windows 3.1 Theme | v2.0 | 0/TBD | Not started | - |
 | 4. Windows 95 Theme | v2.0 | 0/TBD | Not started | - |
 | 5. Desktop Shell and Polish | v2.0 | 0/TBD | Not started | - |

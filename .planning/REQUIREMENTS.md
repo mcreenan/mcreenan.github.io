@@ -9,8 +9,8 @@ Requirements for theme system release. Each maps to roadmap phases.
 
 ### Theme Infrastructure
 
-- [ ] **INFRA-01**: All hardcoded CSS values in global.css converted to CSS custom properties
-- [ ] **INFRA-02**: Theme state managed via data-theme attribute on `<html>` element
+- [x] **INFRA-01**: All hardcoded CSS values in global.css converted to CSS custom properties
+- [x] **INFRA-02**: Theme state managed via data-theme attribute on `<html>` element
 - [ ] **INFRA-03**: Anti-flash inline script prevents theme flash on page load
 - [ ] **INFRA-04**: Theme persists across sessions via localStorage
 - [ ] **INFRA-05**: Theme state survives Astro View Transitions page navigation
@@ -66,8 +66,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 2 | Pending |
-| INFRA-02 | Phase 2 | Pending |
+| INFRA-01 | Phase 2 | Complete |
+| INFRA-02 | Phase 2 | Complete |
 | INFRA-03 | Phase 2 | Pending |
 | INFRA-04 | Phase 2 | Pending |
 | INFRA-05 | Phase 2 | Pending |

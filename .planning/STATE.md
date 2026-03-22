@@ -2,16 +2,14 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Theme System
-status: planning
-stopped_at: Phase 2 UI-SPEC approved
-last_updated: "2026-03-22T02:34:50.357Z"
-last_activity: 2026-03-21 — Roadmap created for v2.0
+status: unknown
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-22T02:49:37.036Z"
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_plans: 3
+  completed_plans: 1
 ---
 
 # Project State
@@ -21,16 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-21)
 
 **Core value:** A theme-switchable personal site where each theme authentically recreates its target OS aesthetic.
-**Current focus:** Phase 2 — CSS Foundation and Theme Infrastructure
+**Current focus:** Phase 02 — css-foundation-theme-infrastructure
 
 ## Current Position
 
-Phase: 2 of 5 (CSS Foundation and Theme Infrastructure)
-Plan: — (not yet planned)
-Status: Ready to plan
-Last activity: 2026-03-21 — Roadmap created for v2.0
-
-Progress: [░░░░░░░░░░] 0%
+Phase: 02 (css-foundation-theme-infrastructure) — EXECUTING
+Plan: 2 of 3
 
 ## Performance Metrics
 
@@ -47,6 +41,7 @@ Progress: [░░░░░░░░░░] 0%
 | - | - | - | - |
 
 *Updated after each plan completion*
+| Phase 02-css-foundation-theme-infrastructure P01 | 2m | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -55,6 +50,8 @@ Progress: [░░░░░░░░░░] 0%
 - Resolved: Use Bun as package manager only (not runtime) — Astro expects Node.js runtime; Bun as PM is drop-in
 - [Phase 01]: Used bun.lock text format (Bun 1.3.9 default)
 - [Phase 01]: withastro/action@v2 requires explicit package-manager: bun@latest config
+- [Phase 02]: Scoped .window under [data-theme='retro'] to prevent Phase 4 collision with 98.css
+- [Phase 02]: @keyframes borderGradient kept hardcoded (retro-only per D-09)
 
 ### Research Flags
 
@@ -72,6 +69,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-22T02:34:50.354Z
-Stopped at: Phase 2 UI-SPEC approved
-Resume file: .planning/phases/02-css-foundation-theme-infrastructure/02-UI-SPEC.md
+Last session: 2026-03-22T02:49:37.033Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: None
