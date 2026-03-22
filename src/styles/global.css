@@ -101,15 +101,11 @@
   background-color: #008080;
 }
 
-/* Win 3.1 window chrome — layered 3D frame like real Win 3.1
-   Outside→in: 1px black | 1px white(TL)/dark(BR) | 3px gray frame | 1px dark(TL)/white(BR) sunken edge */
+/* Win 3.1 window chrome — layered 3D frame
+   Outside→in: 1px black | 1px white(TL)/dark(BR) | 2px gray frame */
 [data-theme="win31"] .window {
   background-color: var(--color-window);
-  border: 4px solid #C0C0C0;
-  border-top-color: #C0C0C0;
-  border-left-color: #C0C0C0;
-  border-bottom-color: #C0C0C0;
-  border-right-color: #C0C0C0;
+  border: 2px solid #C0C0C0;
   outline: 1px solid #000000;
   box-shadow:
     inset 1px 1px 0 0 #FFFFFF,
@@ -119,7 +115,7 @@
 /* Win 3.1 splash screen — override retro 21px border hack */
 [data-theme="win31"] .splash-screen {
   padding: 0;
-  border: 4px solid #C0C0C0;
+  border: 2px solid #C0C0C0;
   border-image: none;
   animation: none;
   outline: 1px solid #000000;
@@ -128,18 +124,18 @@
     inset -1px -1px 0 0 #808080;
 }
 
-/* Win 3.1 title bar — solid navy, white text, snug fit inside frame */
+/* Win 3.1 title bar — solid navy, buttons fill full height */
 [data-theme="win31"] .window-titlebar {
   background: #000080;
   color: #FFFFFF;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
-  padding: 2px 2px;
-  height: 22px;
+  padding: 0;
+  height: 20px;
   margin: 0;
   font-family: "W95FA", Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-font-smoothing: none;
   box-sizing: border-box;
 }
@@ -151,7 +147,7 @@
   background-clip: unset;
   color: #FFFFFF;
   font-family: "W95FA", Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   text-shadow: none;
   transform: none;
@@ -164,7 +160,7 @@
 
 /* Win 3.1 window inner — no top margin offset */
 [data-theme="win31"] .window-inner {
-  height: calc(100% - 22px);
+  height: calc(100% - 20px);
   margin-top: 0;
 }
 
@@ -205,7 +201,7 @@
   border-left: 1px solid #808080;
   border-bottom: 1px solid #FFFFFF;
   border-right: 1px solid #FFFFFF;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.5;
 }
 
@@ -239,7 +235,7 @@
 
 [data-theme="win31"] .theme-dialog-title {
   font-family: "W95FA", Arial, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: bold;
   color: #000000;
 }
@@ -255,7 +251,7 @@
   align-items: center;
   gap: 0.5rem;
   font-family: "W95FA", Arial, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   color: #000000;
   cursor: pointer;
   padding: 3px 4px;
@@ -282,7 +278,7 @@
   border-bottom: 1px solid #808080;
   padding: 0;
   font-family: "W95FA", Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: #000000;
   height: 22px;
 }
@@ -333,7 +329,7 @@
   background: none;
   border: none;
   font-family: "W95FA", Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: #000000;
   cursor: pointer;
 }
@@ -372,22 +368,23 @@
 }
 
 [data-theme="win31"] .pm-icon:hover {
-  background: rgba(0,0,128,0.3);
+  outline: 1px dotted #000000;
+  background: none;
 }
 
 [data-theme="win31"] .pm-icon:focus {
-  outline: 1px dotted #000080;
-  background: rgba(0,0,128,0.3);
+  outline: 1px dotted #000000;
+  background: none;
 }
 
 [data-theme="win31"] .pm-icon-label {
   font-family: "W95FA", Arial, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.2;
   text-align: center;
 }
 
-/* Win 3.1 title bar decorative chrome buttons — 3D beveled */
+/* Win 3.1 title bar chrome buttons — full height, 3D beveled */
 [data-theme="win31"] .win31-chrome-btn {
   font-family: "W95FA", Arial, sans-serif;
   font-size: 9px;
@@ -402,24 +399,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 14px;
-  width: 17px;
+  align-self: stretch;
+  width: 18px;
   box-sizing: border-box;
   text-decoration: none;
   line-height: 1;
 }
 
-/* Win 3.1 title bar left/right groups */
+/* Win 3.1 title bar left/right groups — flush to edges */
 [data-theme="win31"] .win31-titlebar-left {
   display: flex;
-  align-items: center;
-  gap: 4px;
+  align-items: stretch;
+  align-self: stretch;
+  gap: 0;
 }
 
 [data-theme="win31"] .win31-titlebar-right {
   display: flex;
-  align-items: center;
-  gap: 2px;
+  align-items: stretch;
+  align-self: stretch;
+  gap: 0;
 }
 
 [data-theme="win31"] .win31-titlebar-center {
@@ -429,7 +428,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 body {
