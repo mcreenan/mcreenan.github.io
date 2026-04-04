@@ -53,7 +53,7 @@ Plans:
 **Plans**: 2 plans
 Plans:
 - [x] 03-01-PLAN.md — W95FA font, CSS tokens, win31 component overrides, Window.astro variant
-- [ ] 03-02-PLAN.md — ProgramManager component, index.astro wiring, subpage win31 chrome
+- [x] 03-02-PLAN.md — ProgramManager component, index.astro wiring, subpage win31 chrome
 
 ### Phase 4: Windows 95 Theme
 **Goal**: Users can experience the site in an authentic Windows 95 aesthetic using 98.css-powered beveled window chrome, a pixel font, and a taskbar
