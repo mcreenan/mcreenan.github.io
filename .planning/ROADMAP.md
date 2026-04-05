@@ -65,7 +65,10 @@ Plans:
   3. The W95FA pixel font is applied to UI elements, approximating MS Sans Serif
   4. Each section (About, Work, Contact) is represented as a desktop icon that can be clicked to open it
   5. A taskbar with a Start button area and a clock is visible at the bottom of the screen
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 04-01-PLAN.md — Install 98.css, win95 CSS tokens, cherry-picked 98.css rules, Window.astro win95 variant
+- [ ] 04-02-PLAN.md — Taskbar component, Win95Desktop icons, display toggles, subpage win95 chrome
 
 ### Phase 5: Desktop Shell and Polish
 **Goal**: The app-launcher metaphor is complete for both Windows themes, the existing retro theme is unaffected, and the switcher is keyboard-accessible and correctly positioned per theme
@@ -85,5 +88,5 @@ Plans:
 | 1. Migrate to Bun | v1.0 | 1/1 | Complete | 2026-03-22 |
 | 2. CSS Foundation and Theme Infrastructure | v2.0 | 3/3 | Complete   | 2026-03-22 |
 | 3. Windows 3.1 Theme | v2.0 | 0/2 | In progress | - |
-| 4. Windows 95 Theme | v2.0 | 0/TBD | Not started | - |
+| 4. Windows 95 Theme | v2.0 | 0/2 | Not started | - |
 | 5. Desktop Shell and Polish | v2.0 | 0/TBD | Not started | - |
