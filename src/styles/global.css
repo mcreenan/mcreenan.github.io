@@ -140,8 +140,8 @@
   --color-title-glow-2:          transparent;
 
   /* Typography — reuse W95FA from Phase 3 (per D-09) */
-  --font-body:                   "W95FA", Arial, sans-serif;
-  --font-title:                  "W95FA", Arial, sans-serif;
+  --font-body:                   "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
+  --font-title:                  "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
 
   /* Borders */
   --border-button:               none;
@@ -171,9 +171,8 @@
 [data-theme="win95"] body {
   background-image: none;
   background-color: #008080;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 14px;
-  -webkit-font-smoothing: none;
 }
 
 /* Win 3.1 window chrome: 1px black outer, 2px gray, 1px black inner */
@@ -526,10 +525,10 @@
   border-radius: 0;
 }
 
-/* Win95 title bar — navy-to-teal gradient (per D-04) */
+/* Win95 title bar — solid navy (no Win98 gradient) */
 [data-theme="win95"] .title-bar {
-  background: linear-gradient(90deg, #000080, #1084d0);
-  padding: 3px 2px 3px 3px;
+  background: #000080;
+  padding: 2px 2px 2px 3px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -540,9 +539,8 @@
   color: white;
   letter-spacing: 0;
   margin-right: 24px;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 12px;
-  -webkit-font-smoothing: none;
 }
 
 [data-theme="win95"] .title-bar-controls {
@@ -552,9 +550,24 @@
 [data-theme="win95"] .title-bar-controls button {
   padding: 0;
   display: block;
+  width: 16px;
+  height: 14px;
   min-width: 16px;
   min-height: 14px;
   box-sizing: border-box;
+  background-color: #C0C0C0;
+  border: 1px solid #000000;
+  box-shadow:
+    inset 1px 1px 0 0 #FFFFFF,
+    inset -1px -1px 0 0 #808080;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+[data-theme="win95"] .title-bar-controls button:active {
+  box-shadow:
+    inset 1px 1px 0 0 #808080,
+    inset -1px -1px 0 0 #FFFFFF;
 }
 
 [data-theme="win95"] .title-bar-controls button[aria-label="Minimize"] {
@@ -583,9 +596,8 @@
   border-radius: 0;
   box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
               inset -2px -2px grey, inset 2px 2px #dfdfdf;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 11px;
-  -webkit-font-smoothing: none;
 }
 
 [data-theme="win95"] .button:hover {
@@ -630,10 +642,9 @@
 
 /* Win95 os-title — pixel font, no text effects */
 [data-theme="win95"] .os-title {
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   text-shadow: none;
   color: var(--color-title);
-  -webkit-font-smoothing: none;
 }
 
 /* Win95 content-window override */
@@ -654,7 +665,7 @@
 }
 
 [data-theme="win95"] .theme-dialog-title {
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 12px;
   font-weight: bold;
   color: #000000;
@@ -670,7 +681,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 12px;
   color: #000000;
   cursor: pointer;
@@ -695,9 +706,8 @@
   align-items: center;
   padding: 2px;
   gap: 4px;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 11px;
-  -webkit-font-smoothing: none;
 }
 
 [data-theme="win95"] .win95-taskbar {
@@ -715,10 +725,9 @@
   border-radius: 0;
   box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
               inset -2px -2px grey, inset 2px 2px #dfdfdf;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 11px;
   font-weight: bold;
-  -webkit-font-smoothing: none;
   cursor: default;
 }
 
@@ -744,9 +753,8 @@
 }
 
 .win95-clock {
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 11px;
-  -webkit-font-smoothing: none;
   white-space: nowrap;
 }
 
@@ -786,11 +794,10 @@
 }
 
 .win95-icon-label {
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
   font-size: 12px;
   line-height: 1.2;
   text-align: center;
-  -webkit-font-smoothing: none;
   color: #FFFFFF;
   text-shadow:
     1px 1px 0 #000,
@@ -807,6 +814,22 @@
 /* Win95 subpage content padding for taskbar */
 [data-theme="win95"] .win95-window .content-window {
   padding-bottom: 28px;
+}
+
+/* Win95 subpage window container — cap height at 90vh so long pages
+   (like /work) scroll inside the window instead of growing past the
+   viewport. calc() accounts for the zoom:1.5 on .win95-window, so
+   the rendered box tops out at ~90vh. */
+[data-theme="win95"] .win95-window .window {
+  max-height: calc(90vh / 1.5);
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="win95"] .win95-window .window .window-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 /* Win95 hide retro desktop icon on subpages (title bar close button handles navigation) */
