@@ -1275,20 +1275,51 @@ body {
   padding: 1rem;
 }
 
-/* Retina/high-DPI scaling: 1.5x zoom on themed containers.
-   Authentic 1990s pixel sizes feel too small on modern displays. */
-[data-theme="win31"] .program-manager,
-[data-theme="win31"] #overlay-window,
-[data-theme="win31"] .theme-dialog-content {
-  zoom: 1.5;
+/* Retina/high-DPI scaling: scale UI chrome for modern displays.
+   Win31 uses direct sizing (not zoom) because zoom on the title bar
+   overflows its parent window. Win95 uses zoom on its containers. */
+[data-theme="win31"] .window-titlebar {
+  height: 32px;
+  font-size: 24px;
 }
 
-[data-theme="win31"] .retro-win31-window .window-titlebar {
-  zoom: 1.5;
+[data-theme="win31"] .window-title {
+  font-size: 24px;
+}
+
+[data-theme="win31"] .win31-chrome-btn {
+  font-size: 14px;
+}
+
+[data-theme="win31"] .menubar {
+  height: 34px;
+  font-size: 22px;
+}
+
+[data-theme="win31"] .menubar-item {
+  font-size: 22px;
+  padding: 4px 14px;
+}
+
+[data-theme="win31"] .menubar-dropdown button {
+  font-size: 22px;
+  padding: 6px 22px;
+}
+
+[data-theme="win31"] .pm-icon-label {
+  font-size: 20px;
+}
+
+[data-theme="win31"] .os-title {
+  font-size: 40px;
 }
 
 [data-theme="win31"] .retro-win31-window .window-content {
   font-size: 24px;
+}
+
+[data-theme="win31"] .theme-dialog-content {
+  zoom: 1.5;
 }
 
 [data-theme="win95"] .win95-desktop,
