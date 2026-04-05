@@ -914,6 +914,7 @@ body {
     overflow: visible;
     width: calc(100vw - 20px);
     max-width: 640px;
+    max-height: 90vh;
     margin: 0 auto;
     z-index: 1;
     view-transition-name: window;
