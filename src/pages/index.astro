@@ -142,7 +142,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 				const text = await resp.text();
 				const doc = new DOMParser().parseFromString(text, 'text/html');
 
-				const contentEl = doc.querySelector('.window-content') || doc.querySelector('.window-body');
+				const isWin95 = document.documentElement.getAttribute('data-theme') === 'win95';
+				const contentEl = isWin95
+					? (doc.querySelector('.window-body') || doc.querySelector('.window-content'))
+					: (doc.querySelector('.window-content') || doc.querySelector('.window-body'));
 				const html = contentEl ? contentEl.innerHTML : '';
 				const title = TITLE_MAP[url] || 'Content';
 

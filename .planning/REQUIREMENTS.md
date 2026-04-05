@@ -26,21 +26,21 @@ Requirements for theme system release. Each maps to roadmap phases.
 - [x] **WIN31-01**: Windows have flat gray chrome with solid navy title bars and 2px black borders
 - [x] **WIN31-02**: Buttons render with flat Win3.1 style (raised gray, black border)
 - [x] **WIN31-03**: Period-appropriate bitmap-style font applied to UI elements
-- [ ] **WIN31-04**: Desktop shows Program Manager window with icon groups for each section
+- [x] **WIN31-04**: Desktop shows Program Manager window with icon groups for each section
 
 ### Windows 95 Theme
 
-- [ ] **WIN95-01**: Windows have beveled 3D chrome via 98.css with proper shadows
-- [ ] **WIN95-02**: Buttons render with Win95 beveled style
-- [ ] **WIN95-03**: Pixel font (W95FA) applied to UI elements for MS Sans Serif look
-- [ ] **WIN95-04**: Desktop shows icons for each section that open as themed windows
-- [ ] **WIN95-05**: Taskbar with Start button area and clock displayed at bottom
+- [x] **WIN95-01**: Windows have beveled 3D chrome via 98.css with proper shadows
+- [x] **WIN95-02**: Buttons render with Win95 beveled style
+- [x] **WIN95-03**: Pixel font (W95FA) applied to UI elements for MS Sans Serif look
+- [x] **WIN95-04**: Desktop shows icons for each section that open as themed windows
+- [x] **WIN95-05**: Taskbar with Start button area and clock displayed at bottom
 
 ### Desktop Shell
 
-- [ ] **SHELL-01**: Each section (About, Work, Contact) presented as a clickable app icon on the desktop
-- [ ] **SHELL-02**: Clicking an app icon opens the section content in a themed window
-- [ ] **SHELL-03**: Current/default theme continues to work with existing page layout
+- [x] **SHELL-01**: Each section (About, Work, Contact) presented as a clickable app icon on the desktop
+- [x] **SHELL-02**: Clicking an app icon opens the section content in a themed window
+- [x] **SHELL-03**: Current/default theme continues to work with existing page layout
 
 ## Future Requirements
 
@@ -77,15 +77,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | WIN31-01 | Phase 3 | Complete |
 | WIN31-02 | Phase 3 | Complete |
 | WIN31-03 | Phase 3 | Complete |
-| WIN31-04 | Phase 3 | Pending |
-| WIN95-01 | Phase 4 | Pending |
-| WIN95-02 | Phase 4 | Pending |
-| WIN95-03 | Phase 4 | Pending |
-| WIN95-04 | Phase 4 | Pending |
-| WIN95-05 | Phase 4 | Pending |
-| SHELL-01 | Phase 5 | Pending |
-| SHELL-02 | Phase 5 | Pending |
-| SHELL-03 | Phase 5 | Pending |
+| WIN31-04 | Phase 3 | Complete |
+| WIN95-01 | Phase 4 | Complete |
+| WIN95-02 | Phase 4 | Complete |
+| WIN95-03 | Phase 4 | Complete |
+| WIN95-04 | Phase 4 | Complete |
+| WIN95-05 | Phase 4 | Complete |
+| SHELL-01 | Phase 5 | Complete |
+| SHELL-02 | Phase 5 | Complete |
+| SHELL-03 | Phase 5 | Complete |
 
 **Coverage:**
 - v2.0 requirements: 20 total
