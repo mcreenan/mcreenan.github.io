@@ -1,0 +1,41 @@
+---
+// Taskbar.astro — Win95 taskbar with Start button and live clock
+// Hidden by default, shown only under [data-theme="win95"] via CSS toggle
+---
+
+<div class="win95-taskbar">
+  <button class="win95-start-btn" type="button">
+    <svg class="win95-start-flag" width="16" height="14" viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; image-rendering: crisp-edges;" aria-hidden="true">
+      <!-- Windows flag: 4 colored squares -->
+      <rect x="0" y="0" width="7" height="6" fill="#FF0000"/>
+      <rect x="9" y="0" width="7" height="6" fill="#00FF00"/>
+      <rect x="0" y="8" width="7" height="6" fill="#0000FF"/>
+      <rect x="9" y="8" width="7" height="6" fill="#FFFF00"/>
+    </svg>
+    <span>Start</span>
+  </button>
+  <div class="win95-tray">
+    <time class="win95-clock" id="win95-clock" datetime="">12:00 PM</time>
+  </div>
+</div>
+
+<script>
+  function updateWin95Clock() {
+    const el = document.getElementById('win95-clock');
+    if (!el) return;
+    const now = new Date();
+    let h = now.getHours();
+    const m = now.getMinutes().toString().padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    const timeStr = `${h}:${m} ${ampm}`;
+    el.textContent = timeStr;
+    el.setAttribute('datetime', now.toISOString());
+  }
+  updateWin95Clock();
+  setInterval(updateWin95Clock, 60000);
+  // Reinit on View Transitions navigation (per Pitfall 4 in RESEARCH.md)
+  document.addEventListener('astro:after-swap', () => {
+    updateWin95Clock();
+  });
+</script>

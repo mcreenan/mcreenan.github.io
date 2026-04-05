@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import HomeIcon from "../components/HomeIcon.astro";
 import ThemesIcon from "../components/ThemesIcon.astro";
 import ThemeDialog from "../components/ThemeDialog.astro";
+import Taskbar from "../components/Taskbar.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 interface Props {
@@ -26,6 +27,7 @@ const pageTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
             {title && <HomeIcon />}
             {title && <ThemesIcon />}
             <ThemeDialog />
+            <Taskbar />
         </main>
     </body>
 </html>
