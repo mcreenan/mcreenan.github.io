@@ -467,8 +467,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
-  aspect-ratio: 1 / 1;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
   box-sizing: border-box;
   text-decoration: none;
   line-height: 1;
@@ -489,6 +490,8 @@
   align-items: stretch;
   align-self: stretch;
   gap: 0;
+  flex: 0 0 auto;
+  min-width: 0;
 }
 
 [data-theme="win31"] .win31-titlebar-right {
@@ -496,10 +499,13 @@
   align-items: stretch;
   align-self: stretch;
   gap: 0;
+  flex: 0 0 auto;
+  min-width: 0;
 }
 
 [data-theme="win31"] .win31-titlebar-center {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1282,7 +1288,13 @@ body {
 [data-theme="win31"] .window-titlebar {
   height: 32px;
   font-size: 24px;
-  padding-right: 2px;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  justify-content: stretch;
 }
 
 [data-theme="win31"] .window-title {
