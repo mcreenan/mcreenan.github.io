@@ -103,5 +103,149 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 		<ThemeDialog />
 		<Taskbar />
 	</main>
+	<script>
+		// === Desktop Overlay Controller (Phase 05) ===
+
+		const contentCache = new Map<string, { title: string; html: string }>();
+		let overlayIsOpen = false;
+		let activeTrigger: HTMLElement | null = null;
+
+		const TITLE_MAP: Record<string, string> = {
+			'/about': 'About Me',
+			'/work': 'Work',
+			'/contact': 'Contact',
+		};
+
+		const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+		function initDesktopOverlay() {
+			const theme = document.documentElement.getAttribute('data-theme');
+			if (theme !== 'win31' && theme !== 'win95') return;
+
+			const icons = document.querySelectorAll<HTMLAnchorElement>('.pm-icon, .win95-icon');
+			icons.forEach((anchor) => {
+				anchor.addEventListener('click', (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					const href = anchor.getAttribute('href');
+					if (href) openOverlay(href, anchor);
+				});
+			});
+		}
+
+		async function openOverlay(url: string, triggerEl: HTMLElement) {
+			activeTrigger = triggerEl;
+			overlayIsOpen = true;
+
+			if (!contentCache.has(url)) {
+				const resp = await fetch(url);
+				const text = await resp.text();
+				const doc = new DOMParser().parseFromString(text, 'text/html');
+
+				const contentEl = doc.querySelector('.window-content') || doc.querySelector('.window-body');
+				const html = contentEl ? contentEl.innerHTML : '';
+				const title = TITLE_MAP[url] || 'Content';
+
+				contentCache.set(url, { title, html });
+			}
+
+			const cached = contentCache.get(url)!;
+			const overlay = document.getElementById('overlay-window');
+			if (!overlay) return;
+
+			overlay.querySelectorAll('.overlay-title').forEach((el) => {
+				el.textContent = cached.title;
+			});
+			overlay.querySelectorAll('.overlay-body').forEach((el) => {
+				el.innerHTML = cached.html;
+			});
+
+			overlay.removeAttribute('hidden');
+			history.pushState({ overlayUrl: url }, '', url);
+
+			// Focus the close button in the visible chrome
+			const visibleClose = overlay.querySelector<HTMLElement>('.overlay-chrome:not([style*="display: none"]) .overlay-close');
+			if (visibleClose) {
+				visibleClose.focus();
+			} else {
+				// Fallback: focus any visible close button
+				const anyClose = overlay.querySelector<HTMLElement>('.overlay-close');
+				if (anyClose) anyClose.focus();
+			}
+		}
+
+		function closeOverlay(fromPopstate = false) {
+			if (!overlayIsOpen) return;
+			overlayIsOpen = false;
+
+			const overlay = document.getElementById('overlay-window');
+			if (overlay) {
+				overlay.setAttribute('hidden', '');
+				overlay.querySelectorAll('.overlay-body').forEach((el) => {
+					el.innerHTML = '';
+				});
+			}
+
+			if (!fromPopstate) {
+				history.back();
+			}
+
+			activeTrigger?.focus();
+			activeTrigger = null;
+		}
+
+		// Focus trap and Escape key handler
+		const overlayEl = document.getElementById('overlay-window');
+		if (overlayEl) {
+			overlayEl.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') {
+					closeOverlay();
+					return;
+				}
+
+				if (e.key === 'Tab') {
+					const focusable = Array.from(overlayEl.querySelectorAll<HTMLElement>(FOCUSABLE));
+					if (focusable.length === 0) return;
+
+					const first = focusable[0];
+					const last = focusable[focusable.length - 1];
+
+					if (e.shiftKey && document.activeElement === first) {
+						e.preventDefault();
+						last.focus();
+					} else if (!e.shiftKey && document.activeElement === last) {
+						e.preventDefault();
+						first.focus();
+					}
+				}
+			});
+
+			// Backdrop click handler
+			const backdrop = overlayEl.querySelector('.overlay-backdrop');
+			if (backdrop) {
+				backdrop.addEventListener('click', () => closeOverlay());
+			}
+
+			// Close button handlers
+			overlayEl.querySelectorAll('.overlay-close').forEach((btn) => {
+				btn.addEventListener('click', () => closeOverlay());
+			});
+		}
+
+		// Back button handler
+		window.addEventListener('popstate', () => {
+			if (!overlayIsOpen) return;
+			closeOverlay(true);
+		});
+
+		// astro:after-swap re-initialization
+		document.addEventListener('astro:after-swap', () => {
+			overlayIsOpen = false;
+			contentCache.clear();
+			initDesktopOverlay();
+		});
+
+		initDesktopOverlay();
+	</script>
 	</body>
 </html>
