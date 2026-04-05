@@ -1292,9 +1292,25 @@ body {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  justify-content: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+[data-theme="win31"] .window-titlebar > .window-title {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  align-self: center;
+  text-align: center;
+}
+
+[data-theme="win31"] .window-titlebar > .win31-titlebar-left,
+[data-theme="win31"] .window-titlebar > .win31-titlebar-right {
+  flex: 0 0 auto;
 }
 
 [data-theme="win31"] .window-title {
