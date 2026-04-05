@@ -95,10 +95,67 @@
   --bg-content-window:           #FFFFFF;
 }
 
+[data-theme="win95"] {
+  /* Colors */
+  --color-bg:                    #008080;
+  --color-window:                #C0C0C0;
+  --color-button-bg:             #C0C0C0;
+  --color-button-text:           #000000;
+  --color-button-border:         #000000;
+  --color-link:                  #0000FF;
+  --color-link-hover:            #0000CC;
+  --color-desktop-icon:          #FFFFFF;
+  --color-desktop-icon-shadow:   rgba(0,0,0,0.7);
+  --color-desktop-icon-highlight: rgba(0,0,128,0.5);
+  --outline-desktop-icon:        1px dotted #FFFFFF;
+  --color-desktop-label-stroke:  #000;
+  --filter-desktop-icon:         none;
+  --color-scrollbar-track:       #FFFFFF;
+  --border-scrollbar:            1px solid #000;
+  --color-scrollbar-thumb:       #C0C0C0;
+  --color-scrollbar-thumb-hover: #808080;
+  --color-title:                 #FFFFFF;
+  --color-title-gradient-start:  #FFFFFF;
+  --color-title-gradient-end:    #FFFFFF;
+  --color-title-shadow:          transparent;
+  --color-title-glow-1:          transparent;
+  --color-title-glow-2:          transparent;
+
+  /* Typography — reuse W95FA from Phase 3 (per D-09) */
+  --font-body:                   "W95FA", Arial, sans-serif;
+  --font-title:                  "W95FA", Arial, sans-serif;
+
+  /* Borders */
+  --border-button:               none;
+  --border-headshot:             2px solid #000000;
+
+  /* Shadows */
+  --shadow-button:               none;
+  --shadow-button-hover:         none;
+  --shadow-headshot:             none;
+  --shadow-window:               none;
+
+  /* Backgrounds — flat, no retro patterns */
+  --bg-gradient-fade:            transparent;
+  --bg-pixel-light:              transparent;
+  --bg-pixel-dark:               transparent;
+  --bg-splash:                   #C0C0C0;
+  --bg-content-window:           #C0C0C0;
+}
+
 /* Win 3.1 body override — remove retro pixel-grid pattern */
 [data-theme="win31"] body {
   background-image: none;
   background-color: #008080;
+}
+
+/* Win95 body override — flat teal, pixel font */
+[data-theme="win95"] body {
+  background-image: none;
+  background-color: #008080;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: none;
 }
 
 /* Win 3.1 window chrome: 1px black outer, 2px gray, 1px black inner */
@@ -431,6 +488,173 @@
   white-space: nowrap;
   font-weight: bold;
   font-size: 16px;
+}
+
+/* Win95 window chrome — cherry-picked from 98.css (per D-01, D-02, D-03) */
+[data-theme="win95"] .window {
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+              inset -2px -2px grey, inset 2px 2px #fff;
+  background: #C0C0C0;
+  padding: 3px;
+  border: none;
+  border-image: none;
+  animation: none;
+  border-radius: 0;
+}
+
+/* Win95 title bar — navy-to-teal gradient (per D-04) */
+[data-theme="win95"] .title-bar {
+  background: linear-gradient(90deg, #000080, #1084d0);
+  padding: 3px 2px 3px 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-theme="win95"] .title-bar-text {
+  font-weight: bold;
+  color: white;
+  letter-spacing: 0;
+  margin-right: 24px;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 12px;
+  -webkit-font-smoothing: none;
+}
+
+[data-theme="win95"] .title-bar-controls {
+  display: flex;
+}
+
+[data-theme="win95"] .title-bar-controls button {
+  padding: 0;
+  display: block;
+  min-width: 16px;
+  min-height: 14px;
+  box-sizing: border-box;
+}
+
+[data-theme="win95"] .title-bar-controls button[aria-label="Minimize"] {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='6' height='2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23000' d='M0 0h6v2H0z'/%3E%3C/svg%3E");
+  background-position: bottom 3px left 4px;
+  background-repeat: no-repeat;
+}
+
+[data-theme="win95"] .title-bar-controls button[aria-label="Maximize"] {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='9' height='9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9 0H0v9h9V0zM8 2H1v6h7V2z' fill='%23000'/%3E%3C/svg%3E");
+  background-position: top 2px left 3px;
+  background-repeat: no-repeat;
+}
+
+[data-theme="win95"] .title-bar-controls button[aria-label="Close"] {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='8' height='7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h2v1h1v1h2V1h1V0h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V6H5V5H3v1H2v1H0V6h1V5h1V4h1V3H2V2H1V1H0V0z' fill='%23000'/%3E%3C/svg%3E");
+  background-position: top 3px left 4px;
+  background-repeat: no-repeat;
+  margin-left: 2px;
+}
+
+/* Win95 button bevel — scoped to .button class (per D-02, WIN95-02) */
+[data-theme="win95"] .button {
+  background: #C0C0C0;
+  border: none;
+  border-radius: 0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
+              inset -2px -2px grey, inset 2px 2px #dfdfdf;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 11px;
+  -webkit-font-smoothing: none;
+}
+
+[data-theme="win95"] .button:hover {
+  transform: none;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff,
+              inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+/* Win95 splash screen override */
+[data-theme="win95"] .splash-screen {
+  padding: 3px;
+  border: none;
+  border-image: none;
+  animation: none;
+  border-radius: 0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+              inset -2px -2px grey, inset 2px 2px #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Win95 window-body styles (98.css content area) */
+[data-theme="win95"] .window-body {
+  padding: 8px;
+  background: #FFFFFF;
+  border: 2px groove;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* Win95 hide retro titlebar — win95 uses .title-bar (98.css) instead */
+[data-theme="win95"] .window-titlebar {
+  display: none;
+}
+
+/* Win95 headshot — flat border, no shadow */
+[data-theme="win95"] .headshot-image {
+  border: 2px solid #000000;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Win95 os-title — pixel font, no text effects */
+[data-theme="win95"] .os-title {
+  font-family: "W95FA", Arial, sans-serif;
+  text-shadow: none;
+  color: var(--color-title);
+  -webkit-font-smoothing: none;
+}
+
+/* Win95 content-window override */
+[data-theme="win95"] .content-window {
+  background: #C0C0C0;
+}
+
+/* Win95 theme dialog styles */
+[data-theme="win95"] .theme-dialog-content {
+  background: #C0C0C0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+              inset -2px -2px grey, inset 2px 2px #fff;
+  border: none;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+[data-theme="win95"] .theme-dialog-title {
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000000;
+}
+
+[data-theme="win95"] .theme-dialog-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+[data-theme="win95"] .theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 12px;
+  color: #000000;
+  cursor: pointer;
+  padding: 3px 4px;
+}
+
+[data-theme="win95"] .theme-option:hover {
+  background: rgba(0,0,128,0.5);
 }
 
 body {

@@ -5,6 +5,7 @@
     "": {
       "name": "matt-creenan-me",
       "dependencies": {
+        "98.css": "^0.1.21",
         "@astrojs/check": "^0.9.4",
         "@astrojs/mdx": "^3.1.9",
         "@astrojs/rss": "^4.0.9",
@@ -17,6 +18,8 @@
     },
   },
   "packages": {
+    "98.css": ["98.css@0.1.21", "", {}, "sha512-ddk5qtUWyapM0Bzd5jwGExoE5fdSEGrP+F5VbYjyZLf2c9UVmn6w2NPTvCsoD4BWdGsjdLjlkQGhWwWTJcYQJQ=="],
+
     "@alloc/quick-lru": ["@alloc/quick-lru@5.2.0", "", {}, "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="],
 
     "@ampproject/remapping": ["@ampproject/remapping@2.3.0", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.5", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="],
