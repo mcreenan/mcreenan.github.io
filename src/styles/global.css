@@ -444,7 +444,7 @@
   background: none;
 }
 
-[data-theme="win31"] .pm-icon:focus {
+[data-theme="win31"] .pm-icon:focus-visible {
   outline: 1px dotted #000000;
   background: none;
 }
@@ -773,7 +773,7 @@
   background: rgba(0, 0, 128, 0.5);
 }
 
-.win95-icon:focus {
+.win95-icon:focus-visible {
   background: rgba(0, 0, 128, 0.5);
   outline: 1px dotted #FFFFFF;
   outline-offset: -1px;
@@ -1100,7 +1100,7 @@ body {
     background: var(--color-desktop-icon-highlight);
 }
 
-.desktop-icon:focus {
+.desktop-icon:focus-visible {
     background: var(--color-desktop-icon-highlight);
     outline: var(--outline-desktop-icon);
     outline-offset: -1px;
