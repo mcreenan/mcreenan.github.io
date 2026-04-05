@@ -67,8 +67,8 @@ Plans:
   5. A taskbar with a Start button area and a clock is visible at the bottom of the screen
 **Plans**: 2 plans
 Plans:
-- [ ] 04-01-PLAN.md — Install 98.css, win95 CSS tokens, cherry-picked 98.css rules, Window.astro win95 variant
-- [ ] 04-02-PLAN.md — Taskbar component, Win95Desktop icons, display toggles, subpage win95 chrome
+- [x] 04-01-PLAN.md — Install 98.css, win95 CSS tokens, cherry-picked 98.css rules, Window.astro win95 variant
+- [x] 04-02-PLAN.md — Taskbar component, Win95Desktop icons, display toggles, subpage win95 chrome
 
 ### Phase 5: Desktop Shell and Polish
 **Goal**: The app-launcher metaphor is complete for both Windows themes, the existing retro theme is unaffected, and the switcher is keyboard-accessible and correctly positioned per theme
