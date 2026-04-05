@@ -2,21 +2,22 @@
 
 ## What This Is
 
-Personal site (matt.creenan.me) — an Astro-based static site deployed to GitHub Pages with a retro desktop OS aesthetic. Features a switchable theme system with three themes: the current retro desktop, Windows 3.1, and Windows 95. Each theme provides authentic OS chrome, and the Windows themes present sections as clickable desktop apps that open in themed windows.
+Personal site (matt.creenan.me) — an Astro-based static site deployed to GitHub Pages with a switchable three-theme desktop OS aesthetic. Users can switch between retro, Windows 3.1, and Windows 95 themes, each providing authentic OS chrome. The Windows themes present sections as clickable desktop app icons that open in themed overlay windows.
 
 ## Core Value
 
 A theme-switchable personal site where each theme authentically recreates its target OS aesthetic, with sections presented as native-feeling apps within each theme's window chrome.
 
-## Current Milestone: v2.0 Theme System
+## Current State
 
-**Goal:** Add a switchable theme system with three authentic OS themes
+**Shipped:** v2.0 Theme System (2026-04-05)
 
-**Target features:**
-- Theme switcher accessible from all pages
-- Windows 3.1 theme with period-accurate chrome and app metaphor
-- Windows 95 theme with period-accurate chrome and app metaphor
-- Refactored page structure to support theme-driven layouts
+Three fully-functional themes with authentic period-accurate chrome:
+- **Retro** (default): Original teal desktop with pixel grid, Roboto/Montserrat fonts
+- **Windows 3.1**: Flat gray chrome, navy title bars, MS Sans Serif bitmap font, Program Manager with icon groups
+- **Windows 95**: 98.css beveled chrome, navy-to-teal gradient title bars, W95FA font, taskbar with Start button and live clock, desktop icons
+
+Overlay window system in Windows themes: clicking a desktop icon fetches the target page and displays content in a themed overlay with History API URL sync, focus trap, and full keyboard accessibility (Escape, close button, click outside, back button).
 
 ## Requirements
 
@@ -29,14 +30,22 @@ A theme-switchable personal site where each theme authentically recreates its ta
 - ✓ Astro static site builds and deploys correctly — existing
 - ✓ Dev server runs locally — existing
 - ✓ GitHub Pages deployment via GitHub Actions — existing
+- ✓ All hardcoded CSS values converted to CSS custom properties — v2.0
+- ✓ Theme state managed via data-theme attribute — v2.0
+- ✓ Anti-flash inline script — v2.0
+- ✓ Theme persists across sessions via localStorage — v2.0
+- ✓ Theme survives Astro View Transitions — v2.0
+- ✓ Theme switcher accessible from all pages — v2.0
+- ✓ Switcher indicates active theme — v2.0
+- ✓ Switcher keyboard-accessible — v2.0
+- ✓ Windows 3.1 theme with flat gray chrome, navy title bars, bitmap font, Program Manager — v2.0
+- ✓ Windows 95 theme with beveled chrome, pixel font, desktop icons, taskbar — v2.0
+- ✓ Desktop icons open content as overlay windows in Windows themes — v2.0
+- ✓ Retro theme unchanged with existing page layout — v2.0
 
 ### Active
 
-- [x] Theme switcher UI accessible from all pages — Validated in Phase 02
-- [x] Current theme preserved as default option — Validated in Phase 02
-- [ ] Windows 3.1 theme with authentic chrome and app metaphor
-- [ ] Windows 95 theme with authentic chrome and app metaphor
-- [ ] Refactored page/component structure to support theme-driven layouts
+(None — no current milestone)
 
 ### Out of Scope
 
@@ -44,45 +53,41 @@ A theme-switchable personal site where each theme authentically recreates its ta
 - Adding ESLint/Prettier/Biome — not currently used, not adding
 - Using Bun as runtime (replacing Node.js) — Astro expects Node.js runtime
 - Mobile-native theme variants — responsive but not separate mobile themes
-- Theme persistence across sessions — implemented in Phase 02 (localStorage + anti-flash)
+- Draggable/resizable windows — high complexity, not core to theme authenticity
+- Multiple simultaneous overlay windows — one content view at a time
+- Functional Start menu — decorative only, theme switcher has its own access points
 
 ## Context
 
-Shipped v1.0 with Bun as package manager. Tech stack: Astro 4.16.8, Tailwind CSS, MDX, TypeScript. Deployed via `withastro/action@v2` with explicit `package-manager: bun@latest`. Simple dependency tree — 8 direct dependencies. `dist/` excluded from git tracking.
+Shipped v2.0 Theme System with ~800 LOC added to global.css and 5 new components (ProgramManager, Win95Desktop, Taskbar, ThemeDialog, ThemesIcon). Tech stack: Astro 4.16.8, Tailwind CSS, MDX, TypeScript, 98.css (for Win95 chrome), MS Sans Serif + W95FA bitmap fonts.
 
-Current site has a retro desktop OS aesthetic with Window components, Button components, and a teal background with pixel grid pattern. The existing design already uses window chrome concepts (title bars, content areas) which will serve as the foundation for the theme system.
+Three themes share the same page content via CSS display toggles — `.retro-layout`, `.program-manager`, and `.win95-desktop` are all rendered and toggled by `[data-theme="..."]` selectors. Theme switching is instant (no animation), persistent (localStorage), and flash-free (anti-flash inline script).
 
 ## Constraints
 
 - **Deployment**: GitHub Pages via GitHub Actions
 - **Compatibility**: Bun supports all current Astro integrations
 - **CI**: `withastro/action@v2` configured with `package-manager: bun@latest`
+- **Theme authenticity**: Each theme uses period-accurate chrome, fonts, and colors from its target OS era
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Use Bun as package manager only (not runtime) | Astro expects Node.js runtime; Bun as PM is drop-in | ✓ Good |
-| bun.lock text format (not binary bun.lockb) | Bun 1.3.9 default, both formats work with withastro/action | ✓ Good |
-| Explicit package-manager config in deploy.yml | withastro/action@v2 does NOT auto-detect Bun from lockfile | ✓ Good — required for CI |
-| No bunfig.toml | Bun defaults work correctly for this project | ✓ Good |
+| bun.lock text format (not binary bun.lockb) | Bun 1.3.9 default | ✓ Good |
+| Explicit package-manager config in deploy.yml | withastro/action@v2 does NOT auto-detect Bun | ✓ Good |
+| CSS custom properties + data-theme attribute | Industry standard, zero-JS theme switching | ✓ Good |
+| 98.css scoped under [data-theme="win95"] | Avoids global class collision with existing .window | ✓ Good |
+| Variant prop on Window.astro | Allows structurally different chrome per theme | ✓ Good |
+| MS Sans Serif for Win 3.1, W95FA for Win 95 | Period-accurate differentiation — Win 3.1 used bitmap MS Sans Serif, Win 95 used TrueType | ✓ Good |
+| Fetch-based overlays with History API | Progressive enhancement — works without JS via fallback navigation | ✓ Good |
+| :focus-visible for keyboard-only focus rings | Standard accessibility pattern, prevents mouse focus flash | ✓ Good |
+| CSS display toggle (not conditional rendering) | Simpler, no hydration required, all layouts in static HTML | ✓ Good |
 
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
 
-**After each phase transition** (via `/gsd:transition`):
-1. Requirements invalidated? → Move to Out of Scope with reason
-2. Requirements validated? → Move to Validated with phase reference
-3. New requirements emerged? → Add to Active
-4. Decisions to log? → Add to Key Decisions
-5. "What This Is" still accurate? → Update if drifted
-
-**After each milestone** (via `/gsd:complete-milestone`):
-1. Full review of all sections
-2. Core Value check — still the right priority?
-3. Audit Out of Scope — reasons still valid?
-4. Update Context with current state
-
 ---
-*Last updated: 2026-03-21 after Phase 02 completion — CSS token foundation and theme switcher UI*
+*Last updated: 2026-04-05 after v2.0 milestone — three-theme desktop OS aesthetic with overlay windows*
