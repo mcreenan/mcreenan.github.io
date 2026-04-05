@@ -1209,3 +1209,65 @@ body {
 [data-theme="retro"] .theme-option:hover {
   background: var(--color-desktop-icon-highlight);
 }
+
+/* === Overlay Window System (Phase 05) === */
+
+#overlay-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100; /* Above desktop icons, below taskbar (9999) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#overlay-window[hidden] {
+  display: none;
+}
+
+.overlay-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.overlay-chrome {
+  display: none; /* Hidden by default; theme CSS shows the right one */
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  z-index: 1;
+}
+
+/* Win31 overlay chrome — visible only under win31 theme */
+[data-theme="win31"] .overlay-chrome-win31 {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="win31"] .overlay-chrome-win31 .window-content {
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+/* Win95 overlay chrome — visible only under win95 theme */
+[data-theme="win95"] .overlay-chrome-win95 {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="win95"] #overlay-window {
+  bottom: 28px; /* Clear the taskbar */
+}
+
+[data-theme="win95"] .overlay-chrome-win95 .window-body {
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 1rem;
+}

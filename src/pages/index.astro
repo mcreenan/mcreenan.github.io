@@ -69,6 +69,36 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 				</div>
 				<ProgramManager />
 				<Win95Desktop />
+
+				<div id="overlay-window" role="dialog" aria-modal="true" aria-label="Content" hidden>
+					<div class="overlay-backdrop"></div>
+					<div class="overlay-chrome overlay-chrome-win31 window splash-screen">
+						<div class="window-titlebar">
+							<div class="win31-titlebar-left">
+								<button class="win31-chrome-btn overlay-close" aria-label="Close" type="button">-</button>
+							</div>
+							<span class="window-title overlay-title"></span>
+							<div class="win31-titlebar-right">
+								<span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9650;</span>
+								<span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9660;</span>
+							</div>
+						</div>
+						<div class="window-inner">
+							<div class="window-content overlay-body"></div>
+						</div>
+					</div>
+					<div class="overlay-chrome overlay-chrome-win95 window splash-screen">
+						<div class="title-bar">
+							<div class="title-bar-text overlay-title"></div>
+							<div class="title-bar-controls">
+								<button aria-label="Minimize" type="button"></button>
+								<button aria-label="Maximize" type="button"></button>
+								<button class="overlay-close" aria-label="Close" type="button"></button>
+							</div>
+						</div>
+						<div class="window-body overlay-body"></div>
+					</div>
+				</div>
 			</section>
 		<ThemeDialog />
 		<Taskbar />
