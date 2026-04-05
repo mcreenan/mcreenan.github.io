@@ -1237,7 +1237,6 @@ body {
 }
 
 .overlay-chrome {
-  display: none; /* Hidden by default; theme CSS shows the right one */
   position: relative;
   width: 90%;
   max-width: 700px;
@@ -1245,8 +1244,13 @@ body {
   z-index: 1;
 }
 
-/* Win31 overlay chrome — visible only under win31 theme */
-[data-theme="win31"] .overlay-chrome-win31 {
+/* Hide both overlay chromes by default. ID selector beats theme .splash-screen rules. */
+#overlay-window .overlay-chrome {
+  display: none;
+}
+
+/* Show the chrome matching the active theme. */
+[data-theme="win31"] #overlay-window .overlay-chrome-win31 {
   display: flex;
   flex-direction: column;
 }
@@ -1256,8 +1260,7 @@ body {
   overflow-y: auto;
 }
 
-/* Win95 overlay chrome — visible only under win95 theme */
-[data-theme="win95"] .overlay-chrome-win95 {
+[data-theme="win95"] #overlay-window .overlay-chrome-win95 {
   display: flex;
   flex-direction: column;
 }
