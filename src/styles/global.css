@@ -1271,3 +1271,27 @@ body {
   overflow-y: auto;
   padding: 1rem;
 }
+
+/* Retina/high-DPI scaling: 1.5x zoom on themed containers.
+   Authentic 1990s pixel sizes feel too small on modern displays. */
+[data-theme="win31"] .program-manager,
+[data-theme="win31"] #overlay-window,
+[data-theme="win31"] .theme-dialog-content {
+  zoom: 1.5;
+}
+
+[data-theme="win31"] .retro-win31-window .window-titlebar {
+  zoom: 1.5;
+}
+
+[data-theme="win31"] .retro-win31-window .window-content {
+  font-size: 24px;
+}
+
+[data-theme="win95"] .win95-desktop,
+[data-theme="win95"] .win95-taskbar,
+[data-theme="win95"] .win95-window,
+[data-theme="win95"] #overlay-window,
+[data-theme="win95"] .theme-dialog-content {
+  zoom: 1.5;
+}
