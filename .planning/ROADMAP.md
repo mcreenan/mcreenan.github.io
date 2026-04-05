@@ -81,8 +81,8 @@ Plans:
   4. The theme switcher is keyboard-navigable with visible focus states
 **Plans**: 2 plans
 Plans:
-- [ ] 05-01-PLAN.md — Overlay container, CSS styles, and JS overlay controller with fetch/History API/focus trap
-- [ ] 05-02-PLAN.md — Focus-visible keyboard polish and full visual verification
+- [x] 05-01-PLAN.md — Overlay container, CSS styles, and JS overlay controller with fetch/History API/focus trap
+- [x] 05-02-PLAN.md — Focus-visible keyboard polish and full visual verification
 
 ## Progress
 
