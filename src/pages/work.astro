@@ -1,5 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Window from "../components/Window.astro";
+import ThemeDialog from "../components/ThemeDialog.astro";
 import Taskbar from "../components/Taskbar.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
@@ -15,113 +17,206 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
     <body>
         <main class="h-screen overflow-hidden">
             <section class="flex flex-col items-center justify-center h-full">
-                <div class="window fixed splash-screen content-window">
-                    <div class="window-titlebar">
-                        <div class="win31-titlebar-left">
-                            <a href="/" class="win31-chrome-btn" aria-label="Close - return to home">-</a>
-                        </div>
-                        <span class="window-title">Work</span>
-                        <div class="win31-titlebar-right">
-                            <span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9650;</span>
-                            <span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9660;</span>
-                        </div>
-                    </div>
-                    <div class="window-inner">
-                        <div class="window-content">
-                            <div class="flex justify-between items-start mb-4">
-                                <p class="flex-1 mr-4">
-                                    Almost 20 years of experience in full-stack
-                                    development, including backend, frontend,
-                                    data engineering, and distributed systems on
-                                    the cloud.
-                                </p>
-                                <div class="relative">
-                                    <button
-                                        class="button flex flex-col justify-between py-2 flex-shrink-0 cursor-not-allowed opacity-60"
-                                        disabled
-                                        title="Resume coming soon"
-                                    >
-                                        <i
-                                            class="fa-solid fa-file-lines text-4xl"
-                                        ></i>
-                                        <span>Resume</span>
-                                    </button>
-                                </div>
+                <div class="retro-win31-window">
+                    <div class="window fixed splash-screen content-window">
+                        <div class="window-titlebar">
+                            <div class="win31-titlebar-left">
+                                <a href="/" class="win31-chrome-btn" aria-label="Close - return to home">-</a>
                             </div>
-                            <h2 class="text-2xl font-bold mb-3">
-                                Current Role
-                            </h2>
-                            <p class="mb-4">
-                                I am currently a Senior Staff Engineer at
-                                <a href="https://torch.io" target="_blank"
-                                    >Torch Coaching</a
-                                >. I focus on building out the frontend of the
-                                coaches and participants experiences, but also
-                                work in the backend to build APIs and components
-                                to support those efforts.
-                            </p>
-                            <p class="mb-4">
-                                Before this role, I had barely touched the
-                                frontend for about 10 years, using jQuery and
-                                ExtJS as cutting edge technologies.
-                            </p>
-                            <p class="mb-4">
-                                I had to relearn how frontend development worked
-                                with React, and I've grown to love it.
-                            </p>
-                            <h3 class="text-xl font-bold mb-3">Highlights</h3>
-                            <ul class="list-disc pl-5 mb-4">
-                                <li class="mb-2">
-                                    Lead a greenfield project to build a new web
-                                    frontend from the ground up to support a
-                                    design and UX refresh, making sure it ran
-                                    seamlessly alongside the old web frontend.
-                                    Implemented a new "onboarding" experience
-                                    with the new web app and design system.
-                                </li>
-                                <li class="mb-2">
-                                    Lead buildout of a new home / dashboard as
-                                    part of continued focus on a better
-                                    participant experience.
-                                </li>
-                                <li class="mb-2">
-                                    Lead improvements to the "Developer
-                                    Experience" (DX) within the Engineering
-                                    organization. Focused on improving
-                                    bootstrapping/onboarding, as well as
-                                    application/service interopability.
-                                </li>
-                            </ul>
-                            <h2 class="text-2xl font-bold mb-3">Career</h2>
-                            <ul class="list-disc pl-5 mb-4">
-                                <li class="mb-2">
-                                    Frontend development with React, focusing on
-                                    building scalable and maintainable web
-                                    applications
-                                </li>
-                                <li class="mb-2">
-                                    Backend development using Python and Ruby,
-                                    creating robust APIs and services
-                                </li>
-                                <li class="mb-2">
-                                    Data engineering experience with ETL
-                                    pipelines, data warehousing, and analytics
-                                    infrastructure
-                                </li>
-                                <li class="mb-2">
-                                    Distributed systems architecture on AWS
-                                    using serverless technologies like Lambda,
-                                    SQS, and EventBridge
-                                </li>
-                            </ul>
+                            <span class="window-title">Work</span>
+                            <div class="win31-titlebar-right">
+                                <span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9650;</span>
+                                <span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9660;</span>
+                            </div>
+                        </div>
+                        <div class="window-inner">
+                            <div class="window-content">
+                                <div class="flex justify-between items-start mb-4">
+                                    <p class="flex-1 mr-4">
+                                        Almost 20 years of experience in full-stack
+                                        development, including backend, frontend,
+                                        data engineering, and distributed systems on
+                                        the cloud.
+                                    </p>
+                                    <div class="relative">
+                                        <button
+                                            class="button flex flex-col justify-between py-2 flex-shrink-0 cursor-not-allowed opacity-60"
+                                            disabled
+                                            title="Resume coming soon"
+                                        >
+                                            <i
+                                                class="fa-solid fa-file-lines text-4xl"
+                                            ></i>
+                                            <span>Resume</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h2 class="text-2xl font-bold mb-3">
+                                    Current Role
+                                </h2>
+                                <p class="mb-4">
+                                    I am currently a Senior Staff Engineer at
+                                    <a href="https://torch.io" target="_blank"
+                                        >Torch Coaching</a
+                                    >. I focus on building out the frontend of the
+                                    coaches and participants experiences, but also
+                                    work in the backend to build APIs and components
+                                    to support those efforts.
+                                </p>
+                                <p class="mb-4">
+                                    Before this role, I had barely touched the
+                                    frontend for about 10 years, using jQuery and
+                                    ExtJS as cutting edge technologies.
+                                </p>
+                                <p class="mb-4">
+                                    I had to relearn how frontend development worked
+                                    with React, and I've grown to love it.
+                                </p>
+                                <h3 class="text-xl font-bold mb-3">Highlights</h3>
+                                <ul class="list-disc pl-5 mb-4">
+                                    <li class="mb-2">
+                                        Lead a greenfield project to build a new web
+                                        frontend from the ground up to support a
+                                        design and UX refresh, making sure it ran
+                                        seamlessly alongside the old web frontend.
+                                        Implemented a new "onboarding" experience
+                                        with the new web app and design system.
+                                    </li>
+                                    <li class="mb-2">
+                                        Lead buildout of a new home / dashboard as
+                                        part of continued focus on a better
+                                        participant experience.
+                                    </li>
+                                    <li class="mb-2">
+                                        Lead improvements to the "Developer
+                                        Experience" (DX) within the Engineering
+                                        organization. Focused on improving
+                                        bootstrapping/onboarding, as well as
+                                        application/service interopability.
+                                    </li>
+                                </ul>
+                                <h2 class="text-2xl font-bold mb-3">Career</h2>
+                                <ul class="list-disc pl-5 mb-4">
+                                    <li class="mb-2">
+                                        Frontend development with React, focusing on
+                                        building scalable and maintainable web
+                                        applications
+                                    </li>
+                                    <li class="mb-2">
+                                        Backend development using Python and Ruby,
+                                        creating robust APIs and services
+                                    </li>
+                                    <li class="mb-2">
+                                        Data engineering experience with ETL
+                                        pipelines, data warehousing, and analytics
+                                        infrastructure
+                                    </li>
+                                    <li class="mb-2">
+                                        Distributed systems architecture on AWS
+                                        using serverless technologies like Lambda,
+                                        SQS, and EventBridge
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="win95-window">
+                    <Window variant="win95" title="Work" contentWindow>
+                        <div class="flex justify-between items-start mb-4">
+                            <p class="flex-1 mr-4">
+                                Almost 20 years of experience in full-stack
+                                development, including backend, frontend,
+                                data engineering, and distributed systems on
+                                the cloud.
+                            </p>
+                            <div class="relative">
+                                <button
+                                    class="button flex flex-col justify-between py-2 flex-shrink-0 cursor-not-allowed opacity-60"
+                                    disabled
+                                    title="Resume coming soon"
+                                >
+                                    <i
+                                        class="fa-solid fa-file-lines text-4xl"
+                                    ></i>
+                                    <span>Resume</span>
+                                </button>
+                            </div>
+                        </div>
+                        <h2 class="text-2xl font-bold mb-3">
+                            Current Role
+                        </h2>
+                        <p class="mb-4">
+                            I am currently a Senior Staff Engineer at
+                            <a href="https://torch.io" target="_blank"
+                                >Torch Coaching</a
+                            >. I focus on building out the frontend of the
+                            coaches and participants experiences, but also
+                            work in the backend to build APIs and components
+                            to support those efforts.
+                        </p>
+                        <p class="mb-4">
+                            Before this role, I had barely touched the
+                            frontend for about 10 years, using jQuery and
+                            ExtJS as cutting edge technologies.
+                        </p>
+                        <p class="mb-4">
+                            I had to relearn how frontend development worked
+                            with React, and I've grown to love it.
+                        </p>
+                        <h3 class="text-xl font-bold mb-3">Highlights</h3>
+                        <ul class="list-disc pl-5 mb-4">
+                            <li class="mb-2">
+                                Lead a greenfield project to build a new web
+                                frontend from the ground up to support a
+                                design and UX refresh, making sure it ran
+                                seamlessly alongside the old web frontend.
+                                Implemented a new "onboarding" experience
+                                with the new web app and design system.
+                            </li>
+                            <li class="mb-2">
+                                Lead buildout of a new home / dashboard as
+                                part of continued focus on a better
+                                participant experience.
+                            </li>
+                            <li class="mb-2">
+                                Lead improvements to the "Developer
+                                Experience" (DX) within the Engineering
+                                organization. Focused on improving
+                                bootstrapping/onboarding, as well as
+                                application/service interopability.
+                            </li>
+                        </ul>
+                        <h2 class="text-2xl font-bold mb-3">Career</h2>
+                        <ul class="list-disc pl-5 mb-4">
+                            <li class="mb-2">
+                                Frontend development with React, focusing on
+                                building scalable and maintainable web
+                                applications
+                            </li>
+                            <li class="mb-2">
+                                Backend development using Python and Ruby,
+                                creating robust APIs and services
+                            </li>
+                            <li class="mb-2">
+                                Data engineering experience with ETL
+                                pipelines, data warehousing, and analytics
+                                infrastructure
+                            </li>
+                            <li class="mb-2">
+                                Distributed systems architecture on AWS
+                                using serverless technologies like Lambda,
+                                SQS, and EventBridge
+                            </li>
+                        </ul>
+                    </Window>
                 </div>
             </section>
             <a href="/" class="desktop-icon">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </a>
+            <ThemeDialog />
             <Taskbar />
         </main>
     </body>

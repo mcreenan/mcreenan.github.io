@@ -1,5 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Window from "../components/Window.astro";
+import ThemeDialog from "../components/ThemeDialog.astro";
 import Taskbar from "../components/Taskbar.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
@@ -15,47 +17,74 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 	<body>
 		<main class="h-screen overflow-hidden">
 			<section class="flex flex-col items-center justify-center h-full">
-				<div class="window fixed splash-screen content-window">
-					<div class="window-titlebar">
-						<div class="win31-titlebar-left">
-							<a href="/" class="win31-chrome-btn" aria-label="Close - return to home">-</a>
+				<div class="retro-win31-window">
+					<div class="window fixed splash-screen content-window">
+						<div class="window-titlebar">
+							<div class="win31-titlebar-left">
+								<a href="/" class="win31-chrome-btn" aria-label="Close - return to home">-</a>
+							</div>
+							<span class="window-title">About Me</span>
+							<div class="win31-titlebar-right">
+								<span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9650;</span>
+								<span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9660;</span>
+							</div>
 						</div>
-						<span class="window-title">About Me</span>
-						<div class="win31-titlebar-right">
-							<span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9650;</span>
-							<span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9660;</span>
+						<div class="window-inner">
+							<div class="window-content">
+								<p class="mb-4">
+									Hi. I'm Matt Creenan, a 40-ish year-old software
+									engineer based in Buffalo, NY.
+								</p>
+								<p class="mb-4">
+									I'm married with two kids, a dog scared of his
+									own shadow, and a cat that wants to be a dog.
+								</p>
+								<p class="mb-4">
+									When I'm not working, I may be watching football
+									(Go Bills) with my wife and son, or suffering
+									watching the Buffalo Sabres alone.
+								</p>
+								<p class="mb-4">
+									This website's aesthetic was an experiment in
+									trying to get an AI tool to generate a design
+									based on an aesthetic I love. I kept asking it
+									for changes until it got <i>something</i> in the
+									realm of what I was looking for.
+								</p>
+							</div>
 						</div>
 					</div>
-					<div class="window-inner">
-						<div class="window-content">
-							<p class="mb-4">
-								Hi. I'm Matt Creenan, a 40-ish year-old software
-								engineer based in Buffalo, NY.
-							</p>
-							<p class="mb-4">
-								I'm married with two kids, a dog scared of his
-								own shadow, and a cat that wants to be a dog.
-							</p>
-							<p class="mb-4">
-								When I'm not working, I may be watching football
-								(Go Bills) with my wife and son, or suffering
-								watching the Buffalo Sabres alone.
-							</p>
-							<p class="mb-4">
-								This website's aesthetic was an experiment in
-								trying to get an AI tool to generate a design
-								based on an aesthetic I love. I kept asking it
-								for changes until it got <i>something</i> in the
-								realm of what I was looking for.
-							</p>
-						</div>
-					</div>
+				</div>
+				<div class="win95-window">
+					<Window variant="win95" title="About Me" contentWindow>
+						<p class="mb-4">
+							Hi. I'm Matt Creenan, a 40-ish year-old software
+							engineer based in Buffalo, NY.
+						</p>
+						<p class="mb-4">
+							I'm married with two kids, a dog scared of his
+							own shadow, and a cat that wants to be a dog.
+						</p>
+						<p class="mb-4">
+							When I'm not working, I may be watching football
+							(Go Bills) with my wife and son, or suffering
+							watching the Buffalo Sabres alone.
+						</p>
+						<p class="mb-4">
+							This website's aesthetic was an experiment in
+							trying to get an AI tool to generate a design
+							based on an aesthetic I love. I kept asking it
+							for changes until it got <i>something</i> in the
+							realm of what I was looking for.
+						</p>
+					</Window>
 				</div>
 			</section>
 			<a href="/" class="desktop-icon">
 				<i class="fa-solid fa-house"></i>
 				<span>Home</span>
 			</a>
+			<ThemeDialog />
 			<Taskbar />
 		</main>
 	</body>

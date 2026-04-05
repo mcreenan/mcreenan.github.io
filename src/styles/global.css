@@ -726,6 +726,68 @@
   white-space: nowrap;
 }
 
+/* Win95 desktop / retro / win31 layout CSS toggle */
+.win95-desktop { display: none; }
+[data-theme="win95"] .win95-desktop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  height: 100%;
+  padding-bottom: 28px; /* Account for fixed taskbar (per Pitfall 5 in RESEARCH.md) */
+}
+[data-theme="win95"] .retro-layout { display: none; }
+[data-theme="win95"] .program-manager { display: none; }
+
+/* Win95 desktop icon */
+.win95-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #FFFFFF;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.win95-icon:hover {
+  background: rgba(0, 0, 128, 0.5);
+}
+
+.win95-icon:focus {
+  background: rgba(0, 0, 128, 0.5);
+  outline: 1px dotted #FFFFFF;
+  outline-offset: -1px;
+}
+
+.win95-icon-label {
+  font-family: "W95FA", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: center;
+  -webkit-font-smoothing: none;
+  color: #FFFFFF;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+
+/* Win95 subpage window toggle */
+.win95-window { display: none; }
+[data-theme="win95"] .win95-window { display: block; }
+[data-theme="win95"] .retro-win31-window { display: none; }
+
+/* Win95 subpage content padding for taskbar */
+[data-theme="win95"] .win95-window .content-window {
+  padding-bottom: 28px;
+}
+
+/* Win95 hide retro desktop icon on subpages (title bar close button handles navigation) */
+[data-theme="win95"] .desktop-icon { display: none; }
+
 body {
     background-color: var(--color-bg);
     font-family: var(--font-body);
