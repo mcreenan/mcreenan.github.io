@@ -7,6 +7,24 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url("/fonts/ms_sans_serif.woff2") format("woff2"),
+       url("/fonts/ms_sans_serif.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url("/fonts/ms_sans_serif_bold.woff2") format("woff2"),
+       url("/fonts/ms_sans_serif_bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 [data-theme="retro"] {
   /* Colors */
   --color-bg:                    #008080;
@@ -80,8 +98,8 @@
   --color-title-shadow:          transparent;
   --color-title-glow-1:          transparent;
   --color-title-glow-2:          transparent;
-  --font-body:                   "W95FA", Arial, sans-serif;
-  --font-title:                  "W95FA", Arial, sans-serif;
+  --font-body:                   "MS Sans Serif", Arial, sans-serif;
+  --font-title:                  "MS Sans Serif", Arial, sans-serif;
   --border-button:               2px solid #000000;
   --border-headshot:             2px solid #000000;
   --shadow-button:               none;
@@ -187,7 +205,7 @@
   justify-content: space-between;
   padding: 0;
   margin: 0;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: none;
   box-sizing: border-box;
@@ -199,7 +217,7 @@
   -webkit-background-clip: unset;
   background-clip: unset;
   color: #FFFFFF;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   font-size: 16px;
   font-weight: bold;
   text-shadow: none;
@@ -267,7 +285,7 @@
 
 /* Win 3.1 os-title — bitmap font, no retro text-shadow */
 [data-theme="win31"] .os-title {
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   text-shadow: none;
   color: var(--color-title);
 }
@@ -288,7 +306,7 @@
 }
 
 [data-theme="win31"] .theme-dialog-title {
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   font-size: 16px;
   font-weight: bold;
   color: #000000;
@@ -304,7 +322,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   font-size: 16px;
   color: #000000;
   cursor: pointer;
@@ -331,7 +349,7 @@
   background: #FFFFFF;
   border-bottom: 1px solid #808080;
   padding: 0;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   font-size: 16px;
   color: #000000;
   height: 22px;
@@ -382,7 +400,7 @@
   padding: 3px 16px;
   background: none;
   border: none;
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   font-size: 16px;
   color: #000000;
   cursor: pointer;
@@ -432,7 +450,7 @@
 }
 
 [data-theme="win31"] .pm-icon-label {
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   font-size: 15px;
   line-height: 1.2;
   text-align: center;
@@ -440,7 +458,7 @@
 
 /* Win 3.1 title bar chrome buttons — 1:1 ratio, full titlebar height */
 [data-theme="win31"] .win31-chrome-btn {
-  font-family: "W95FA", Arial, sans-serif;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   font-size: 9px;
   color: #000000;
   background: #C0C0C0;
