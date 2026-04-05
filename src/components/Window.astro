@@ -3,35 +3,60 @@ interface Props {
     title?: string;
     height?: string;
     contentWindow?: boolean;
-    variant?: "retro" | "win31";
+    variant?: "retro" | "win31" | "win95";
 }
 
 const { title, height = "auto", contentWindow = false, variant = "retro" } = Astro.props;
 ---
 
-<div
-    class={`window fixed splash-screen ${contentWindow ? "content-window" : ""}`}
-    style={`height: ${height};`}
->
-    {title && (
-        <div class="window-titlebar">
-            <div class="win31-titlebar-left">
-                {contentWindow ? (
-                    <a href="/" class="win31-chrome-btn" aria-label="Close - return to home">-</a>
-                ) : (
-                    <span class="win31-chrome-btn" aria-hidden="true">-</span>
-                )}
+{variant === "win95" ? (
+    <div
+        class={`window ${contentWindow ? "content-window" : "splash-screen"}`}
+        style={`height: ${height};`}
+    >
+        {title && (
+            <div class="title-bar">
+                <div class="title-bar-text">{title}</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize" type="button"></button>
+                    <button aria-label="Maximize" type="button"></button>
+                    {contentWindow ? (
+                        <button aria-label="Close" type="button" onclick="window.location='/'"></button>
+                    ) : (
+                        <button aria-label="Close" type="button"></button>
+                    )}
+                </div>
             </div>
-            <span class="window-title">{title}</span>
-            <div class="win31-titlebar-right">
-                <span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9650;</span>
-                <span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9660;</span>
-            </div>
-        </div>
-    )}
-    <div class="window-inner">
-        <div class="window-content">
+        )}
+        <div class="window-body">
             <slot />
         </div>
     </div>
-</div>
+) : (
+    <div
+        class={`window fixed splash-screen ${contentWindow ? "content-window" : ""}`}
+        style={`height: ${height};`}
+    >
+        {title && (
+            <div class="window-titlebar">
+                <div class="win31-titlebar-left">
+                    {contentWindow ? (
+                        <a href="/" class="win31-chrome-btn" aria-label="Close - return to home">-</a>
+                    ) : (
+                        <span class="win31-chrome-btn" aria-hidden="true">-</span>
+                    )}
+                </div>
+                <span class="window-title">{title}</span>
+                <div class="win31-titlebar-right">
+                    <span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9650;</span>
+                    <span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9660;</span>
+                </div>
+            </div>
+        )}
+        <div class="window-inner">
+            <div class="window-content">
+                <slot />
+            </div>
+        </div>
+    </div>
+)}
