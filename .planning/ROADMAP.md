@@ -79,7 +79,10 @@ Plans:
   2. Clicking an app icon opens the section content in a themed window overlaid on the desktop
   3. The existing retro/default theme continues to work with its current page layout unchanged
   4. The theme switcher is keyboard-navigable with visible focus states
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 05-01-PLAN.md — Overlay container, CSS styles, and JS overlay controller with fetch/History API/focus trap
+- [ ] 05-02-PLAN.md — Focus-visible keyboard polish and full visual verification
 
 ## Progress
 
@@ -89,4 +92,4 @@ Plans:
 | 2. CSS Foundation and Theme Infrastructure | v2.0 | 3/3 | Complete   | 2026-03-22 |
 | 3. Windows 3.1 Theme | v2.0 | 0/2 | In progress | - |
 | 4. Windows 95 Theme | v2.0 | 0/2 | Not started | - |
-| 5. Desktop Shell and Polish | v2.0 | 0/TBD | Not started | - |
+| 5. Desktop Shell and Polish | v2.0 | 0/2 | Not started | - |
