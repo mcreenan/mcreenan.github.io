@@ -1,0 +1,411 @@
+---
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const jobs = [
+    {
+        dates: "2019 — Present",
+        title: "Engineering Manager, Data",
+        company: "Delaware North",
+        bullets: [
+            "Managed 4 senior-level engineers responsible for the data platform, integrations, and new solutions.",
+            "Maintained and supported operation of legacy data platform post-reorganization.",
+            "Developed plan for a green-field Data Platform aligned with industry best practices.",
+        ],
+    },
+    {
+        dates: "2014 — 2019",
+        title: "Senior SOA Engineer, Senior Data Engineer",
+        company: "Delaware North",
+        bullets: [
+            "Developed a Data Platform from scratch supporting a critical BI project, with 99.9%+ API uptime over 7 years.",
+            "Built ETL processes across multiple platforms, including a custom serverless framework for data pipelines.",
+            "Designed and developed multiple stand-alone solutions to support business projects.",
+        ],
+    },
+    {
+        dates: "2013 — 2014",
+        title: "Senior Programmer",
+        company: "LocalNet / CoreComm / Exhibio LLC",
+        bullets: [
+            "Took over development of a multi-tier web application and saw it through to launch.",
+            "Deployed Haraka SMTP server (Node.js) and wrote plugins integrating with internal systems.",
+            "Developed a new billing system from scratch for ISP customers and migrated from legacy systems.",
+        ],
+    },
+    {
+        dates: "2006 — 2012",
+        title: "Vendor Integrations Engineer, Lead Engineer",
+        company: "Synacor — Williamsville, NY",
+        bullets: [
+            "Critical role in developing a platform used for internal and external tools, including SOA implementation.",
+            "Led team adoption of agile development with 2-week sprints and kanban; took on Scrum Master role.",
+            "Built internal tools to improve productivity tracking and on-time delivery.",
+            "Mentored junior developers and participated in all architectural decisions with the Engineering Manager.",
+            "Lead role in introducing new technologies to the company (Riak, Solr).",
+        ],
+    },
+];
+
+// `set:html` is used on dt below so the literal `&nbsp;` in these labels
+// renders as a non-breaking space (per D-11). The `&` in the Data Engineering
+// value below is a plain ampersand here; Astro auto-escapes it to `&amp;`
+// when rendered as text.
+const techRows = [
+    { label: "Languages", value: "PHP, Perl, Python, JavaScript, Java" },
+    { label: "Operating&nbsp;Systems", value: "Linux, Windows, FreeBSD, macOS" },
+    {
+        label: "Cloud / AWS",
+        value: "API Gateway, Athena, CloudFormation, CodeArtifact, Data Pipelines, DocumentDB, EC2, ECS, EKS, Elastic Beanstalk, Glue, Lambda, RDS, Rekognition, Route 53, S3, SNS, SQS, Secrets Manager, Step Functions",
+    },
+    { label: "Databases", value: "MySQL, PostgreSQL, Microsoft SQL Server, MongoDB, Redis" },
+    { label: "Provisioning", value: "Ansible, Puppet, Terraform" },
+    {
+        label: "Data&nbsp;Engineering",
+        value: "Spark (pipelines), Airflow (orchestration), Parquet & ORC (storage formats)",
+    },
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Matt Creenan — Resume</title>
+        <meta
+            name="description"
+            content="Matt Creenan's resume — 15+ years across full-stack development, DevOps, and data engineering."
+        />
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content="Matt Creenan — Resume" />
+        <meta
+            property="og:description"
+            content="Matt Creenan's resume — 15+ years across full-stack development, DevOps, and data engineering."
+        />
+
+        <!-- Twitter card -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:url" content={canonicalURL} />
+        <meta name="twitter:title" content="Matt Creenan — Resume" />
+        <meta
+            name="twitter:description"
+            content="Matt Creenan's resume — 15+ years across full-stack development, DevOps, and data engineering."
+        />
+
+        <style is:global>
+            @font-face {
+                font-family: "Merriweather";
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: url("/fonts/merriweather-regular.woff2") format("woff2");
+            }
+            @font-face {
+                font-family: "Merriweather";
+                font-style: normal;
+                font-weight: 700;
+                font-display: swap;
+                src: url("/fonts/merriweather-bold.woff2") format("woff2");
+            }
+            @font-face {
+                font-family: "JetBrains Mono";
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: url("/fonts/jetbrains-mono-regular.woff2") format("woff2");
+            }
+            @font-face {
+                font-family: "JetBrains Mono";
+                font-style: normal;
+                font-weight: 500;
+                font-display: swap;
+                src: url("/fonts/jetbrains-mono-medium.woff2") format("woff2");
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            :root {
+                --ink: #1a1d22;
+                --ink-soft: #3d434c;
+                --ink-mute: #6a717c;
+                --paper: #fbfaf7;
+                --bg: #efece6;
+                --accent-bg: #c3cbd1; /* slate, +31% luminance */
+                --accent-text: #1a1d22; /* auto: dark text on light accent */
+                --accent-text-soft: #3d434c;
+                --accent-text-mute: #6a717c;
+                --mono: "JetBrains Mono", ui-monospace, monospace;
+                --sans: "Merriweather", Georgia, serif;
+            }
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                background: var(--bg);
+                color: var(--ink);
+                font-family: var(--sans);
+                font-size: 15px;
+                line-height: 1.55;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .page {
+                max-width: 780px;
+                margin: 48px auto;
+                background: var(--paper);
+                padding: 44px 44px; /* baked from tweaks */
+                box-shadow:
+                    0 1px 2px rgba(0, 0, 0, 0.04),
+                    0 8px 24px rgba(0, 0, 0, 0.06);
+            }
+
+            /* No section dividers — just spacing */
+            section + section {
+                margin-top: 36px;
+            }
+
+            /* ─── 1. Personal / intro ─────────────────────────────── */
+            .intro {
+                display: grid;
+                grid-template-columns: 44% 1fr; /* baked from tweaks */
+                gap: 32px;
+                align-items: start;
+            }
+
+            .personal {
+                padding: 22px 26px;
+                border-radius: 6px;
+                min-width: 0;
+                background: var(--accent-bg);
+                color: var(--accent-text);
+            }
+            .personal .tagline,
+            .personal .contact {
+                color: var(--accent-text-soft);
+            }
+            .personal .contact-sep {
+                color: var(--accent-text-mute);
+            }
+            .personal .contact a:hover {
+                color: var(--accent-text);
+            }
+
+            .intro h1 {
+                font-size: 32px;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                margin: 0 0 4px;
+                line-height: 1.1;
+            }
+
+            .intro .tagline {
+                font-size: 15px;
+                margin: 0 0 14px;
+                font-weight: 400;
+            }
+
+            .summary {
+                font-size: 15px;
+                color: var(--ink-soft);
+                margin: 0;
+                max-width: 62ch;
+                padding-top: 8px;
+            }
+
+            .contact {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                font-family: var(--mono);
+                font-size: 12px;
+                margin: 0;
+            }
+            .contact-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .contact-sep {
+                opacity: 0.6;
+            }
+            .contact a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            /* ─── 2. Experience ───────────────────────────────────── */
+            .job {
+                display: grid;
+                grid-template-columns: 130px 1fr;
+                gap: 24px;
+                margin-bottom: 28px;
+            }
+            .job:last-child {
+                margin-bottom: 0;
+            }
+
+            .job-meta {
+                font-family: var(--mono);
+                font-size: 12px;
+                color: var(--ink-mute);
+                line-height: 1.5;
+                padding-top: 3px;
+            }
+
+            .job-body h3 {
+                font-size: 15.5px;
+                font-weight: 600;
+                margin: 0 0 2px;
+                color: var(--ink);
+            }
+            .job-body .company {
+                font-size: 14px;
+                color: var(--ink-soft);
+                margin: 0 0 10px;
+            }
+
+            .job-body ul {
+                margin: 0;
+                padding-left: 18px;
+                color: var(--ink-soft);
+            }
+            .job-body li {
+                margin-bottom: 4px;
+                padding-left: 4px;
+            }
+            .job-body li::marker {
+                color: var(--ink-mute);
+            }
+
+            /* ─── 3. Technical ────────────────────────────────────── */
+            .technical {
+                background: var(--accent-bg);
+                color: var(--accent-text);
+                border-radius: 6px;
+                padding: 22px 26px;
+            }
+            .technical .tech-grid dt {
+                color: var(--accent-text-mute);
+            }
+            .technical .tech-grid dd {
+                color: var(--accent-text-soft);
+            }
+
+            .tech-grid {
+                display: grid;
+                grid-template-columns: 130px 1fr;
+                gap: 14px 24px;
+                margin: 0;
+            }
+
+            .tech-grid dt {
+                font-family: var(--mono);
+                font-size: 12px;
+                padding-top: 3px;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+            }
+
+            .tech-grid dd {
+                margin: 0;
+                font-size: 14.5px;
+            }
+
+            @media (max-width: 640px) {
+                .page {
+                    padding: 32px 24px;
+                    margin: 0;
+                }
+                .intro,
+                .job,
+                .tech-grid {
+                    grid-template-columns: 1fr;
+                    gap: 4px;
+                }
+                .intro {
+                    gap: 16px;
+                }
+                .job-meta,
+                .tech-grid dt {
+                    padding-top: 0;
+                }
+            }
+
+            @media print {
+                body {
+                    background: white;
+                }
+                .page {
+                    box-shadow: none;
+                    margin: 0;
+                    max-width: none;
+                    padding: 36px 44px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main class="page">
+            <section class="intro">
+                <div class="personal">
+                    <h1>Matt Creenan</h1>
+                    <p class="tagline">Experienced Software Professional</p>
+                    <div class="contact">
+                        <span>(716) 579-0988</span>
+                        <a href="mailto:mattcreenan@gmail.com">mattcreenan@gmail.com</a>
+                        <div class="contact-row">
+                            <a href="https://www.linkedin.com/pub/matt-creenan/56/677/605">LinkedIn</a>
+                            <span class="contact-sep">·</span>
+                            <a href="https://github.com/mcreenan/">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="summary">
+                    15+ years of experience across full-stack development, DevOps, and data
+                    engineering. Consistently a top-performing individual contributor across
+                    technologies, methodologies, and software architectures.
+                </p>
+            </section>
+
+            <section class="experience">
+                {
+                    jobs.map((job) => (
+                        <article class="job">
+                            <div class="job-meta">{job.dates}</div>
+                            <div class="job-body">
+                                <h3>{job.title}</h3>
+                                <p class="company">{job.company}</p>
+                                <ul>
+                                    {job.bullets.map((b) => (
+                                        <li>{b}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </article>
+                    ))
+                }
+            </section>
+
+            <section class="technical">
+                <dl class="tech-grid">
+                    {
+                        techRows.map((row) => (
+                            <>
+                                <dt set:html={row.label} />
+                                <dd>{row.value}</dd>
+                            </>
+                        ))
+                    }
+                </dl>
+            </section>
+        </main>
+    </body>
+</html>
