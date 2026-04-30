@@ -177,6 +177,33 @@ const techRows = [
                 grid-template-columns: 44% 1fr; /* baked from tweaks */
                 gap: 32px;
                 align-items: start;
+                position: relative;
+            }
+
+            .download-pdf {
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 1;
+                font-family: var(--mono);
+                font-size: 12px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                color: var(--ink);
+                background: var(--paper);
+                border: 1px solid var(--ink-soft);
+                border-radius: 4px;
+                padding: 6px 10px;
+                cursor: pointer;
+                line-height: 1.2;
+            }
+            .download-pdf:hover {
+                background: var(--bg);
+                color: var(--ink);
+            }
+            .download-pdf:focus-visible {
+                outline: 2px solid var(--ink);
+                outline-offset: 2px;
             }
 
             .personal {
@@ -348,12 +375,24 @@ const techRows = [
                     max-width: none;
                     padding: 36px 44px;
                 }
+                .download-pdf {
+                    display: none;
+                }
             }
         </style>
     </head>
     <body>
         <main class="page">
             <section class="intro">
+                <button
+                    type="button"
+                    id="download-pdf"
+                    class="download-pdf"
+                    aria-label="Download resume as PDF"
+                >
+                    Download PDF
+                </button>
+
                 <div class="personal">
                     <h1>Matt Creenan</h1>
                     <p class="tagline">Experienced Software Professional</p>
@@ -407,5 +446,14 @@ const techRows = [
                 </dl>
             </section>
         </main>
+
+        <script>
+            const btn = document.getElementById("download-pdf");
+            if (btn) {
+                btn.addEventListener("click", () => {
+                    window.print();
+                });
+            }
+        </script>
     </body>
 </html>
