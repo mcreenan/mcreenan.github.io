@@ -6,9 +6,9 @@ status: planning
 stopped_at: null
 last_updated: "2026-04-30T00:00:00.000Z"
 progress:
-  total_phases: 0
+  total_phases: 1
   completed_phases: 0
-  total_plans: 0
+  total_plans: 2
   completed_plans: 0
   percent: 0
 ---
@@ -24,10 +24,10 @@ See: .planning/PROJECT.md (updated 2026-04-30)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 6 — Standalone Resume Page (not started)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-04-30 — Milestone v2.1 started
+Status: Ready to plan Phase 6
+Last activity: 2026-04-30 — Roadmap approved for milestone v2.1
 
 ## Performance Metrics
 
@@ -67,8 +67,9 @@ Last activity: 2026-04-30 — Milestone v2.1 started
 
 ### Research Flags
 
-- v2.1 (Resume): Existing overlay system in index.astro has a TITLE_MAP — `/resume` must be added there for overlay support
-- v2.1 (Resume): Disabled Resume button exists in both retro and win95 variants of work.astro — both need to be enabled
+- v2.1 (Resume): `/resume` is **standalone** — explicitly outside the theme system. Do NOT add it to the overlay TITLE_MAP in index.astro, do NOT add `[data-theme]` chrome variants
+- v2.1 (Resume): Disabled Resume button exists in both retro and win95 variants of work.astro — both need to be enabled and link plainly to `/resume` (no overlay handling)
+- v2.1 (Resume): `/resume` will likely need its own minimal layout/CSS independent of the theme tokens in global.css
 
 ### Pending Todos
 

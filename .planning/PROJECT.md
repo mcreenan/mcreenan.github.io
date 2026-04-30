@@ -21,13 +21,15 @@ Overlay window system in Windows themes: clicking a desktop icon fetches the tar
 
 ## Current Milestone: v2.1 Resume
 
-**Goal:** Ship a working resume on the site — themed across all three themes (retro, Windows 3.1, Windows 95) — and replace the disabled "Resume coming soon" button on `/work` with a real entry point.
+**Goal:** Ship a working resume as a standalone `/resume` page — deliberately outside the three-theme desktop OS system — and replace the disabled "Resume coming soon" button on `/work` with a real link to it.
 
 **Target features:**
-- `/resume` page with full themed chrome across retro, win31, win95
-- Resume button on `/work` enabled and linking to `/resume`
-- `/resume` opens as an overlay in win31/win95 themes (matching existing about/work/contact pattern)
+- `/resume` page as a standalone document page (no retro/win31/win95 theming, no overlay integration)
+- Recruiter-friendly clean styling, print-ready
+- Resume button on `/work` enabled and linking out to `/resume` (plain navigation, not an overlay)
 - Downloadable/printable PDF version of the resume
+
+**Scope note:** `/resume` is intentionally decoupled from the desktop-OS theming framework. The themed pages (about, work, contact) keep their theme-switching behavior; `/resume` does not participate.
 
 ## Requirements
 
@@ -55,9 +57,9 @@ Overlay window system in Windows themes: clicking a desktop icon fetches the tar
 
 ### Active
 
-- [ ] **RES-01**: User can view a resume at `/resume` in any of the three themes
-- [ ] **RES-02**: The "Resume" button on `/work` is enabled and links to `/resume` (no longer disabled)
-- [ ] **RES-03**: `/resume` opens as a themed overlay in win31 and win95 themes (consistent with about/work/contact)
+- [ ] **RES-01**: User can view a resume at `/resume` rendered as a standalone document page (outside the theme system)
+- [ ] **RES-02**: Resume content covers career summary, current role, work history, highlights, and skills
+- [ ] **RES-03**: The "Resume" button on `/work` is enabled and links to `/resume` (plain navigation; no overlay)
 - [ ] **RES-04**: User can download a PDF version of the resume from `/resume`
 
 ### Out of Scope
