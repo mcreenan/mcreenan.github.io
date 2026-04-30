@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v2.1
 milestone_name: Resume
 status: planning
-stopped_at: null
+stopped_at: "Phase 6 context gathered"
 last_updated: "2026-04-30T00:00:00.000Z"
 progress:
   total_phases: 1
@@ -24,10 +24,10 @@ See: .planning/PROJECT.md (updated 2026-04-30)
 
 ## Current Position
 
-Phase: 6 — Standalone Resume Page (not started)
+Phase: 6 — Standalone Resume Page (context gathered)
 Plan: —
 Status: Ready to plan Phase 6
-Last activity: 2026-04-30 — Roadmap approved for milestone v2.1
+Last activity: 2026-04-30 — Phase 6 CONTEXT.md written (4 areas discussed: PDF, page shell, fonts, button transition)
 
 ## Performance Metrics
 
@@ -88,5 +88,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-04-30
-Stopped at: Milestone v2.1 initialized
-Resume file: None
+Stopped at: Phase 6 context gathered
+Resume file: .planning/milestones/v2.1-phases/06-standalone-resume-page/06-CONTEXT.md
