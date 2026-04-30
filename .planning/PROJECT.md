@@ -19,6 +19,16 @@ Three fully-functional themes with authentic period-accurate chrome:
 
 Overlay window system in Windows themes: clicking a desktop icon fetches the target page and displays content in a themed overlay with History API URL sync, focus trap, and full keyboard accessibility (Escape, close button, click outside, back button).
 
+## Current Milestone: v2.1 Resume
+
+**Goal:** Ship a working resume on the site — themed across all three themes (retro, Windows 3.1, Windows 95) — and replace the disabled "Resume coming soon" button on `/work` with a real entry point.
+
+**Target features:**
+- `/resume` page with full themed chrome across retro, win31, win95
+- Resume button on `/work` enabled and linking to `/resume`
+- `/resume` opens as an overlay in win31/win95 themes (matching existing about/work/contact pattern)
+- Downloadable/printable PDF version of the resume
+
 ## Requirements
 
 ### Validated
@@ -45,7 +55,10 @@ Overlay window system in Windows themes: clicking a desktop icon fetches the tar
 
 ### Active
 
-(None — no current milestone)
+- [ ] **RES-01**: User can view a resume at `/resume` in any of the three themes
+- [ ] **RES-02**: The "Resume" button on `/work` is enabled and links to `/resume` (no longer disabled)
+- [ ] **RES-03**: `/resume` opens as a themed overlay in win31 and win95 themes (consistent with about/work/contact)
+- [ ] **RES-04**: User can download a PDF version of the resume from `/resume`
 
 ### Out of Scope
 
@@ -90,4 +103,4 @@ Three themes share the same page content via CSS display toggles — `.retro-lay
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-04-05 after v2.0 milestone — three-theme desktop OS aesthetic with overlay windows*
+*Last updated: 2026-04-30 — milestone v2.1 Resume started*

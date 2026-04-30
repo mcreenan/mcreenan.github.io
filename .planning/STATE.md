@@ -1,53 +1,53 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.0
-milestone_name: Theme System
-status: v2.0 milestone complete
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-04-05T13:08:27.565Z"
+milestone: v2.1
+milestone_name: Resume
+status: planning
+stopped_at: null
+last_updated: "2026-04-30T00:00:00.000Z"
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 9
-  completed_plans: 9
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-21)
+See: .planning/PROJECT.md (updated 2026-04-30)
 
 **Core value:** A theme-switchable personal site where each theme authentically recreates its target OS aesthetic.
-**Current focus:** Phase 05 — desktop-shell-polish
+**Current focus:** Milestone v2.1 — adding a working resume across all three themes.
 
 ## Current Position
 
-Phase: 05
-Plan: Not started
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-04-30 — Milestone v2.1 started
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 6
+- Total plans completed: 9 (across v1.0 + v2.0)
 - Average duration: —
 - Total execution time: —
 
-**By Phase:**
+**By Phase (historical):**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
+| 01 | 1 | - | - |
+| 02 | 3 | - | - |
 | 03 | 2 | - | - |
 | 04 | 2 | - | - |
 | 05 | 2 | - | - |
 
 *Updated after each plan completion*
-| Phase 02-css-foundation-theme-infrastructure P01 | 2m | 2 tasks | 3 files |
-| Phase 02 P02 | 1m | 2 tasks | 1 files |
-| Phase 02 P03 | 8m | 2 tasks | 5 files |
-| Phase 03 P01 | 3m | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -67,9 +67,8 @@ Plan: Not started
 
 ### Research Flags
 
-- Phase 3 (Win3.1): Win3.1 bitmap font fallback behavior across browsers/OS not fully confirmed — verify during planning
-- Phase 5 (Desktop Shell): CSS display:none toggle for Desktop.astro — verify no accessibility issues with hidden DOM during planning
-- Phase 4: 98.css .window class collision with existing global.css .window — scope existing .window under [data-theme="retro"] carefully
+- v2.1 (Resume): Existing overlay system in index.astro has a TITLE_MAP — `/resume` must be added there for overlay support
+- v2.1 (Resume): Disabled Resume button exists in both retro and win95 variants of work.astro — both need to be enabled
 
 ### Pending Todos
 
@@ -87,6 +86,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-22T03:47:26.621Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-04-30
+Stopped at: Milestone v2.1 initialized
 Resume file: None
