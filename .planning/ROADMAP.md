@@ -55,10 +55,16 @@ See `.planning/milestones/v2.0-ROADMAP.md` for full details.
    - Covers: RES-01, RES-02, RES-03
 
 2. **Plan 2 — PDF download**
-   - Add a "Download PDF" action on `/resume`
-   - Implementation choice: produce a static `public/resume.pdf` (committed) and link to it OR use the browser's `window.print()` with a print stylesheet — decide during planning
-   - Ensure the action is visible on screen but hidden in print output
+   - Add a "Download PDF" action on `/resume` (top-right of `.intro` per D-03)
+   - Implementation: `window.print()` (D-01) — no static `public/resume.pdf` committed; content edits ship automatically
+   - Hide the button in print output via `@media print`
    - Covers: RES-04
+
+
+**Plan files:**
+
+- [ ] `06-01-PLAN.md` — Resume page + button wiring (RES-01, RES-02, RES-03)
+- [ ] `06-02-PLAN.md` — PDF download via window.print() (RES-04)
 
 **Success criteria:**
 
