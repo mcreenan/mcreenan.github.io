@@ -61,17 +61,12 @@ const jobs = [
 // when rendered as text.
 const techRows = [
     { label: "Languages", value: "PHP, Perl, Python, JavaScript, Java" },
-    { label: "Operating&nbsp;Systems", value: "Linux, Windows, FreeBSD, macOS" },
     {
         label: "Cloud / AWS",
         value: "API Gateway, Athena, CloudFormation, CodeArtifact, Data Pipelines, DocumentDB, EC2, ECS, EKS, Elastic Beanstalk, Glue, Lambda, RDS, Rekognition, Route 53, S3, SNS, SQS, Secrets Manager, Step Functions",
     },
     { label: "Databases", value: "MySQL, PostgreSQL, Microsoft SQL Server, MongoDB, Redis" },
     { label: "Provisioning", value: "Ansible, Puppet, Terraform" },
-    {
-        label: "Data&nbsp;Engineering",
-        value: "Spark (pipelines), Airflow (orchestration), Parquet & ORC (storage formats)",
-    },
 ];
 ---
 
@@ -145,10 +140,10 @@ const techRows = [
                 --ink-mute: #6a717c;
                 --paper: #fbfaf7;
                 --bg: #efece6;
-                --accent-bg: #134e4a; /* deep teal */
+                --accent-bg: #1d5d72; /* deep blue-teal, lighter */
                 --accent-text: #f3f1eb; /* light cream on dark teal */
-                --accent-text-soft: #cdd5d2;
-                --accent-text-mute: #8fa6a2;
+                --accent-text-soft: #cdd6dc;
+                --accent-text-mute: #94a8b3;
                 --mono: "JetBrains Mono", ui-monospace, monospace;
                 --sans: "Merriweather", Georgia, serif;
             }
@@ -343,7 +338,7 @@ const techRows = [
             .tech-grid {
                 display: grid;
                 grid-template-columns: 130px 1fr;
-                gap: 14px 24px;
+                gap: 22px 24px;
                 margin: 0;
             }
 
