@@ -145,10 +145,10 @@ const techRows = [
                 --ink-mute: #6a717c;
                 --paper: #fbfaf7;
                 --bg: #efece6;
-                --accent-bg: #c3cbd1; /* slate, +31% luminance */
-                --accent-text: #1a1d22; /* auto: dark text on light accent */
-                --accent-text-soft: #3d434c;
-                --accent-text-mute: #6a717c;
+                --accent-bg: #134e4a; /* deep teal */
+                --accent-text: #f3f1eb; /* light cream on dark teal */
+                --accent-text-soft: #cdd5d2;
+                --accent-text-mute: #8fa6a2;
                 --mono: "JetBrains Mono", ui-monospace, monospace;
                 --sans: "Merriweather", Georgia, serif;
             }
@@ -418,8 +418,9 @@ const techRows = [
                     <h1>Matt Creenan</h1>
                     <p class="tagline">Experienced Software Builder</p>
                     <div class="contact">
-                        <span>(716) 579-0988</span>
-                        <a href="mailto:mattcreenan@gmail.com">mattcreenan@gmail.com</a>
+                        <a class="email" data-user="mattcreenan" data-domain="gmail.com" href="#" aria-label="email address (assembled by script to avoid scrapers)">
+                            <span>mattcreenan</span><span> [at] </span><span>gmail</span><span> [dot] </span><span>com</span>
+                        </a>
                         <div class="contact-row">
                             <a href="https://www.linkedin.com/pub/matt-creenan/56/677/605">LinkedIn</a>
                             <span class="contact-sep">·</span>
@@ -475,6 +476,16 @@ const techRows = [
                     window.print();
                 });
             }
+
+            // Assemble the email at runtime so HTML scrapers see only obfuscated parts
+            document.querySelectorAll<HTMLAnchorElement>("a.email[data-user][data-domain]").forEach((a) => {
+                const user = a.dataset.user;
+                const domain = a.dataset.domain;
+                if (!user || !domain) return;
+                const addr = user + "@" + domain;
+                a.href = "mailto:" + addr;
+                a.textContent = addr;
+            });
         </script>
     </body>
 </html>
