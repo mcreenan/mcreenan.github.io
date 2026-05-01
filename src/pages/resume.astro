@@ -185,17 +185,32 @@ const techRows = [
             }
 
             .download-pdf {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
                 font-family: var(--mono);
-                font-size: 12px;
+                font-size: 14px;
                 letter-spacing: 0.04em;
                 text-transform: uppercase;
                 color: var(--ink);
                 background: var(--paper);
                 border: 1px solid var(--ink-soft);
-                border-radius: 4px;
-                padding: 6px 10px;
+                border-radius: 6px;
+                padding: 12px 18px;
                 cursor: pointer;
                 line-height: 1.2;
+                text-decoration: none;
+                transition: border-color 0.15s ease, background-color 0.15s ease;
+            }
+            .download-pdf .pdf-icon {
+                width: 18px;
+                height: 18px;
+                flex-shrink: 0;
+                stroke: currentColor;
+                fill: none;
+                stroke-width: 1.6;
+                stroke-linecap: round;
+                stroke-linejoin: round;
             }
             .download-pdf:hover {
                 background: var(--paper);
@@ -412,7 +427,13 @@ const techRows = [
                 class="download-pdf"
                 aria-label="Download resume as PDF"
             >
-                Download PDF
+                <svg class="pdf-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+                    <path d="M14 3v5h5" />
+                    <path d="M9 13h6" />
+                    <path d="M9 17h4" />
+                </svg>
+                <span>Download PDF</span>
             </a>
         </div>
 
