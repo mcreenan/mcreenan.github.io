@@ -13,9 +13,12 @@ export default defineConfig({
         sitemap(),
         tailwind(),
         pdf({
-            launch: process.env.PUPPETEER_EXECUTABLE_PATH
-                ? { executablePath: process.env.PUPPETEER_EXECUTABLE_PATH }
-                : {},
+            launch: {
+                args: ['--no-sandbox', '--disable-setuid-sandbox'],
+                ...(process.env.PUPPETEER_EXECUTABLE_PATH
+                    ? { executablePath: process.env.PUPPETEER_EXECUTABLE_PATH }
+                    : {}),
+            },
             pages: {
                 '/resume': {
                     path: '/resume.pdf',
