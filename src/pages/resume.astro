@@ -158,7 +158,7 @@ const techRows = [
 
             .page {
                 max-width: 780px;
-                margin: 48px auto;
+                margin: 16px auto 48px;
                 background: var(--paper);
                 padding: 44px 44px; /* baked from tweaks */
                 box-shadow:
@@ -171,20 +171,16 @@ const techRows = [
                 margin-top: 36px;
             }
 
-            /* ─── 1. Personal / intro ─────────────────────────────── */
-            .intro {
-                display: grid;
-                grid-template-columns: 44% 1fr; /* baked from tweaks */
-                gap: 32px;
-                align-items: start;
-                position: relative;
+            /* ─── 0. Page actions (above the resume sheet) ────────── */
+            .page-actions {
+                max-width: 780px;
+                margin: 48px auto 0;
+                padding: 0 44px;
+                display: flex;
+                justify-content: flex-end;
             }
 
             .download-pdf {
-                position: absolute;
-                top: 0;
-                right: 0;
-                z-index: 1;
                 font-family: var(--mono);
                 font-size: 12px;
                 letter-spacing: 0.04em;
@@ -198,12 +194,21 @@ const techRows = [
                 line-height: 1.2;
             }
             .download-pdf:hover {
-                background: var(--bg);
+                background: var(--paper);
                 color: var(--ink);
+                border-color: var(--ink);
             }
             .download-pdf:focus-visible {
                 outline: 2px solid var(--ink);
                 outline-offset: 2px;
+            }
+
+            /* ─── 1. Personal / intro ─────────────────────────────── */
+            .intro {
+                display: grid;
+                grid-template-columns: 44% 1fr; /* baked from tweaks */
+                gap: 32px;
+                align-items: start;
             }
 
             .personal {
@@ -300,15 +305,16 @@ const techRows = [
 
             .job-body ul {
                 margin: 0;
-                padding-left: 18px;
+                padding-left: 22px;
                 color: var(--ink-soft);
+                list-style: disc outside;
             }
             .job-body li {
                 margin-bottom: 4px;
                 padding-left: 4px;
             }
             .job-body li::marker {
-                color: var(--ink-mute);
+                color: var(--ink-soft);
             }
 
             /* ─── 3. Technical ────────────────────────────────────── */
@@ -346,9 +352,13 @@ const techRows = [
             }
 
             @media (max-width: 640px) {
+                .page-actions {
+                    margin-top: 16px;
+                    padding: 0 16px;
+                }
                 .page {
                     padding: 32px 24px;
-                    margin: 0;
+                    margin: 8px 0 0;
                 }
                 .intro,
                 .job,
@@ -369,30 +379,32 @@ const techRows = [
                 body {
                     background: white;
                 }
+                .page-actions {
+                    display: none;
+                }
                 .page {
                     box-shadow: none;
                     margin: 0;
                     max-width: none;
                     padding: 36px 44px;
                 }
-                .download-pdf {
-                    display: none;
-                }
             }
         </style>
     </head>
     <body>
+        <div class="page-actions">
+            <button
+                type="button"
+                id="download-pdf"
+                class="download-pdf"
+                aria-label="Download resume as PDF"
+            >
+                Download PDF
+            </button>
+        </div>
+
         <main class="page">
             <section class="intro">
-                <button
-                    type="button"
-                    id="download-pdf"
-                    class="download-pdf"
-                    aria-label="Download resume as PDF"
-                >
-                    Download PDF
-                </button>
-
                 <div class="personal">
                     <h1>Matt Creenan</h1>
                     <p class="tagline">Experienced Software Professional</p>
