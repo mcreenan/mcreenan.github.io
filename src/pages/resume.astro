@@ -3,7 +3,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const jobs = [
     {
-        dates: "2019 — Present",
+        dates: "2022 — Present",
+        title: "Senior Staff Engineer",
+        company: "Torch",
+        bullets: [
+            "Helped lead a greenfield project to build a new frontend application with a new design system, using a monorepo and modern tooling.",
+            "Led the team in between engineering managers, providing technical direction and continuity through the transition.",
+        ],
+    },
+    {
+        dates: "2019 — 2022",
         title: "Engineering Manager, Data",
         company: "Delaware North",
         bullets: [
@@ -74,7 +83,7 @@ const techRows = [
         <title>Matt Creenan — Resume</title>
         <meta
             name="description"
-            content="Matt Creenan's resume — 15+ years across full-stack development, DevOps, and data engineering."
+            content="Matt Creenan's resume — 20+ years across full-stack development, DevOps, and data engineering."
         />
         <link rel="canonical" href={canonicalURL} />
 
@@ -84,7 +93,7 @@ const techRows = [
         <meta property="og:title" content="Matt Creenan — Resume" />
         <meta
             property="og:description"
-            content="Matt Creenan's resume — 15+ years across full-stack development, DevOps, and data engineering."
+            content="Matt Creenan's resume — 20+ years across full-stack development, DevOps, and data engineering."
         />
 
         <!-- Twitter card -->
@@ -93,7 +102,7 @@ const techRows = [
         <meta name="twitter:title" content="Matt Creenan — Resume" />
         <meta
             name="twitter:description"
-            content="Matt Creenan's resume — 15+ years across full-stack development, DevOps, and data engineering."
+            content="Matt Creenan's resume — 20+ years across full-stack development, DevOps, and data engineering."
         />
 
         <style is:global>
@@ -407,7 +416,7 @@ const techRows = [
             <section class="intro">
                 <div class="personal">
                     <h1>Matt Creenan</h1>
-                    <p class="tagline">Experienced Software Professional</p>
+                    <p class="tagline">Experienced Software Builder</p>
                     <div class="contact">
                         <span>(716) 579-0988</span>
                         <a href="mailto:mattcreenan@gmail.com">mattcreenan@gmail.com</a>
@@ -420,7 +429,7 @@ const techRows = [
                 </div>
 
                 <p class="summary">
-                    15+ years of experience across full-stack development, DevOps, and data
+                    20+ years of experience across full-stack development, DevOps, and data
                     engineering. Consistently a top-performing individual contributor across
                     technologies, methodologies, and software architectures.
                 </p>
