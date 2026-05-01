@@ -379,14 +379,23 @@ const techRows = [
                 }
             }
 
+            @page {
+                margin: 0;
+                size: Letter;
+            }
+
             @media print {
+                html,
                 body {
-                    background: white;
+                    background: var(--paper);
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
                 }
                 .page-actions {
                     display: none;
                 }
                 .page {
+                    background: var(--paper);
                     box-shadow: none;
                     margin: 0;
                     max-width: none;
@@ -397,14 +406,14 @@ const techRows = [
     </head>
     <body>
         <div class="page-actions">
-            <button
-                type="button"
-                id="download-pdf"
+            <a
+                href="/resume.pdf"
+                download="matt-creenan-resume.pdf"
                 class="download-pdf"
                 aria-label="Download resume as PDF"
             >
                 Download PDF
-            </button>
+            </a>
         </div>
 
         <main class="page">
@@ -465,13 +474,6 @@ const techRows = [
         </main>
 
         <script>
-            const btn = document.getElementById("download-pdf");
-            if (btn) {
-                btn.addEventListener("click", () => {
-                    window.print();
-                });
-            }
-
             // Assemble the email at runtime so HTML scrapers see only obfuscated parts
             document.querySelectorAll<HTMLAnchorElement>("a.email[data-user][data-domain]").forEach((a) => {
                 const user = a.dataset.user;
