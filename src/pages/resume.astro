@@ -395,8 +395,9 @@ const techRows = [
             }
 
             @page {
-                margin: 0;
                 size: Letter;
+                /* Margins are set via Puppeteer's pdf.margin option
+                 * so they apply to every page. Body bg paints through. */
             }
 
             @media print {
@@ -414,7 +415,7 @@ const techRows = [
                     box-shadow: none;
                     margin: 0;
                     max-width: none;
-                    padding: 36px 44px;
+                    padding: 0;
                 }
 
                 /* ── Page-break rules ──

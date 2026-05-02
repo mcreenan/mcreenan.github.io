@@ -26,7 +26,17 @@ export default defineConfig({
                     pdf: {
                         format: 'Letter',
                         printBackground: true,
-                        margin: { top: 0, right: 0, bottom: 0, left: 0 },
+                        // Per-page margins applied by Chromium for every
+                        // page in the PDF. Body background paints through
+                        // these regions, so the warm-cream surface still
+                        // covers the page edge-to-edge while content is
+                        // inset from the top on every sheet (not just p1).
+                        margin: {
+                            top: '36px',
+                            right: '44px',
+                            bottom: '36px',
+                            left: '44px',
+                        },
                     },
                 },
             },
