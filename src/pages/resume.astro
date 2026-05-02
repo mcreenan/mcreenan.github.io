@@ -416,6 +416,30 @@ const techRows = [
                     max-width: none;
                     padding: 36px 44px;
                 }
+
+                /* ── Page-break rules ──
+                 * Only break between top-level sections, or between
+                 * individual jobs inside .experience. Never split a
+                 * job, the intro card, or the technical card. */
+                .intro,
+                .technical,
+                .job {
+                    break-inside: avoid;
+                    page-break-inside: avoid;
+                }
+                /* .experience itself may span pages, but only on
+                 * .job boundaries (above) — the bullet list inside
+                 * a job stays glued to its title. */
+                .experience {
+                    break-inside: auto;
+                    page-break-inside: auto;
+                }
+                /* Keep heading + company line with the bullets. */
+                .job-body h3,
+                .job-body .company {
+                    break-after: avoid;
+                    page-break-after: avoid;
+                }
             }
         </style>
     </head>
