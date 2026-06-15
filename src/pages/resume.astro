@@ -170,6 +170,11 @@ const techRows = [
                 margin-top: 36px;
             }
 
+            /* Extra breathing room between the header and experience. */
+            .intro + .experience {
+                margin-top: 56px;
+            }
+
             /* ─── 0. Page actions (above the resume sheet) ────────── */
             .page-actions {
                 max-width: 780px;
@@ -220,27 +225,26 @@ const techRows = [
             /* ─── 1. Personal / intro ─────────────────────────────── */
             .intro {
                 display: grid;
-                grid-template-columns: 44% 1fr; /* baked from tweaks */
+                grid-template-columns: 36% 1fr; /* baked from tweaks */
                 gap: 32px;
                 align-items: start;
             }
 
             .personal {
-                padding: 22px 26px;
-                border-radius: 6px;
+                padding: 0;
                 min-width: 0;
-                background: var(--accent-bg);
-                color: var(--accent-text);
+                background: transparent;
+                color: var(--accent-bg);
             }
             .personal .tagline,
             .personal .contact {
-                color: var(--accent-text-soft);
+                color: color-mix(in srgb, var(--accent-bg) 80%, var(--paper));
             }
             .personal .contact-sep {
-                color: var(--accent-text-mute);
+                color: color-mix(in srgb, var(--accent-bg) 55%, var(--paper));
             }
             .personal .contact a:hover {
-                color: var(--accent-text);
+                color: var(--accent-bg);
             }
 
             .intro h1 {
