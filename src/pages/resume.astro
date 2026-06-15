@@ -266,7 +266,6 @@ const techRows = [
                 color: var(--ink-soft);
                 margin: 0;
                 max-width: 62ch;
-                padding-top: 8px;
             }
 
             .contact {
@@ -400,16 +399,17 @@ const techRows = [
 
             @page {
                 size: Letter;
-                /* Per-page content inset. Using @page margin (not Puppeteer's
-                 * margin) keeps the warm-cream page background painting across
-                 * the full sheet — margins included — for a uniform color. */
-                margin: 36px 44px;
+                /* Per-page margins (consistent top inset on every page). The
+                 * margin region is white, matching the white content surface. */
+                margin: 44px;
             }
 
             @media print {
+                /* PDF uses a plain white surface so it matches Chromium's
+                 * white page margins — no cream-vs-white edge mismatch. */
                 html,
                 body {
-                    background: var(--paper);
+                    background: #fff;
                     -webkit-print-color-adjust: exact;
                     print-color-adjust: exact;
                 }
@@ -417,7 +417,7 @@ const techRows = [
                     display: none;
                 }
                 .page {
-                    background: var(--paper);
+                    background: #fff;
                     box-shadow: none;
                     margin: 0;
                     max-width: none;

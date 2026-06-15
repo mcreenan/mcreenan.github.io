@@ -26,12 +26,10 @@ export default defineConfig({
                     pdf: {
                         format: 'Letter',
                         printBackground: true,
-                        // No Chromium margins — its margin box renders white
-                        // and is NOT painted by the page background. Per-page
-                        // insets are handled by `@page { margin }` in CSS
-                        // instead, so the warm-cream surface propagates across
-                        // the whole sheet (margins included) while content
-                        // stays inset on every page.
+                        // Margins handled by CSS `@page` (it takes precedence
+                        // over this option, so keep these at 0 to avoid a
+                        // zeroed-out result). The PDF uses a white content
+                        // surface, matching the white margins — no mismatch.
                         margin: {
                             top: '0',
                             right: '0',
