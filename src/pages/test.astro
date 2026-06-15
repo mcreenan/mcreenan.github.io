@@ -1,0 +1,83 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+---
+
+<html lang="en">
+<head>
+	<BaseHead title="Win 3.1 Test" description="Test page for Win 3.1 theme" />
+	<style>
+	    :root {
+			--grey: rgb(205, 205, 205);
+			--blue: rgb(0, 0, 123);
+			font-family: W95FA, Arial, sans-serif;
+			font-size: 14px;
+
+		}
+
+	    #desktop {
+			background: #008080;
+			margin: 0;
+			padding: 40px;
+			width: 100vw;
+			height: 100vh;
+		}
+
+	    .x-window {
+			box-shadow:
+			    0 0 0 1px black,
+				0 0 0 3px var(--grey),
+				0 0 0 4px black;
+			background: white;
+		}
+
+		.titlebar {
+		    background-color: var(--blue);
+			color: white;
+			display: flex;
+		}
+		.titlebar-text {
+		    flex: 1;
+			padding: 2px 4px;
+			text-align: center;
+		}
+
+		button {
+		    background-color: var(--grey);
+			box-shadow:
+			    inset 1px 1px 0 white,     /* top + left highlight */
+				inset -1px -1px 0 #555;    /* bottom + right shadow */
+            color: white;
+			padding: 2px 8px;
+			text-shadow: 1px 1px black;
+		}
+	</style>
+</head>
+<body>
+
+    <div id="desktop">
+        <div class="x-window">
+            <div class="titlebar">
+                <button class="app-button">
+                    -
+                </button>
+                <span class="titlebar-text">
+                    Program Manager
+                </span>
+                <button class="minimize">v</button>
+                <button class="maximize">^</button>
+            </div>
+            <div class="menu">
+                <div class="menu-item">File</div>
+                <div class="menu-item">Options</div>
+            </div>
+            <div class="body">
+                <div class="app-grid">
+                    <div class="app">TODO</div>
+                    <div class="app">TODO</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
