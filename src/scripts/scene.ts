@@ -8,7 +8,6 @@ export interface SceneActions {
     music(): Promise<boolean>;
     stars(count?: number): void;
     fireflies(): void;
-    pets(): void;
     lights(): boolean;
     say(text: string): void;
     bills(): void;
@@ -232,7 +231,6 @@ const QUIPS = [
     "listen… crickets.",
     "psst — press play on the boombox",
     "try clicking the trees",
-    "Apollo, it's just your shadow.",
     "coffee count: yes",
 ];
 
@@ -312,27 +310,6 @@ export function initScene(): SceneActions {
         sky.fireflies(clientX / window.innerWidth, clientY / window.innerHeight);
     });
 
-    // Apollo is scared of his own shadow; the cat thinks it's a dog.
-    const dog = $("#dog");
-    const cat = $("#cat");
-    const replay = (el: Element, cls: string) => {
-        el.classList.remove(cls);
-        void (el as HTMLElement).getBoundingClientRect();
-        el.classList.add(cls);
-    };
-    const poke = {
-        dog() {
-            replay(dog, "startle");
-            say("Apollo! it's just your shadow.");
-        },
-        cat() {
-            replay(cat, "flick");
-            say("the cat is pretty sure it's a dog.");
-        },
-    };
-    dog.addEventListener("click", poke.dog);
-    cat.addEventListener("click", poke.cat);
-
     const bills = () => {
         scene.classList.remove("bills");
         void scene.offsetWidth;
@@ -345,10 +322,6 @@ export function initScene(): SceneActions {
         music,
         stars: sky.stars,
         fireflies: () => sky.fireflies(),
-        pets() {
-            poke.dog();
-            window.setTimeout(() => replay(cat, "flick"), 400);
-        },
         lights,
         say,
         bills,

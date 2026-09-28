@@ -563,93 +563,6 @@ button {
     stroke-linecap: round;
 }
 
-.pets {
-    position: absolute;
-    left: calc(25vw - clamp(75px, 8.5vw, 150px));
-    bottom: 24.5svh;
-    z-index: 8;
-    width: clamp(150px, 17vw, 300px);
-    pointer-events: none;
-}
-.doormat path {
-    fill: #5e4636;
-}
-.doormat .shag {
-    fill: none;
-    stroke: #7a5c46;
-    stroke-width: 3;
-    stroke-dasharray: 2 5;
-}
-.pets svg {
-    display: block;
-    width: 100%;
-    overflow: visible;
-}
-.dog,
-.cat {
-    pointer-events: auto;
-    cursor: pointer;
-}
-.fur {
-    fill: #efeae0;
-}
-.dog-patch,
-.dog-head {
-    fill: #6e4a35;
-}
-.dog-ear {
-    fill: #3e2a20;
-}
-.collar {
-    fill: none;
-    stroke: #1f2440;
-    stroke-width: 7;
-    stroke-linecap: round;
-}
-.dog-tail {
-    fill: none;
-    stroke: #efeae0;
-    stroke-width: 16;
-    stroke-linecap: round;
-}
-.tabby {
-    fill: #6d6356;
-}
-.tabby-dark {
-    fill: #54493f;
-}
-.cat-stripes {
-    fill: none;
-    stroke: #3d342c;
-    stroke-width: 4;
-    stroke-linecap: round;
-}
-.cat-tail {
-    fill: none;
-    stroke: #5b5046;
-    stroke-width: 10;
-    stroke-linecap: round;
-    transform-box: fill-box;
-    transform-origin: 0% 100%;
-}
-.dog {
-    transform-box: fill-box;
-    transform-origin: 50% 100%;
-}
-.dog.startle {
-    animation: startle 0.6s ease-out;
-}
-.cat.flick .cat-tail {
-    animation: flick 0.8s ease-in-out;
-}
-.dog-tail {
-    transform-box: fill-box;
-    transform-origin: 0% 0%;
-    animation: wag 1.6s ease-in-out infinite;
-}
-.playing .dog-tail {
-    animation-duration: calc(var(--beat) * 2);
-}
 
 .stars {
     width: 100%;
@@ -1802,39 +1715,6 @@ main {
             inset 0 0 10px #9d7bff;
     }
 }
-@keyframes startle {
-    0%,
-    100% {
-        transform: none;
-    }
-    20% {
-        transform: translateY(-14px) scale(1.03);
-    }
-    45% {
-        transform: translateY(0) scale(0.98);
-    }
-}
-@keyframes flick {
-    0%,
-    100% {
-        transform: rotate(0);
-    }
-    30% {
-        transform: rotate(-18deg);
-    }
-    60% {
-        transform: rotate(10deg);
-    }
-}
-@keyframes wag {
-    0%,
-    100% {
-        transform: rotate(-6deg);
-    }
-    50% {
-        transform: rotate(6deg);
-    }
-}
 @keyframes twinkle {
     0%,
     100% {
@@ -2013,9 +1893,6 @@ main {
         top: 24.6svh;
         left: 76vw;
         width: 32px;
-    }
-    .pets {
-        display: none;
     }
     .lamp,
     .lamp-light {
