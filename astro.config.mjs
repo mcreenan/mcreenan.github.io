@@ -1,17 +1,19 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import pdf from 'astro-pdf';
 
 // https://astro.build/config
 export default defineConfig({
     site: 'https://matt.creenan.me',
+    // The old multi-page routes now live as sections of the single-page home.
+    redirects: {
+        '/about': '/#about',
+        '/work': '/#experience',
+        '/contact': '/#contact',
+    },
     integrations: [
-        mdx(),
         sitemap(),
-        tailwind(),
         pdf({
             launch: {
                 args: ['--no-sandbox', '--disable-setuid-sandbox'],

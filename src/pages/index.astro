@@ -1,254 +1,229 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import ThemeDialog from "../components/ThemeDialog.astro";
-import ProgramManager from "../components/ProgramManager.astro";
-import Win95Desktop from "../components/Win95Desktop.astro";
-import Taskbar from "../components/Taskbar.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import "../styles/site.css";
+import Skyline from "../components/Skyline.astro";
+import Crt from "../components/Crt.astro";
+import Boombox from "../components/Boombox.astro";
+import Character from "../components/Character.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, currentRole, jobs, links, projects } from "../data/profile";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/images/avatar-256.png", Astro.site);
+
+const nav = [
+    { id: "about", label: "about" },
+    { id: "now", label: "now" },
+    { id: "projects", label: "projects" },
+    { id: "experience", label: "work" },
+    { id: "contact", label: "contact" },
+];
 ---
 
 <!doctype html>
-<html lang="en" data-theme="retro">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<main class="h-screen overflow-hidden">
-			<section class="flex flex-col items-center justify-center h-full">
-				<div class="retro-layout flex flex-col items-center justify-center h-full">
-					<div class="window fixed splash-screen">
-						<div class="window-inner">
-							<div
-								class="flex items-center justify-center mt-8 gap-6"
-							>
-								<img
-									src="/images/headshot.png"
-									alt="Matt Creenan"
-									class="headshot-image"
-								/>
-								<h1 class="text-6xl font-bold os-title">
-									Matt Creenan
-								</h1>
-							</div>
-							<div
-								class="flex justify-center items-center mt-8 md:mt-12 flex-wrap gap-4"
-								style="height: auto; min-height: 120px;"
-							>
-								<a
-									href="/about"
-									class="button flex flex-col justify-between py-2"
-								>
-									<i class="ph ph-user text-4xl"></i>
-									<span>About</span>
-								</a>
-								<a
-									href="/work"
-									class="button flex flex-col justify-between py-2"
-								>
-									<i class="fa-regular fa-building text-4xl"></i>
-									<span>Work</span>
-								</a>
-								<a
-									href="/contact"
-									class="button flex flex-col justify-between py-2"
-								>
-									<i class="ph ph-envelope text-4xl"></i>
-									<span>Contact</span>
-								</a>
-								<button
-									class="button flex flex-col justify-between py-2"
-									type="button"
-									onclick="window.openThemeDialog()"
-								>
-									<i class="ph ph-palette text-4xl"></i>
-									<span>Themes</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<ProgramManager />
-				<Win95Desktop />
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#0c0a24" />
+        <title>{SITE_TITLE}</title>
+        <meta name="description" content={SITE_DESCRIPTION} />
+        <link rel="canonical" href={canonicalURL} />
+        <link rel="icon" type="image/png" href="/images/avatar-256.png" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <link rel="preload" href="/fonts/vt323.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/images/avatar-cut.webp" as="image" type="image/webp" />
 
-				<div id="overlay-window" role="dialog" aria-modal="true" aria-label="Content" hidden>
-					<div class="overlay-backdrop"></div>
-					<div class="overlay-chrome overlay-chrome-win31 window splash-screen">
-						<div class="window-titlebar">
-							<div class="win31-titlebar-left">
-								<button class="win31-chrome-btn overlay-close" aria-label="Close" type="button">-</button>
-							</div>
-							<span class="window-title overlay-title"></span>
-							<div class="win31-titlebar-right">
-								<span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9650;</span>
-								<span class="win31-chrome-btn win31-btn-raised" aria-hidden="true">&#9660;</span>
-							</div>
-						</div>
-						<div class="window-inner">
-							<div class="window-content overlay-body"></div>
-						</div>
-					</div>
-					<div class="overlay-chrome overlay-chrome-win95 window splash-screen">
-						<div class="title-bar">
-							<div class="title-bar-text overlay-title"></div>
-							<div class="title-bar-controls">
-								<button aria-label="Minimize" type="button"></button>
-								<button aria-label="Maximize" type="button"></button>
-								<button class="overlay-close" aria-label="Close" type="button"></button>
-							</div>
-						</div>
-						<div class="window-body overlay-body"></div>
-					</div>
-				</div>
-			</section>
-		<ThemeDialog />
-		<Taskbar />
-	</main>
-	<script>
-		// === Desktop Overlay Controller (Phase 05) ===
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={SITE_TITLE} />
+        <meta property="og:description" content={SITE_DESCRIPTION} />
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={SITE_TITLE} />
+        <meta name="twitter:description" content={SITE_DESCRIPTION} />
+        <meta name="twitter:image" content={ogImage} />
+    </head>
+    <body>
+        <a class="skip" href="#about">Skip to content</a>
 
-		const contentCache = new Map<string, { title: string; html: string }>();
-		let overlayIsOpen = false;
-		let activeTrigger: HTMLElement | null = null;
+        <nav class="topnav" id="topnav" aria-label="Sections">
+            <a class="topnav-home" href="#top" aria-label="Back to top"><span class="cursor">▌</span>matt.creenan.me</a>
+            <ul>
+                {nav.map((n) => <li><a href={`#${n.id}`} data-nav={n.id}>{n.label}</a></li>)}
+                <li><a href="/resume" class="topnav-resume">resume</a></li>
+            </ul>
+        </nav>
 
-		const TITLE_MAP: Record<string, string> = {
-			'/about': 'About Me',
-			'/work': 'Work',
-			'/contact': 'Contact',
-		};
+        <header class="scene" id="top">
+            <div id="scene" class="scene-inner">
+                <div class="sky" aria-hidden="true"></div>
+                <canvas id="stars" class="stars" aria-hidden="true"></canvas>
+                <button class="moon" id="moon" type="button" aria-label="The moon. Click to make a wish."></button>
+                <div class="clouds" aria-hidden="true"><i></i><i></i><i></i></div>
+                <div class="plane" aria-hidden="true"></div>
+                <div class="layer layer-far"><Skyline layer="far" seed={1994} /></div>
+                <div class="layer layer-near"><Skyline layer="near" seed={716} /></div>
+                <div class="haze" aria-hidden="true"></div>
 
-		const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+                <h1 class="marquee">
+                    <span class="marquee-name">Matt Creenan</span>
+                    <span class="marquee-sub">software builder · buffalo, ny · vibing after dark</span>
+                </h1>
 
-		function initDesktopOverlay() {
-			const theme = document.documentElement.getAttribute('data-theme');
-			if (theme !== 'win31' && theme !== 'win95') return;
+                <div class="ledge" aria-hidden="true"></div>
+                <Crt />
+                <Boombox />
+                <div class="mug" aria-hidden="true"><span class="steam"></span><span class="steam"></span></div>
+                <Character />
 
-			const icons = document.querySelectorAll<HTMLAnchorElement>('.pm-icon, .win95-icon');
-			icons.forEach((anchor) => {
-				anchor.addEventListener('click', (e) => {
-					e.preventDefault();
-					e.stopPropagation();
-					const href = anchor.getAttribute('href');
-					if (href) openOverlay(href, anchor);
-				});
-			});
-		}
+                <a class="scroll-cue" href="#about">scroll ▾</a>
+                <div class="vignette" aria-hidden="true"></div>
+                <div class="crt-noise" aria-hidden="true"></div>
+            </div>
+        </header>
 
-		async function openOverlay(url: string, triggerEl: HTMLElement) {
-			activeTrigger = triggerEl;
-			overlayIsOpen = true;
+        <main>
+            <section id="about" class="panel">
+                <h2 class="prompt"><span>~/about</span> $ cat about.txt</h2>
+                <div class="about">
+                    <img src="/images/avatar-256.png" alt="Matt's cartoon avatar: glasses, beard, purple shirt" width="128" height="125" loading="lazy" />
+                    <div class="prose">
+                        <p>
+                            Hi, I'm <strong>Matt Creenan</strong> — a 40-ish-year-old software engineer in Buffalo, NY.
+                            I've spent 20+ years building across full-stack development, data engineering, and DevOps,
+                            and I'm happiest leading the gnarly projects nobody else wants to pick up.
+                        </p>
+                        <p>
+                            Lately I'm obsessed with <em>agentic coding</em>: harnesses, runtimes, and tools that make
+                            coding agents faster and more trustworthy by keeping the boring parts deterministic.
+                        </p>
+                        <p>
+                            I'm married with two kids, a dog scared of his own shadow, and a cat that wants to be a dog.
+                            Off the clock I'm watching the Bills with my wife and son, or suffering through the Sabres alone.
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-			if (!contentCache.has(url)) {
-				const resp = await fetch(url);
-				const text = await resp.text();
-				const doc = new DOMParser().parseFromString(text, 'text/html');
+            <section id="now" class="panel">
+                <h2 class="prompt"><span>~/now</span> $ cat now.txt</h2>
+                <div class="now-card">
+                    <p class="now-kicker">currently</p>
+                    <p class="now-role">{currentRole.title}</p>
+                    <p class="now-company">@ {currentRole.company} <span>— a {currentRole.parent} company</span></p>
+                </div>
+                <div class="prose">
+                    <p>
+                        Before that I spent four years as a Senior Staff Engineer at Torch, where I shipped a company-wide
+                        AI Slack agent, in-product LLM features, and a greenfield frontend platform, and built
+                        AI-native engineering workflows with custom agents, skills, and routines.
+                    </p>
+                    <p>
+                        On nights and weekends: the projects below.
+                    </p>
+                </div>
+            </section>
 
-				const isWin95 = document.documentElement.getAttribute('data-theme') === 'win95';
-				const contentEl = isWin95
-					? (doc.querySelector('.window-body') || doc.querySelector('.window-content'))
-					: (doc.querySelector('.window-content') || doc.querySelector('.window-body'));
-				const html = contentEl ? contentEl.innerHTML : '';
-				const title = TITLE_MAP[url] || 'Content';
+            <section id="projects" class="panel">
+                <h2 class="prompt"><span>~/projects</span> $ ls -t</h2>
+                <p class="lede">Recent agentic coding work, newest first. Everything's on <a href={links.github}>GitHub</a>.</p>
+                <ul class="projects">
+                    {
+                        projects.map((p, i) => (
+                            <li class="project" style={`--i:${i}`}>
+                                <a href={p.url} target="_blank" rel="noopener">
+                                    <span class="project-head">
+                                        <span class="project-name">{p.name}</span>
+                                        <span class="project-arrow" aria-hidden="true">↗</span>
+                                    </span>
+                                    <span class="project-tagline">{p.tagline}</span>
+                                    <span class="project-desc">{p.description}</span>
+                                    <span class="project-tags">
+                                        {p.tags.map((t) => <span>{t}</span>)}
+                                    </span>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </section>
 
-				contentCache.set(url, { title, html });
-			}
+            <section id="experience" class="panel">
+                <h2 class="prompt"><span>~/work</span> $ tail work.log</h2>
+                <ol class="timeline">
+                    {
+                        jobs.map((j) => (
+                            <li>
+                                <span class="tl-dates">{j.dates}</span>
+                                <div>
+                                    <h3>{j.title}</h3>
+                                    <p class="tl-company">{j.company}</p>
+                                    {j.summary && <p class="tl-summary">{j.summary}</p>}
+                                    {j.bullets && (
+                                        <ul>
+                                            {j.bullets.slice(0, 4).map((b) => <li>{b}</li>)}
+                                        </ul>
+                                    )}
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ol>
+                <p class="more">
+                    <a class="btn" href="/resume">full resume →</a>
+                    <a class="btn btn-ghost" href="/resume.pdf">download pdf</a>
+                </p>
+            </section>
 
-			const cached = contentCache.get(url)!;
-			const overlay = document.getElementById('overlay-window');
-			if (!overlay) return;
+            <section id="contact" class="panel">
+                <h2 class="prompt"><span>~/contact</span> $ cat contact.txt</h2>
+                <ul class="contact">
+                    <li><span>github</span><a href={links.github} target="_blank" rel="noopener">github.com/mcreenan</a></li>
+                    <li><span>linkedin</span><a href={links.linkedin} target="_blank" rel="noopener">linkedin.com/in/matt-creenan</a></li>
+                    <li><span>bluesky</span><a href={links.bluesky} target="_blank" rel="noopener">@matt.creenan.me</a></li>
+                    <li><span>twitter</span><a href={links.twitter} target="_blank" rel="noopener">@mcreenan</a></li>
+                    <li>
+                        <span>email</span>
+                        <a class="email" data-user="mattcreenan" data-domain="gmail.com" href="#contact">mattcreenan [at] gmail [dot] com</a>
+                    </li>
+                </ul>
+            </section>
+        </main>
 
-			overlay.querySelectorAll('.overlay-title').forEach((el) => {
-				el.textContent = cached.title;
-			});
-			overlay.querySelectorAll('.overlay-body').forEach((el) => {
-				el.innerHTML = cached.html;
-			});
+        <footer class="footer">
+            <p>built late at night with an agent, astro &amp; bun · <a href="#top">back to the rooftop ↑</a></p>
+        </footer>
 
-			overlay.removeAttribute('hidden');
-			history.pushState({ overlayUrl: url }, '', url);
+        <script>
+            import { initScene } from "../scripts/scene";
+            import { initTerminal } from "../scripts/terminal";
 
-			// Focus the close button in the visible chrome
-			const visibleClose = overlay.querySelector<HTMLElement>('.overlay-chrome:not([style*="display: none"]) .overlay-close');
-			if (visibleClose) {
-				visibleClose.focus();
-			} else {
-				// Fallback: focus any visible close button
-				const anyClose = overlay.querySelector<HTMLElement>('.overlay-close');
-				if (anyClose) anyClose.focus();
-			}
-		}
+            initTerminal(initScene());
 
-		function closeOverlay(fromPopstate = false) {
-			if (!overlayIsOpen) return;
-			overlayIsOpen = false;
+            // Assemble the email at runtime so HTML scrapers only see the obfuscated parts.
+            document.querySelectorAll<HTMLAnchorElement>("a.email[data-user][data-domain]").forEach((a) => {
+                const addr = `${a.dataset.user}@${a.dataset.domain}`;
+                a.href = `mailto:${addr}`;
+                a.textContent = addr;
+            });
 
-			const overlay = document.getElementById('overlay-window');
-			if (overlay) {
-				overlay.setAttribute('hidden', '');
-				overlay.querySelectorAll('.overlay-body').forEach((el) => {
-					el.innerHTML = '';
-				});
-			}
+            // Top nav: solid once past the hero, highlight the section in view.
+            const topnav = document.getElementById("topnav")!;
+            const hero = document.getElementById("top")!;
+            new IntersectionObserver(([e]) => topnav.classList.toggle("solid", !e.isIntersecting), {
+                rootMargin: "-64px 0px 0px 0px",
+            }).observe(hero);
 
-			if (!fromPopstate) {
-				history.back();
-			}
-
-			activeTrigger?.focus();
-			activeTrigger = null;
-		}
-
-		// Focus trap and Escape key handler
-		const overlayEl = document.getElementById('overlay-window');
-		if (overlayEl) {
-			overlayEl.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape') {
-					closeOverlay();
-					return;
-				}
-
-				if (e.key === 'Tab') {
-					const focusable = Array.from(overlayEl.querySelectorAll<HTMLElement>(FOCUSABLE));
-					if (focusable.length === 0) return;
-
-					const first = focusable[0];
-					const last = focusable[focusable.length - 1];
-
-					if (e.shiftKey && document.activeElement === first) {
-						e.preventDefault();
-						last.focus();
-					} else if (!e.shiftKey && document.activeElement === last) {
-						e.preventDefault();
-						first.focus();
-					}
-				}
-			});
-
-			// Backdrop click handler
-			const backdrop = overlayEl.querySelector('.overlay-backdrop');
-			if (backdrop) {
-				backdrop.addEventListener('click', () => closeOverlay());
-			}
-
-			// Close button handlers
-			overlayEl.querySelectorAll('.overlay-close').forEach((btn) => {
-				btn.addEventListener('click', () => closeOverlay());
-			});
-		}
-
-		// Back button handler
-		window.addEventListener('popstate', () => {
-			if (!overlayIsOpen) return;
-			closeOverlay(true);
-		});
-
-		// astro:after-swap re-initialization
-		document.addEventListener('astro:after-swap', () => {
-			overlayIsOpen = false;
-			contentCache.clear();
-			initDesktopOverlay();
-		});
-
-		initDesktopOverlay();
-	</script>
-	</body>
+            const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav]");
+            const sectionObserver = new IntersectionObserver(
+                (entries) => {
+                    for (const e of entries) {
+                        if (!e.isIntersecting) continue;
+                        navLinks.forEach((a) => a.classList.toggle("active", a.dataset.nav === e.target.id));
+                    }
+                },
+                { rootMargin: "-45% 0px -50% 0px" },
+            );
+            document.querySelectorAll("main section[id]").forEach((s) => sectionObserver.observe(s));
+        </script>
+    </body>
 </html>

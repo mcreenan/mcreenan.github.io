@@ -1,0 +1,158 @@
+---
+interface Props {
+    layer: "far" | "near";
+    seed: number;
+}
+
+const { layer, seed } = Astro.props;
+
+// Deterministic RNG so the skyline is identical on every build.
+function mulberry32(a: number) {
+    return () => {
+        a |= 0;
+        a = (a + 0x6d2b79f5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+
+const rand = mulberry32(seed);
+const between = (min: number, max: number) => min + rand() * (max - min);
+
+const W = 1600;
+const H = 600;
+const near = layer === "near";
+
+interface Win {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+    on: boolean;
+    tint: string;
+    flicker: boolean;
+}
+interface Building {
+    x: number;
+    w: number;
+    h: number;
+    windows: Win[];
+    antenna: boolean;
+    tower: boolean;
+}
+
+const tints = near ? ["warm", "warm", "warm", "cool", "pink"] : ["warm", "cool"];
+const buildings: Building[] = [];
+let x = -30;
+while (x < W + 30) {
+    const w = near ? between(70, 160) : between(40, 110);
+    const h = near ? between(140, 380) : between(150, 400);
+    const windows: Win[] = [];
+    const ww = near ? 7 : 4;
+    const wh = near ? 9 : 5;
+    const gx = near ? 16 : 10;
+    const gy = near ? 20 : 12;
+    for (let wy = H - h + 18; wy < H - 14; wy += gy) {
+        for (let wx = x + 10; wx < x + w - 10 - ww; wx += gx) {
+            windows.push({
+                x: Math.round(wx),
+                y: Math.round(wy),
+                w: ww,
+                h: wh,
+                on: rand() < (near ? 0.24 : 0.32),
+                tint: tints[Math.floor(rand() * tints.length)],
+                flicker: rand() < 0.03,
+            });
+        }
+    }
+    buildings.push({
+        x,
+        w,
+        h,
+        windows,
+        antenna: rand() < (near ? 0.25 : 0.35),
+        tower: near && rand() < 0.18,
+    });
+    x += w + (near ? between(-10, 14) : between(-6, 8));
+}
+
+// A stepped art-deco tower on the far layer — a nod to Buffalo City Hall.
+const deco = { x: 1060, w: 120 };
+---
+
+<svg
+    class:list={["skyline", `skyline-${layer}`]}
+    viewBox={`0 0 ${W} ${H}`}
+    preserveAspectRatio="xMidYMax slice"
+    aria-hidden="true"
+>
+    {
+        !near && (
+            <g class="deco">
+                <rect x={deco.x} y={H - 330} width={deco.w} height={330} />
+                <rect x={deco.x + 15} y={H - 400} width={deco.w - 30} height={80} />
+                <rect x={deco.x + 32} y={H - 450} width={deco.w - 64} height={60} />
+                <polygon
+                    points={`${deco.x + 38},${H - 450} ${deco.x + deco.w / 2},${H - 500} ${deco.x + deco.w - 38},${H - 450}`}
+                />
+                <rect class="deco-crown" x={deco.x + 42} y={H - 440} width={deco.w - 84} height={10} />
+                <rect class="deco-crown" x={deco.x + 22} y={H - 392} width={deco.w - 44} height={6} />
+                <circle class="blink" cx={deco.x + deco.w / 2} cy={H - 503} r={3.5} />
+            </g>
+        )
+    }
+    {
+        buildings.map((b, i) => (
+            <g class="bldg">
+                <rect class="bldg-body" x={b.x} y={H - b.h} width={b.w} height={b.h} />
+                {b.antenna && (
+                    <>
+                        <line
+                            class="antenna"
+                            x1={b.x + b.w * 0.7}
+                            y1={H - b.h}
+                            x2={b.x + b.w * 0.7}
+                            y2={H - b.h - (near ? 46 : 30)}
+                        />
+                        <circle
+                            class="blink"
+                            style={`animation-delay:${(i * 0.37) % 2}s`}
+                            cx={b.x + b.w * 0.7}
+                            cy={H - b.h - (near ? 46 : 30)}
+                            r={near ? 3 : 2.2}
+                        />
+                    </>
+                )}
+                {b.tower && (
+                    <g class="water-tower">
+                        <rect x={b.x + 16} y={H - b.h - 40} width={30} height={28} rx={4} />
+                        <polygon points={`${b.x + 13},${H - b.h - 40} ${b.x + 31},${H - b.h - 54} ${b.x + 49},${H - b.h - 40}`} />
+                        <line x1={b.x + 20} y1={H - b.h - 12} x2={b.x + 20} y2={H - b.h} />
+                        <line x1={b.x + 42} y1={H - b.h - 12} x2={b.x + 42} y2={H - b.h} />
+                    </g>
+                )}
+                {b.windows.map((w) => (
+                    <rect
+                        class:list={["w", w.tint, { on: w.on, flicker: w.flicker }]}
+                        x={w.x}
+                        y={w.y}
+                        width={w.w}
+                        height={w.h}
+                    />
+                ))}
+            </g>
+        ))
+    }
+    {
+        near && (
+            <g class="neon-sign" transform="translate(262 330)">
+                <rect x="-6" y="-4" width="40" height="150" rx="6" />
+                <text x="14" y="26">O</text>
+                <text x="14" y="58">P</text>
+                <text x="14" y="90">E</text>
+                <text x="14" y="122">N</text>
+            </g>
+        )
+    }
+</svg>

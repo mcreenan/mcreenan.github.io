@@ -1,50 +1,7 @@
 ---
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+import { jobs } from "../data/profile";
 
-const jobs = [
-    {
-        dates: "2022 — Present",
-        title: "Senior Staff Engineer",
-        company: "Torch",
-        bullets: [
-            "Designed and shipped a company-wide AI Slack agent that answers employee questions grounded in our help content, live operational data, and codebases — our sources of truth — with guardrails for safe, accurate responses.",
-            "Built in-product LLM features — a coaching chat assistant, summarization, and light RAG over our content.",
-            "Built AI-native development workflows — authoring custom agents, skills, and routines for support triage, QA testing, and a daily engineering brief.",
-            "Led the team between engineering managers, providing technical direction and continuity through the transition.",
-            "Built internal developer tools that streamline common tedious tasks.",
-            "Led the greenfield rebuild of the frontend platform — new design system, monorepo, modern tooling — and migrated the coaching and participant experiences onto it.",
-            "Overhauled the local development setup with automated provisioning so every system component can run end-to-end on a single machine.",
-        ],
-    },
-    {
-        dates: "2019 — 2022",
-        title: "Engineering Manager, Data",
-        company: "Delaware North",
-        summary:
-            "Managed 4 senior engineers across the data platform, integrations, and new solutions, stabilizing the legacy platform through the post-COVID transition to keep critical reporting flows live.",
-    },
-    {
-        dates: "2014 — 2019",
-        title: "Senior SOA Engineer, Senior Data Engineer",
-        company: "Delaware North",
-        summary:
-            "Built a data platform from scratch for a critical BI project (99.9%+ API uptime through 2022), developed ETL processes including a custom serverless pipeline framework, and delivered multiple stand-alone solutions for business projects.",
-    },
-    {
-        dates: "2013 — 2014",
-        title: "Senior Programmer",
-        company: "LocalNet / CoreComm / Exhibio LLC",
-        summary:
-            "Drove a stalled multi-tier web application to launch, built a new ISP billing system from scratch, and deployed a Haraka (Node.js) SMTP server with custom plugins integrating internal systems.",
-    },
-    {
-        dates: "2006 — 2012",
-        title: "Vendor Integrations Engineer, Lead Engineer",
-        company: "Synacor — Williamsville, NY",
-        summary:
-            "Led design and development of a greenfield platform for internal and external tooling, drove the team's adoption of agile practices as Scrum Master, and mentored junior developers while introducing new technologies like Riak and Solr.",
-    },
-];
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // `set:html` is used on dt below so the literal `&nbsp;` in these labels
 // renders as a non-breaking space (per D-11). The `&` in the Data Engineering
@@ -503,13 +460,13 @@ const techRows = [
                                 <p class="company">{job.company}</p>
                                 {job.summary ? (
                                     <p class="job-summary">{job.summary}</p>
-                                ) : (
+                                ) : job.bullets?.length ? (
                                     <ul>
                                         {(job.bullets ?? []).map((b) => (
                                             <li>{b}</li>
                                         ))}
                                     </ul>
-                                )}
+                                ) : null}
                             </div>
                         </article>
                     ))

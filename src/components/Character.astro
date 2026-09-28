@@ -1,0 +1,61 @@
+<button class="me" id="me" type="button" aria-label="Matt, vibing with headphones and a laptop. Click to say hi.">
+    <span class="me-bubble" id="me-bubble" aria-live="polite"></span>
+    <span class="me-notes" id="me-notes" aria-hidden="true"></span>
+    <svg viewBox="0 0 700 780" aria-hidden="true">
+        <defs>
+            <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#3a3752" />
+                <stop offset="1" stop-color="#1a1829" />
+            </linearGradient>
+            <radialGradient id="screen-spill" cx="0.5" cy="1" r="0.8">
+                <stop offset="0" stop-color="#7fe8ff" stop-opacity="0.55" />
+                <stop offset="0.6" stop-color="#7fe8ff" stop-opacity="0.12" />
+                <stop offset="1" stop-color="#7fe8ff" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="hoodie" x1="0" y1="0.45" x2="0" y2="1">
+                <stop offset="0" stop-color="#966480" />
+                <stop offset="1" stop-color="#5a3552" />
+            </linearGradient>
+        </defs>
+
+        <path class="me-body" d="M0 780 C 0 610, 40 500, 150 492 L 520 560 C 620 580, 690 650, 700 780 Z" fill="url(#hoodie)" />
+
+        <g class="me-head">
+            <image href="/images/avatar-cut.webp" x="70" y="80" width="560" height="545" />
+            <ellipse class="me-glow" cx="350" cy="560" rx="300" ry="260" fill="url(#screen-spill)" />
+            <g class="headphones">
+                <path class="hp-band" d="M92 318 C 52 -40, 612 -20, 560 380" />
+                <path class="hp-band-hi" d="M92 318 C 52 -40, 612 -20, 560 380" />
+                <g transform="rotate(-8 96 362)">
+                    <rect class="hp-cup" x="52" y="296" width="88" height="132" rx="40" />
+                    <rect class="hp-ring" x="64" y="312" width="64" height="100" rx="30" />
+                </g>
+                <g transform="rotate(-16 556 420)">
+                    <rect class="hp-cup" x="512" y="354" width="88" height="132" rx="40" />
+                    <rect class="hp-ring" x="524" y="370" width="64" height="100" rx="30" />
+                </g>
+            </g>
+        </g>
+
+        <g class="laptop">
+            <rect x="120" y="590" width="460" height="230" rx="18" fill="url(#lid)" />
+            <rect x="120" y="590" width="460" height="6" rx="3" fill="#7fe8ff" opacity="0.55" />
+            <g class="sticker" transform="rotate(-8 230 670)">
+                <rect x="178" y="638" width="104" height="44" rx="8" fill="#ff4fd8" />
+                <text x="230" y="669" text-anchor="middle" fill="#1a0b2e">SHOUT!</text>
+            </g>
+            <g class="sticker" transform="rotate(6 440 690)">
+                <circle cx="440" cy="690" r="38" fill="#5ef2ff" />
+                <text x="440" y="704" text-anchor="middle" fill="#0c0a24" font-size="44">λ</text>
+            </g>
+            <g class="sticker" transform="rotate(-3 320 735)">
+                <rect x="252" y="714" width="140" height="40" rx="6" fill="#ffb86b" />
+                <text x="322" y="742" text-anchor="middle" fill="#2a1406">JOSH/ALLEN</text>
+            </g>
+            <g class="sticker" transform="rotate(10 530 632)">
+                <rect x="498" y="614" width="64" height="36" rx="18" fill="#1d4ed8" />
+                <text x="530" y="639" text-anchor="middle" fill="#fff">BUF</text>
+            </g>
+        </g>
+    </svg>
+</button>
