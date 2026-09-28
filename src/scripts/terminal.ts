@@ -53,7 +53,8 @@ export function initTerminal(scene: SceneActions) {
                 ["play", "press play on the boombox"],
                 ["stars", "make a wish"],
                 ["fireflies", "wake up the yard"],
-                ["lights", "flip the lamp"],
+                ["pets", "say hi to Apollo and the cat"],
+                ["lights", "flip the ceiling light"],
                 ["clear", "clean the glass"],
             ];
             for (const [c, d] of rows) print(`  <span class="t-col">${cmd(c)}</span><span class="dim">${d}</span>`);
@@ -109,6 +110,12 @@ export function initTerminal(scene: SceneActions) {
         },
         lights() {
             print(scene.lights() ? "lights back on." : "lights off. better for stargazing.", "dim");
+        },
+        pets() {
+            scene.pets();
+            print("Apollo: dog, scared of his own shadow.");
+            print("the cat: a cat that wants to be a dog.");
+            print("both on door duty, watching the yard.", "dim");
         },
         fireflies() {
             scene.fireflies();
@@ -175,6 +182,9 @@ export function initTerminal(scene: SceneActions) {
         wish: "stars",
         bugs: "fireflies",
         lamp: "lights",
+        apollo: "pets",
+        dog: "pets",
+        cat: "pets",
         cls: "clear",
         "?": "help",
         man: "help",

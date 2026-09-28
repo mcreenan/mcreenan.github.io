@@ -3,6 +3,7 @@ import "../styles/site.css";
 import Yard from "../components/Yard.astro";
 import Room from "../components/Room.astro";
 import Furniture from "../components/Furniture.astro";
+import Pets from "../components/Pets.astro";
 import Crt from "../components/Crt.astro";
 import Boombox from "../components/Boombox.astro";
 import Character from "../components/Character.astro";
@@ -59,10 +60,10 @@ const nav = [
         <div class="scene" id="scene">
             <div class="sky" aria-hidden="true"></div>
             <canvas id="stars" class="stars" aria-hidden="true"></canvas>
-            <button class="moon" id="moon" type="button" aria-label="The moon. Click to make a wish."></button>
             <div class="clouds" aria-hidden="true"><i></i><i></i><i></i></div>
             <div class="plane" aria-hidden="true"></div>
             <Yard />
+            <button class="moon" id="moon" type="button" aria-label="The moon. Click to make a wish."></button>
             <Room />
             <div class="room-glow" aria-hidden="true"></div>
 
@@ -73,7 +74,7 @@ const nav = [
 
             <Furniture />
             <Crt />
-            <div class="mug" aria-hidden="true"><span class="steam"></span><span class="steam"></span></div>
+            <Pets />
             <Boombox />
             <Character />
 

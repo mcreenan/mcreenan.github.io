@@ -16,14 +16,22 @@
                 <stop offset="0" stop-color="#5d5fb8" />
                 <stop offset="1" stop-color="#34357a" />
             </linearGradient>
-            <radialGradient id="beanbag" cx="0.4" cy="0.2" r="0.9">
-                <stop offset="0" stop-color="#3f7fc4" />
-                <stop offset="0.7" stop-color="#244b86" />
-                <stop offset="1" stop-color="#16305a" />
-            </radialGradient>
+            <linearGradient id="chair-leather" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#101014" />
+                <stop offset="0.5" stop-color="#23232b" />
+                <stop offset="1" stop-color="#101014" />
+            </linearGradient>
         </defs>
 
-        <path class="beanbag" d="M-60 860 C -80 690, 40 600, 160 640 C 250 570, 470 570, 560 630 C 690 600, 790 700, 760 860 Z" fill="url(#beanbag)" />
+        <!-- Black gaming chair from the desk in the sunroom. -->
+        <g class="chair">
+            <path d="M-40 860 L-30 470 C -26 380, 726 380, 730 470 L740 860 Z" fill="url(#chair-leather)" />
+            <path class="chair-stitch" d="M40 860 L46 480 C 50 420, 650 420, 654 480 L660 860" />
+        </g>
+
+        <!-- Hood bunched behind the neck, and the neck itself, so the head always sits on the body. -->
+        <path class="hood-back" d="M30 700 C 30 580, 110 500, 200 492 L 470 488 C 560 500, 640 570, 660 700 Z" />
+        <path class="neck" d="M150 470 L 440 470 L 430 640 L 160 640 Z" />
 
         <g class="me-head">
             <image href="/images/avatar-cut.webp" x="70" y="80" width="560" height="545" />
@@ -51,6 +59,13 @@
             <path class="hood" d="M200 606 C 190 590, 150 588, 120 604 M222 604 Q 300 630, 382 606 M382 606 C 420 588, 470 588, 500 606" />
             <path class="sleeve" d="M86 650 C 110 700, 118 760, 112 860 M520 650 C 500 700, 494 760, 500 860" />
             <path class="drawstring" d="M268 620 C 266 640, 270 660, 264 686 M334 618 C 338 640, 332 660, 338 684" />
+        </g>
+
+        <g class="chair-arms">
+            <rect x="-60" y="720" width="150" height="40" rx="18" />
+            <rect x="610" y="720" width="150" height="40" rx="18" />
+            <rect x="-10" y="760" width="40" height="100" />
+            <rect x="670" y="760" width="40" height="100" />
         </g>
 
         <g class="laptop">

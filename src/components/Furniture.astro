@@ -1,33 +1,77 @@
-<div class="rug" aria-hidden="true"></div>
+<!-- Flush-mount dome light in the middle of the ceiling; click it to flip the lights. -->
+<div class="dome-light-glow" aria-hidden="true"></div>
+<button class="dome-light" id="lamp" type="button" aria-pressed="true" aria-label="Ceiling light. Click to toggle the lights."></button>
 
-<div class="snake-plant" aria-hidden="true">
-    <svg viewBox="0 0 200 320">
-        <g class="blades">
-            <path d="M70 250 Q 40 140 52 30 Q 78 140 92 250 Z" />
-            <path d="M88 250 Q 84 120 104 8 Q 118 130 110 250 Z" />
-            <path d="M104 250 Q 130 150 162 60 Q 150 160 126 250 Z" />
-            <path d="M60 250 Q 20 190 10 110 Q 50 180 80 250 Z" />
-            <path d="M118 250 Q 160 200 190 150 Q 170 210 136 250 Z" />
-        </g>
-        <g class="blade-edges">
-            <path d="M52 30 Q 78 140 92 250" />
-            <path d="M104 8 Q 118 130 110 250" />
-            <path d="M162 60 Q 150 160 126 250" />
-        </g>
-        <path class="pot" d="M44 236 H156 L144 318 H56 Z" />
-        <rect class="pot-rim" x="38" y="228" width="124" height="18" rx="4" />
+<!-- Acoustic guitar leaning in the back corner. -->
+<div class="guitar" aria-hidden="true">
+    <svg viewBox="0 0 60 200">
+        <rect class="guitar-neck" x="26" y="8" width="8" height="100" rx="2" />
+        <rect class="guitar-head" x="23" y="0" width="14" height="18" rx="3" />
+        <path class="guitar-body" d="M30 96 C 12 96, 10 118, 18 130 C 4 142, 2 184, 30 196 C 58 184, 56 142, 42 130 C 50 118, 48 96, 30 96 Z" />
+        <circle class="guitar-hole" cx="30" cy="140" r="9" />
+        <rect class="guitar-bridge" x="22" y="170" width="16" height="4" rx="1" />
     </svg>
 </div>
 
-<div class="lamp-light" aria-hidden="true"></div>
-<button class="lamp" id="lamp" type="button" aria-pressed="true" aria-label="Floor lamp. Click to toggle the lights.">
-    <span class="lamp-shade"></span>
-    <span class="lamp-pole"></span>
-    <span class="lamp-base"></span>
-</button>
+<!-- Buffalo sign leaning in the left window. -->
+<div class="buf-sign" aria-hidden="true"><span>BUFFALO</span></div>
 
+<!-- Black standing desk with the NZXT tower glowing underneath. -->
 <div class="desk" aria-hidden="true">
     <span class="desk-top"></span>
-    <span class="desk-drawers"><i></i><i></i></span>
-    <span class="desk-leg desk-leg-r"></span>
+    <span class="desk-leg desk-leg-l"><i></i></span>
+    <span class="desk-leg desk-leg-r"><i></i></span>
+</div>
+<div class="pc" aria-hidden="true">
+    <span class="pc-fan"></span>
+    <span class="pc-fan"></span>
+    <span class="pc-fan"></span>
+    <span class="pc-logo">NZXT</span>
+</div>
+
+<!-- Wicker loveseat with the striped cushions. -->
+<div class="loveseat" aria-hidden="true">
+    <svg viewBox="0 0 320 260">
+        <defs>
+            <pattern id="wicker-seat" width="12" height="12" patternUnits="userSpaceOnUse">
+                <rect width="12" height="12" fill="#2b2320" />
+                <path d="M0 6 L6 0 M6 12 L12 6 M0 6 L6 12 M6 0 L12 6" stroke="#4a3b33" stroke-width="2.5" />
+            </pattern>
+            <pattern id="seat-stripes" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+                <rect width="40" height="40" fill="#e3d7bf" />
+                <rect width="40" height="8" fill="#a8443f" />
+                <rect y="14" width="40" height="4" fill="#b39a74" />
+                <rect y="24" width="40" height="8" fill="#a8443f" />
+            </pattern>
+        </defs>
+        <path d="M10 250 L20 60 C 30 20, 290 20, 300 60 L310 250 Z" fill="url(#wicker-seat)" />
+        <path class="seat-rim" d="M20 60 C 30 20, 290 20, 300 60" />
+        <rect x="40" y="70" width="240" height="70" rx="22" fill="url(#seat-stripes)" />
+        <rect x="30" y="140" width="260" height="60" rx="18" fill="url(#seat-stripes)" />
+        <path d="M-10 260 L-10 150 C -10 118, 60 118, 64 150 L64 260 Z" fill="url(#wicker-seat)" />
+        <path d="M256 260 L256 150 C 260 118, 330 118, 330 150 L330 260 Z" fill="url(#wicker-seat)" />
+        <path class="seat-rim" d="M-10 150 C -10 118, 60 118, 64 150 M256 150 C 260 118, 330 118, 330 150" />
+    </svg>
+</div>
+
+<!-- Little tile-top coffee table, home of the boombox and the bicycle planter. -->
+<div class="coffee-table" aria-hidden="true">
+    <span class="ct-top"></span>
+    <span class="ct-leg ct-leg-l"></span>
+    <span class="ct-leg ct-leg-r"></span>
+</div>
+<div class="planter" aria-hidden="true">
+    <svg viewBox="0 0 120 90">
+        <g class="plant">
+            <ellipse cx="80" cy="20" rx="8" ry="14" transform="rotate(-30 80 20)" />
+            <ellipse cx="94" cy="16" rx="7" ry="13" transform="rotate(20 94 16)" />
+            <ellipse cx="88" cy="10" rx="6" ry="12" />
+        </g>
+        <path class="planter-pot" d="M70 26 H106 L102 52 H74 Z" />
+        <g class="bike">
+            <circle cx="30" cy="66" r="20" />
+            <circle cx="88" cy="72" r="14" />
+            <path d="M30 66 L60 50 L88 72 M60 50 L74 52 M44 30 L60 50 M38 30 H52" />
+        </g>
+    </svg>
 </div>
