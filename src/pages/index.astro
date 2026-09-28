@@ -1,6 +1,8 @@
 ---
 import "../styles/site.css";
-import Skyline from "../components/Skyline.astro";
+import Yard from "../components/Yard.astro";
+import Room from "../components/Room.astro";
+import Furniture from "../components/Furniture.astro";
 import Crt from "../components/Crt.astro";
 import Boombox from "../components/Boombox.astro";
 import Character from "../components/Character.astro";
@@ -53,33 +55,34 @@ const nav = [
             </ul>
         </nav>
 
-        <header class="scene" id="top">
-            <div id="scene" class="scene-inner">
-                <div class="sky" aria-hidden="true"></div>
-                <canvas id="stars" class="stars" aria-hidden="true"></canvas>
-                <button class="moon" id="moon" type="button" aria-label="The moon. Click to make a wish."></button>
-                <div class="clouds" aria-hidden="true"><i></i><i></i><i></i></div>
-                <div class="plane" aria-hidden="true"></div>
-                <div class="layer layer-far"><Skyline layer="far" seed={1994} /></div>
-                <div class="layer layer-near"><Skyline layer="near" seed={716} /></div>
-                <div class="haze" aria-hidden="true"></div>
+        <div class="scene" id="scene">
+            <div class="sky" aria-hidden="true"></div>
+            <canvas id="stars" class="stars" aria-hidden="true"></canvas>
+            <button class="moon" id="moon" type="button" aria-label="The moon. Click to make a wish."></button>
+            <div class="clouds" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="plane" aria-hidden="true"></div>
+            <Yard />
+            <Room />
+            <div class="room-glow" aria-hidden="true"></div>
 
-                <h1 class="marquee">
-                    <span class="marquee-name">Matt Creenan</span>
-                    <span class="marquee-sub">software builder · buffalo, ny · vibing after dark</span>
-                </h1>
+            <h1 class="marquee">
+                <span class="marquee-name">Matt Creenan</span>
+                <span class="marquee-sub">software builder · buffalo, ny · vibing after dark</span>
+            </h1>
 
-                <div class="ledge" aria-hidden="true"></div>
-                <Crt />
-                <Boombox />
-                <div class="mug" aria-hidden="true"><span class="steam"></span><span class="steam"></span></div>
-                <Character />
+            <Furniture />
+            <Crt />
+            <div class="mug" aria-hidden="true"><span class="steam"></span><span class="steam"></span></div>
+            <Boombox />
+            <Character />
 
-                <a class="scroll-cue" href="#about">scroll ▾</a>
-                <div class="vignette" aria-hidden="true"></div>
-                <div class="crt-noise" aria-hidden="true"></div>
-            </div>
-        </header>
+            <a class="scroll-cue" href="#about">scroll ▾</a>
+            <div class="vignette" aria-hidden="true"></div>
+            <div class="scene-dim" aria-hidden="true"></div>
+            <div class="crt-noise" aria-hidden="true"></div>
+        </div>
+
+        <div class="hero-spacer" id="top"></div>
 
         <main>
             <section id="about" class="panel">
@@ -205,6 +208,12 @@ const nav = [
                 a.href = `mailto:${addr}`;
                 a.textContent = addr;
             });
+
+            // The scene stays pinned behind the page; dim it as the sections scroll over.
+            const scene = document.getElementById("scene")!;
+            const onScroll = () => scene.style.setProperty("--dim", Math.min(window.scrollY / window.innerHeight, 1).toFixed(3));
+            window.addEventListener("scroll", onScroll, { passive: true });
+            onScroll();
 
             // Top nav: solid once past the hero, highlight the section in view.
             const topnav = document.getElementById("topnav")!;

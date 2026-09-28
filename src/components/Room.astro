@@ -1,0 +1,184 @@
+---
+// Sunroom architecture drawn in a 100×100 box stretched to the viewport.
+// Everything is laid out in one-point perspective toward V; strokes use
+// non-scaling widths so frames stay crisp at any aspect ratio.
+
+const V = { x: 50, y: 44 };
+const BACK = { l: 12, r: 88, top: 14, transom: 24, rail: 44, sill: 64, floor: 72 };
+const POSTS = [12, 31, 50, 69, 88];
+
+const r2 = (n: number) => Math.round(n * 100) / 100;
+
+// Project a point on the back wall out to a target x (side walls) or y (ceiling/floor).
+const toX = (p: { x: number; y: number }, x: number) => {
+    const t = (x - V.x) / (p.x - V.x);
+    return { x, y: r2(V.y + (p.y - V.y) * t) };
+};
+const toY = (p: { x: number; y: number }, y: number) => {
+    const t = (y - V.y) / (p.y - V.y);
+    return { x: r2(V.x + (p.x - V.x) * t), y };
+};
+
+// y of a back-wall height where each side wall meets the viewport edge.
+const edge = (y: number) => toX({ x: BACK.l, y }, 0).y;
+// Point on the left side wall at x for a given back-wall height (mirrored for right).
+const side = (y: number, x: number) => r2(edge(y) + (y - edge(y)) * (x / BACK.l));
+
+const line = (x1: number, y1: number, x2: number, y2: number) => ({ x1, y1, x2, y2 });
+const mirror = (l: ReturnType<typeof line>) => line(100 - l.x1, l.y1, 100 - l.x2, l.y2);
+const both = (l: ReturnType<typeof line>) => [l, mirror(l)];
+
+const beams = [
+    ...POSTS.map((x) => {
+        const top = toY({ x, y: BACK.top }, 0);
+        return line(x, BACK.top, top.x, 0);
+    }),
+    line(toY({ x: BACK.l, y: BACK.top }, 6).x, 6, 100 - toY({ x: BACK.l, y: BACK.top }, 6).x, 6),
+];
+
+const posts = [
+    ...POSTS.map((x) => line(x, BACK.top, x, BACK.sill)),
+    ...both(line(5.5, side(BACK.top, 5.5), 5.5, side(BACK.sill, 5.5))),
+];
+const headers = [
+    line(BACK.l, BACK.top, BACK.r, BACK.top),
+    ...both(line(0, edge(BACK.top), BACK.l, BACK.top)),
+];
+const sills = [line(BACK.l, BACK.sill, BACK.r, BACK.sill), ...both(line(0, edge(BACK.sill), BACK.l, BACK.sill))];
+const mullions = [
+    ...POSTS.slice(0, -1).map((x) => line(x + 9.5, BACK.transom, x + 9.5, BACK.sill)),
+    line(BACK.l, BACK.transom, BACK.r, BACK.transom),
+    line(BACK.l, BACK.rail, BACK.r, BACK.rail),
+    ...both(line(0, edge(BACK.transom), BACK.l, BACK.transom)),
+    ...both(line(0, edge(BACK.rail), BACK.l, BACK.rail)),
+];
+
+const floorEdge = edge(BACK.floor);
+const floorPoly = `${BACK.l},${BACK.floor} ${BACK.r},${BACK.floor} 100,${floorEdge} 100,100 0,100 0,${floorEdge}`;
+const planks = Array.from({ length: 25 }, (_, i) => {
+    const x = -24 + i * 6.33;
+    const end = toY({ x, y: BACK.floor }, 100);
+    return line(r2(x), BACK.floor, end.x, 100);
+});
+const seams = [77, 84, 94].map((y) => line(0, y, 100, y));
+
+const kneeBack = `${BACK.l},${BACK.sill} ${BACK.r},${BACK.sill} ${BACK.r},${BACK.floor} ${BACK.l},${BACK.floor}`;
+const kneeLeft = `0,${edge(BACK.sill)} ${BACK.l},${BACK.sill} ${BACK.l},${BACK.floor} 0,${floorEdge}`;
+const kneeRight = `100,${edge(BACK.sill)} ${BACK.r},${BACK.sill} ${BACK.r},${BACK.floor} 100,${floorEdge}`;
+const beadboard = Array.from({ length: 50 }, (_, i) => r2(BACK.l + 0.8 + i * 1.52));
+
+const glass = [
+    `${BACK.l},${BACK.top} ${BACK.r},${BACK.top} ${BACK.r},${BACK.sill} ${BACK.l},${BACK.sill}`,
+    `0,${edge(BACK.top)} ${BACK.l},${BACK.top} ${BACK.l},${BACK.sill} 0,${edge(BACK.sill)}`,
+    `100,${edge(BACK.top)} ${BACK.r},${BACK.top} ${BACK.r},${BACK.sill} 100,${edge(BACK.sill)}`,
+    `${toY({ x: BACK.l, y: BACK.top }, 0).x},0 ${toY({ x: BACK.r, y: BACK.top }, 0).x},0 ${BACK.r},${BACK.top} ${BACK.l},${BACK.top}`,
+];
+
+// String lights: one swag between each pair of posts, just under the header.
+const SAG = 4.2;
+const HANG = BACK.top + 0.6;
+const swags = POSTS.slice(0, -1).map((x, i) => ({ x0: x, x1: POSTS[i + 1] }));
+const wire = swags.map((s) => `M${s.x0},${HANG} Q${(s.x0 + s.x1) / 2},${HANG + SAG * 2} ${s.x1},${HANG}`).join(" ");
+const bulbs = swags.flatMap((s, si) =>
+    [0.14, 0.32, 0.5, 0.68, 0.86].map((t, bi) => ({
+        x: r2(s.x0 + (s.x1 - s.x0) * t),
+        y: r2(HANG + 2 * t * (1 - t) * SAG * 2),
+        delay: r2(((si * 5 + bi) * 0.61) % 3),
+    })),
+);
+---
+
+<svg class="room" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+        <linearGradient id="floor-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2a1c26" />
+            <stop offset="1" stop-color="#3d2a2c" />
+        </linearGradient>
+        <linearGradient id="glass-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#bcd4ff" stop-opacity="0.07" />
+            <stop offset="0.45" stop-color="#bcd4ff" stop-opacity="0.02" />
+            <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.06" />
+            <stop offset="0.56" stop-color="#bcd4ff" stop-opacity="0.02" />
+            <stop offset="1" stop-color="#ffd9a8" stop-opacity="0.05" />
+        </linearGradient>
+        <clipPath id="floor-clip"><polygon points={floorPoly} /></clipPath>
+    </defs>
+
+    <g class="glass">{glass.map((p) => <polygon points={p} fill="url(#glass-grad)" />)}</g>
+
+    <polygon class="floor" points={floorPoly} fill="url(#floor-grad)" />
+    <g class="planks" clip-path="url(#floor-clip)">
+        {planks.map((l) => <line {...l} />)}
+        {seams.map((l) => <line {...l} />)}
+    </g>
+
+    <polygon class="knee" points={kneeBack} />
+    <polygon class="knee knee-side" points={kneeLeft} />
+    <polygon class="knee knee-side" points={kneeRight} />
+    <g class="beadboard">{beadboard.map((x) => <line x1={x} y1={BACK.sill} x2={x} y2={BACK.floor} />)}</g>
+    <line class="baseboard" x1={BACK.l} y1={BACK.floor} x2={BACK.r} y2={BACK.floor} />
+    {both(line(0, floorEdge, BACK.l, BACK.floor)).map((l) => <line class="baseboard" {...l} />)}
+
+    <g class="frame mullions">{mullions.map((l) => <line {...l} />)}</g>
+    <g class="frame beams">{beams.map((l) => <line {...l} />)}</g>
+    <g class="frame posts">{[...posts, ...headers].map((l) => <line {...l} />)}</g>
+    <g class="frame sills">{sills.map((l) => <line {...l} />)}</g>
+</svg>
+
+<div class="string-lights" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d={wire} /></svg>
+    {bulbs.map((b) => <i style={`left:${b.x}%;top:${b.y}%;animation-delay:${b.delay}s`}></i>)}
+</div>
+
+<div class="hanging-plant hp-left" aria-hidden="true">
+    <svg viewBox="0 0 120 300">
+        <path class="hp-rope" d="M60 0 L22 150 M60 0 L98 150 M60 0 L60 150" />
+        <g class="vines">
+            <path d="M34 175 C 26 210, 40 240, 30 290" />
+            <path d="M58 180 C 66 215, 52 240, 60 270" />
+            <path d="M86 175 C 96 200, 84 230, 92 250" />
+        </g>
+        <g class="leaves">
+            <ellipse cx="30" cy="205" rx="7" ry="4" transform="rotate(-30 30 205)" />
+            <ellipse cx="37" cy="235" rx="7" ry="4" transform="rotate(30 37 235)" />
+            <ellipse cx="31" cy="262" rx="7" ry="4" transform="rotate(-20 31 262)" />
+            <ellipse cx="28" cy="286" rx="6" ry="3.5" transform="rotate(20 28 286)" />
+            <ellipse cx="62" cy="210" rx="7" ry="4" transform="rotate(25 62 210)" />
+            <ellipse cx="55" cy="240" rx="7" ry="4" transform="rotate(-25 55 240)" />
+            <ellipse cx="60" cy="266" rx="6" ry="3.5" transform="rotate(15 60 266)" />
+            <ellipse cx="92" cy="200" rx="7" ry="4" transform="rotate(-35 92 200)" />
+            <ellipse cx="86" cy="228" rx="7" ry="4" transform="rotate(25 86 228)" />
+            <ellipse cx="91" cy="248" rx="6" ry="3.5" transform="rotate(-15 91 248)" />
+            <circle cx="30" cy="160" r="16" />
+            <circle cx="52" cy="152" r="18" />
+            <circle cx="74" cy="154" r="17" />
+            <circle cx="92" cy="162" r="14" />
+        </g>
+        <path class="hp-pot" d="M18 160 H102 L94 186 Q60 196 26 186 Z" />
+    </svg>
+</div>
+<div class="hanging-plant hp-right" aria-hidden="true">
+    <svg viewBox="0 0 120 300">
+        <path class="hp-rope" d="M60 0 L22 120 M60 0 L98 120 M60 0 L60 120" />
+        <g class="vines">
+            <path d="M30 145 C 20 180, 36 210, 26 240" />
+            <path d="M60 150 C 70 190, 54 220, 62 250" />
+            <path d="M90 145 C 100 170, 88 200, 96 220" />
+        </g>
+        <g class="leaves">
+            <ellipse cx="26" cy="175" rx="7" ry="4" transform="rotate(-30 26 175)" />
+            <ellipse cx="33" cy="205" rx="7" ry="4" transform="rotate(30 33 205)" />
+            <ellipse cx="27" cy="236" rx="6" ry="3.5" transform="rotate(-20 27 236)" />
+            <ellipse cx="64" cy="185" rx="7" ry="4" transform="rotate(25 64 185)" />
+            <ellipse cx="57" cy="216" rx="7" ry="4" transform="rotate(-25 57 216)" />
+            <ellipse cx="62" cy="246" rx="6" ry="3.5" transform="rotate(15 62 246)" />
+            <ellipse cx="96" cy="172" rx="7" ry="4" transform="rotate(-35 96 172)" />
+            <ellipse cx="91" cy="200" rx="7" ry="4" transform="rotate(25 91 200)" />
+            <circle cx="30" cy="130" r="16" />
+            <circle cx="52" cy="122" r="18" />
+            <circle cx="74" cy="124" r="17" />
+            <circle cx="92" cy="132" r="14" />
+        </g>
+        <path class="hp-pot" d="M18 130 H102 L94 156 Q60 166 26 156 Z" />
+    </svg>
+</div>

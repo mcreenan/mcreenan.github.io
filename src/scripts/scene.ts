@@ -7,13 +7,15 @@ const $ = <T extends Element = HTMLElement>(sel: string) => document.querySelect
 export interface SceneActions {
     music(): Promise<boolean>;
     stars(count?: number): void;
+    fireflies(): void;
     lights(): boolean;
     say(text: string): void;
     bills(): void;
 }
 
-/* ── Stars + shooting stars ─────────────────────────────── */
+/* ── Sky + yard: stars, shooting stars, fireflies ───────── */
 
+// Positions are normalized (0..1) so resizing never reshuffles the sky.
 interface Star {
     x: number;
     y: number;
@@ -28,15 +30,40 @@ interface Meteor {
     vy: number;
     life: number;
 }
+interface Firefly {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    phase: number;
+    life: number;
+}
 
-function initSky(scene: HTMLElement) {
+const YARD_TOP = 0.46;
+const YARD_BOTTOM = 0.66;
+
+function initSky() {
     const canvas = $<HTMLCanvasElement>("#stars");
     const ctx = canvas.getContext("2d")!;
-    let stars: Star[] = [];
+    const stars: Star[] = Array.from({ length: 260 }, () => ({
+        x: Math.random(),
+        y: Math.pow(Math.random(), 1.4) * 0.5,
+        r: Math.random() < 0.08 ? 1.6 : Math.random() * 1.1 + 0.3,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.6 + Math.random() * 2,
+    }));
     const meteors: Meteor[] = [];
+    const fireflies: Firefly[] = [];
+    const firefly = (x = Math.random(), y = YARD_TOP + Math.random() * (YARD_BOTTOM - YARD_TOP), life = Infinity): Firefly => ({
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 0.0006,
+        vy: (Math.random() - 0.5) * 0.0004,
+        phase: Math.random() * Math.PI * 2,
+        life,
+    });
     let w = 0;
     let h = 0;
-    let visible = true;
 
     const resize = () => {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -45,75 +72,108 @@ function initSky(scene: HTMLElement) {
         canvas.width = w * dpr;
         canvas.height = h * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.round((w * h) / 4200);
-        stars = Array.from({ length: count }, () => ({
-            x: Math.random() * w,
-            y: Math.pow(Math.random(), 1.6) * h * 0.8,
-            r: Math.random() < 0.08 ? 1.6 : Math.random() * 1.1 + 0.3,
-            phase: Math.random() * Math.PI * 2,
-            speed: 0.6 + Math.random() * 2,
-        }));
+        const want = Math.round(Math.max(14, w / 45));
+        while (fireflies.filter((f) => f.life === Infinity).length < want) fireflies.push(firefly());
         if (reducedMotion) draw(0);
-    };
-
-    const spawn = () => {
-        meteors.push({
-            x: w * (0.15 + Math.random() * 0.7),
-            y: h * Math.random() * 0.3,
-            vx: (Math.random() < 0.5 ? -1 : 1) * (5 + Math.random() * 4),
-            vy: 2.2 + Math.random() * 2,
-            life: 1,
-        });
     };
 
     const draw = (t: number) => {
         ctx.clearRect(0, 0, w, h);
-        for (const s of stars) {
-            const a = 0.45 + 0.55 * Math.sin(s.phase + (t / 1000) * s.speed) ** 2;
-            ctx.globalAlpha = reducedMotion ? 0.8 : a;
+        const density = Math.min(1, (w * h) / 1_100_000);
+        for (let i = 0; i < stars.length; i++) {
+            if (i / stars.length > 0.35 + density * 0.65) break;
+            const s = stars[i];
+            ctx.globalAlpha = reducedMotion ? 0.8 : 0.45 + 0.55 * Math.sin(s.phase + (t / 1000) * s.speed) ** 2;
             ctx.fillStyle = s.r > 1.5 ? "#ffe9c4" : "#dfe6ff";
-            ctx.fillRect(s.x, s.y, s.r, s.r);
+            ctx.fillRect(s.x * w, s.y * h, s.r, s.r);
         }
         ctx.globalAlpha = 1;
+
         for (let i = meteors.length - 1; i >= 0; i--) {
             const m = meteors[i];
-            const tail = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 14, m.y - m.vy * 14);
+            const x = m.x * w;
+            const y = m.y * h;
+            const tail = ctx.createLinearGradient(x, y, x - m.vx * 14, y - m.vy * 14);
             tail.addColorStop(0, `rgba(255,255,255,${m.life})`);
             tail.addColorStop(1, "rgba(127,232,255,0)");
             ctx.strokeStyle = tail;
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.moveTo(m.x, m.y);
-            ctx.lineTo(m.x - m.vx * 14, m.y - m.vy * 14);
+            ctx.moveTo(x, y);
+            ctx.lineTo(x - m.vx * 14, y - m.vy * 14);
             ctx.stroke();
-            m.x += m.vx;
-            m.y += m.vy;
+            m.x += m.vx / w;
+            m.y += m.vy / h;
             m.life -= 0.012;
             if (m.life <= 0) meteors.splice(i, 1);
+        }
+
+        for (let i = fireflies.length - 1; i >= 0; i--) {
+            const f = fireflies[i];
+            const glow = Math.max(0, Math.sin(f.phase + t / 700)) ** 3 * Math.min(1, f.life);
+            if (glow > 0.02) {
+                const x = f.x * w;
+                const y = f.y * h;
+                const g = ctx.createRadialGradient(x, y, 0, x, y, 9);
+                g.addColorStop(0, `rgba(230,255,140,${glow})`);
+                g.addColorStop(0.25, `rgba(200,255,90,${glow * 0.5})`);
+                g.addColorStop(1, "rgba(200,255,90,0)");
+                ctx.fillStyle = g;
+                ctx.fillRect(x - 9, y - 9, 18, 18);
+            }
+            if (reducedMotion) continue;
+            f.vx += (Math.random() - 0.5) * 0.00008;
+            f.vy += (Math.random() - 0.5) * 0.00006;
+            f.vx *= 0.98;
+            f.vy *= 0.98;
+            f.x += f.vx;
+            f.y += f.vy;
+            if (f.y < YARD_TOP - 0.06 || f.y > YARD_BOTTOM) f.vy *= -1;
+            if (f.x < 0) f.x += 1;
+            if (f.x > 1) f.x -= 1;
+            if (f.life !== Infinity && (f.life -= 0.004) <= 0) fireflies.splice(i, 1);
         }
     };
 
     const loop = (t: number) => {
-        if (visible) draw(t);
+        draw(t);
         requestAnimationFrame(loop);
     };
 
     new ResizeObserver(resize).observe(canvas);
-    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(scene);
     resize();
+
+    const spawnMeteor = () =>
+        meteors.push({
+            x: 0.15 + Math.random() * 0.7,
+            y: Math.random() * 0.2,
+            vx: (Math.random() < 0.5 ? -1 : 1) * (5 + Math.random() * 4),
+            vy: 2.2 + Math.random() * 2,
+            life: 1,
+        });
 
     if (!reducedMotion) {
         requestAnimationFrame(loop);
         const ambient = () => {
-            if (visible && document.visibilityState === "visible") spawn();
-            window.setTimeout(ambient, 5000 + Math.random() * 9000);
+            if (document.visibilityState === "visible") spawnMeteor();
+            window.setTimeout(ambient, 6000 + Math.random() * 10000);
         };
-        window.setTimeout(ambient, 2500);
+        window.setTimeout(ambient, 3000);
     }
 
-    return (count = 6) => {
-        if (reducedMotion) return;
-        for (let i = 0; i < count; i++) window.setTimeout(spawn, i * 180 + Math.random() * 160);
+    return {
+        stars(count = 6) {
+            if (reducedMotion) return;
+            for (let i = 0; i < count; i++) window.setTimeout(spawnMeteor, i * 180 + Math.random() * 160);
+        },
+        fireflies(x = Math.random(), y = (YARD_TOP + YARD_BOTTOM) / 2) {
+            if (reducedMotion) return;
+            for (let i = 0; i < 14; i++) {
+                const f = firefly(x + (Math.random() - 0.5) * 0.08, y + (Math.random() - 0.5) * 0.06, 2 + Math.random());
+                f.phase = -Math.PI / 2 + Math.random();
+                fireflies.push(f);
+            }
+        },
     };
 }
 
@@ -125,13 +185,12 @@ function initParallax(scene: HTMLElement) {
     let ty = 0;
     let x = 0;
     let y = 0;
-    scene.addEventListener("pointermove", (e) => {
+    window.addEventListener("pointermove", (e) => {
         if (e.pointerType !== "mouse") return;
-        const r = scene.getBoundingClientRect();
-        tx = ((e.clientX - r.left) / r.width) * 2 - 1;
-        ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+        tx = (e.clientX / window.innerWidth) * 2 - 1;
+        ty = (e.clientY / window.innerHeight) * 2 - 1;
     });
-    scene.addEventListener("pointerleave", () => {
+    document.documentElement.addEventListener("pointerleave", () => {
         tx = 0;
         ty = 0;
     });
@@ -145,36 +204,19 @@ function initParallax(scene: HTMLElement) {
     requestAnimationFrame(step);
 }
 
-/* ── City lights ────────────────────────────────────────── */
+/* ── Room lights ────────────────────────────────────────── */
 
 function initLights(scene: HTMLElement) {
-    const windows = Array.from(scene.querySelectorAll<SVGRectElement>(".skyline .w"));
-    let out = false;
-
-    // Someone somewhere is always flipping a light on or off.
-    if (!reducedMotion) {
-        window.setInterval(() => {
-            if (out) return;
-            for (let i = 0; i < 3; i++) {
-                windows[Math.floor(Math.random() * windows.length)].classList.toggle("on");
-            }
-        }, 900);
-    }
-
-    scene.querySelectorAll(".skyline-near").forEach((el) =>
-        el.addEventListener("click", (e) => {
-            const target = e.target as Element;
-            const bldg = target.closest(".bldg");
-            if (!bldg) return;
-            bldg.querySelectorAll(".w").forEach((w) => w.classList.toggle("on", Math.random() < 0.6));
-        }),
-    );
-
-    return () => {
-        out = !out;
-        scene.classList.toggle("blackout", out);
-        return !out;
+    const lamp = $("#lamp");
+    let on = true;
+    const toggle = () => {
+        on = !on;
+        scene.classList.toggle("lights-off", !on);
+        lamp.setAttribute("aria-pressed", String(on));
+        return on;
     };
+    lamp.addEventListener("click", toggle);
+    return toggle;
 }
 
 /* ── Me: speech bubble, notes, music ────────────────────── */
@@ -186,8 +228,9 @@ const QUIPS = [
     "the agent wrote it. I reviewed it. mostly.",
     "go bills 🦬",
     "deterministic space > agent space",
-    "have you tried turning the vibes off and on again?",
+    "listen… crickets.",
     "psst — press play on the boombox",
+    "try clicking the trees",
     "coffee count: yes",
 ];
 
@@ -252,23 +295,35 @@ function initMe(scene: HTMLElement, vibe: Vibe) {
 export function initScene(): SceneActions {
     const scene = $("#scene");
     const vibe = new Vibe();
-    const stars = initSky(scene);
+    const sky = initSky();
     const lights = initLights(scene);
     const { say, music } = initMe(scene, vibe);
     initParallax(scene);
 
     $("#moon").addEventListener("click", () => {
-        stars(8);
+        sky.stars(8);
         say("make a wish");
+    });
+
+    scene.querySelector(".yard-svg")!.addEventListener("click", (e) => {
+        const { clientX, clientY } = e as MouseEvent;
+        sky.fireflies(clientX / window.innerWidth, clientY / window.innerHeight);
     });
 
     const bills = () => {
         scene.classList.remove("bills");
         void scene.offsetWidth;
         scene.classList.add("bills");
-        stars(10);
+        sky.stars(10);
         say("GO BILLS! 🦬");
     };
 
-    return { music, stars, lights, say, bills };
+    return {
+        music,
+        stars: sky.stars,
+        fireflies: () => sky.fireflies(),
+        lights,
+        say,
+        bills,
+    };
 }

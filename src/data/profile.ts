@@ -10,7 +10,7 @@ export const links = {
 };
 
 export const currentRole = {
-    title: "Senior Staff Engineer",
+    title: "Principal Engineer",
     company: "Totality LMS",
     parent: "Valmar Holdings",
 };

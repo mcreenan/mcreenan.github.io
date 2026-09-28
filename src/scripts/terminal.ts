@@ -52,7 +52,8 @@ export function initTerminal(scene: SceneActions) {
                 ["resume", "open the resume (pdf too)"],
                 ["play", "press play on the boombox"],
                 ["stars", "make a wish"],
-                ["lights", "mess with the city"],
+                ["fireflies", "wake up the yard"],
+                ["lights", "flip the lamp"],
                 ["clear", "clean the glass"],
             ];
             for (const [c, d] of rows) print(`  <span class="t-col">${cmd(c)}</span><span class="dim">${d}</span>`);
@@ -107,7 +108,11 @@ export function initTerminal(scene: SceneActions) {
             print("✦ ✧ ✦  make a wish.", "dim");
         },
         lights() {
-            print(scene.lights() ? "lights back on." : "somebody tripped a breaker.", "dim");
+            print(scene.lights() ? "lights back on." : "lights off. better for stargazing.", "dim");
+        },
+        fireflies() {
+            scene.fireflies();
+            print("·  ✺  ·  the yard lights up.", "dim");
         },
         clear() {
             out.innerHTML = "";
@@ -168,6 +173,8 @@ export function initTerminal(scene: SceneActions) {
         stop: "play",
         vibe: "play",
         wish: "stars",
+        bugs: "fireflies",
+        lamp: "lights",
         cls: "clear",
         "?": "help",
         man: "help",

@@ -1,0 +1,116 @@
+---
+// The night-time backyard seen through the sunroom glass.
+
+// Deterministic RNG so the yard is identical on every build.
+function mulberry32(a: number) {
+    return () => {
+        a |= 0;
+        a = (a + 0x6d2b79f5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+const rand = mulberry32(2026);
+const between = (min: number, max: number) => min + rand() * (max - min);
+const r1 = (n: number) => Math.round(n * 10) / 10;
+
+const W = 1600;
+const H = 500;
+const GROUND = H - 70;
+
+// Distant tree line: overlapping canopy blobs.
+const farCanopy: { cx: number; cy: number; r: number }[] = [];
+for (let x = -40; x < W + 40; x += between(22, 38)) {
+    farCanopy.push({ cx: r1(x), cy: r1(GROUND - between(80, 150)), r: r1(between(34, 60)) });
+}
+
+// Mid-ground trees: a mix of pines and round deciduous trees.
+interface Tree {
+    kind: "pine" | "round";
+    x: number;
+    h: number;
+    w: number;
+    blobs: { cx: number; cy: number; r: number }[];
+}
+const trees: Tree[] = [];
+for (const x of [60, 250, 420, 610, 880, 1010, 1330, 1500]) {
+    const kind = rand() < 0.45 ? "pine" : "round";
+    const h = between(190, 310);
+    const w = kind === "pine" ? between(70, 110) : between(120, 180);
+    const blobs =
+        kind === "round"
+            ? Array.from({ length: 6 }, () => ({
+                  cx: r1(x + between(-w / 3, w / 3)),
+                  cy: r1(GROUND - h + between(30, 110)),
+                  r: r1(between(w / 4, w / 2.4)),
+              }))
+            : [];
+    trees.push({ kind, x: r1(x + between(-30, 30)), h: r1(h), w: r1(w), blobs });
+}
+
+const pines = (t: Tree) =>
+    [0, 1, 2, 3].map((i) => {
+        const top = GROUND - t.h + i * t.h * 0.2;
+        const half = (t.w / 2) * (0.45 + i * 0.2);
+        return `${r1(t.x - half)},${r1(top + t.h * 0.34)} ${t.x},${r1(top)} ${r1(t.x + half)},${r1(top + t.h * 0.34)}`;
+    });
+
+const pickets: number[] = [];
+for (let x = -10; x < W + 10; x += 16) pickets.push(x);
+
+const shed = { x: 1150, w: 130, h: 86 };
+---
+
+<div class="yard" aria-hidden="true">
+    <div class="lawn"></div>
+    <svg class="yard-svg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMax slice">
+        <g class="far-trees">
+            {farCanopy.map((c) => <circle cx={c.cx} cy={c.cy} r={c.r} />)}
+            <rect x="-40" y={GROUND - 110} width={W + 80} height={H} />
+        </g>
+
+        <g class="shed">
+            <rect x={shed.x} y={GROUND - shed.h} width={shed.w} height={shed.h + 20} />
+            <polygon
+                points={`${shed.x - 12},${GROUND - shed.h} ${shed.x + shed.w / 2},${GROUND - shed.h - 46} ${shed.x + shed.w + 12},${GROUND - shed.h}`}
+            />
+            <rect class="shed-window" x={shed.x + 20} y={GROUND - shed.h + 20} width="34" height="26" />
+            <rect class="shed-door" x={shed.x + 74} y={GROUND - shed.h + 22} width="36" height={shed.h - 2} />
+        </g>
+
+        <g class="trees">
+            {
+                trees.map((t) =>
+                    t.kind === "pine" ? (
+                        <g class="tree">
+                            <rect x={t.x - 5} y={GROUND - 40} width="10" height="60" />
+                            {pines(t).map((p) => <polygon points={p} />)}
+                        </g>
+                    ) : (
+                        <g class="tree">
+                            <rect x={t.x - 8} y={GROUND - t.h * 0.55} width="16" height={t.h * 0.55 + 20} />
+                            {t.blobs.map((b) => <circle cx={b.cx} cy={b.cy} r={b.r} />)}
+                        </g>
+                    ),
+                )
+            }
+        </g>
+
+        <g class="fence">
+            <rect x="-10" y={GROUND - 22} width={W + 20} height="5" />
+            <rect x="-10" y={GROUND + 2} width={W + 20} height="5" />
+            {pickets.map((x) => <polygon points={`${x},${GROUND + 20} ${x},${GROUND - 30} ${x + 4},${GROUND - 36} ${x + 8},${GROUND - 30} ${x + 8},${GROUND + 20}`} />)}
+        </g>
+
+        <g class="trees big-tree">
+            <g class="tree">
+                <rect x="1540" y={GROUND - 360} width="34" height="460" />
+                <circle cx="1560" cy={GROUND - 390} r="120" />
+                <circle cx="1470" cy={GROUND - 330} r="90" />
+                <circle cx="1620" cy={GROUND - 300} r="110" />
+                <circle cx="1500" cy={GROUND - 440} r="80" />
+            </g>
+        </g>
+    </svg>
+</div>
