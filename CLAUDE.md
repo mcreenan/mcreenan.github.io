@@ -1,4 +1,3 @@
-<!-- GSD:project-start source:PROJECT.md -->
 ## Project
 
 **Yarn to Bun Migration**
@@ -12,9 +11,7 @@ Migrate the personal site (matt.creenan.me) from Yarn to Bun as the package mana
 - **Deployment**: Must continue deploying to GitHub Pages via GitHub Actions
 - **Compatibility**: Bun must support all current Astro integrations
 - **CI**: `withastro/action@v2` needs to detect Bun or be configured for it
-<!-- GSD:project-end -->
 
-<!-- GSD:stack-start source:codebase/STACK.md -->
 ## Technology Stack
 
 ## Languages
@@ -64,9 +61,7 @@ Migrate the personal site (matt.creenan.me) from Yarn to Bun as the package mana
 - Trigger: Push to main branch or manual workflow dispatch
 - Build runner: Ubuntu latest
 - Deployment: GitHub Pages automatic deployment
-<!-- GSD:stack-end -->
 
-<!-- GSD:conventions-start source:CONVENTIONS.md -->
 ## Conventions
 
 ## Naming Patterns
@@ -147,9 +142,7 @@ Migrate the personal site (matt.creenan.me) from Yarn to Bun as the package mana
 - CSS encapsulation handled by Astro automatically
 - Media queries at breakpoints: `640px`, `380px` in `global.css`
 - Mobile-first approach with breakpoints handling smaller screens
-<!-- GSD:conventions-end -->
 
-<!-- GSD:architecture-start source:ARCHITECTURE.md -->
 ## Architecture
 
 ## Pattern Overview
@@ -218,26 +211,3 @@ Migrate the personal site (matt.creenan.me) from Yarn to Bun as the package mana
 - File-based routing handled by Astro at build time
 - View Transitions provide smooth page transitions
 - HomeIcon and desktop-icon anchors provide explicit navigation affordances on content pages
-<!-- GSD:architecture-end -->
-
-<!-- GSD:workflow-start source:GSD defaults -->
-## GSD Workflow Enforcement
-
-Before using Edit, Write, or other file-changing tools, start work through a GSD command so planning artifacts and execution context stay in sync.
-
-Use these entry points:
-- `/gsd:quick` for small fixes, doc updates, and ad-hoc tasks
-- `/gsd:debug` for investigation and bug fixing
-- `/gsd:execute-phase` for planned phase work
-
-Do not make direct repo edits outside a GSD workflow unless the user explicitly asks to bypass it.
-<!-- GSD:workflow-end -->
-
-
-
-<!-- GSD:profile-start -->
-## Developer Profile
-
-> Profile not yet configured. Run `/gsd:profile-user` to generate your developer profile.
-> This section is managed by `generate-claude-profile` -- do not edit manually.
-<!-- GSD:profile-end -->
