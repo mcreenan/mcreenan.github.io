@@ -61,22 +61,20 @@ const nav = [
             <canvas id="stars" class="stars" aria-hidden="true"></canvas>
             <div class="clouds" aria-hidden="true"><i></i><i></i><i></i></div>
             <div class="plane" aria-hidden="true"></div>
-            <Yard />
-            <button class="moon" id="moon" type="button" aria-label="The moon. Click to make a wish."></button>
-            <Room />
-            <div class="room-glow" aria-hidden="true"></div>
+            <h1 class="sr-only">Matt Creenan</h1>
 
-            <h1 class="marquee">
-                <span class="marquee-name">Matt Creenan</span>
-                <span class="marquee-sub">software builder · buffalo, ny · vibing after dark</span>
-            </h1>
-
-            <Furniture />
-            <Crt />
-            <Boombox />
+            <!-- The room is a fixed-proportion stage: it scales uniformly and crops at the edges. -->
+            <div class="stage">
+                <Yard />
+                <button class="moon" id="moon" type="button" aria-label="The moon. Click to make a wish."></button>
+                <Room />
+                <div class="room-glow" aria-hidden="true"></div>
+                <Furniture />
+                <Crt />
+                <Boombox />
+            </div>
             <Character />
 
-            <a class="scroll-cue" href="#about">scroll ▾</a>
             <div class="vignette" aria-hidden="true"></div>
             <div class="scene-dim" aria-hidden="true"></div>
             <div class="crt-noise" aria-hidden="true"></div>
@@ -93,7 +91,7 @@ const nav = [
                         <p>
                             Hi, I'm <strong>Matt Creenan</strong> — a 40-ish-year-old software engineer in Buffalo, NY.
                             I've spent 20+ years building across full-stack development, data engineering, and DevOps,
-                            and I'm happiest leading the gnarly projects nobody else wants to pick up.
+                            and I tend to lead complex projects and set technical direction.
                         </p>
                         <p>
                             Lately I'm obsessed with <em>agentic coding</em>: harnesses, runtimes, and tools that make
@@ -110,7 +108,6 @@ const nav = [
             <section id="now" class="panel">
                 <h2 class="prompt"><span>~/now</span> $ cat now.txt</h2>
                 <div class="now-card">
-                    <p class="now-kicker">currently</p>
                     <p class="now-role">{currentRole.title}</p>
                     <p class="now-company">@ {currentRole.company} <span>— a {currentRole.parent} company</span></p>
                 </div>
@@ -120,15 +117,11 @@ const nav = [
                         AI Slack agent, in-product LLM features, and a greenfield frontend platform, and built
                         AI-native engineering workflows with custom agents, skills, and routines.
                     </p>
-                    <p>
-                        On nights and weekends: the projects below.
-                    </p>
                 </div>
             </section>
 
             <section id="projects" class="panel">
                 <h2 class="prompt"><span>~/projects</span> $ ls -t</h2>
-                <p class="lede">Recent agentic coding work, newest first. Everything's on <a href={links.github}>GitHub</a>.</p>
                 <ul class="projects">
                     {
                         projects.map((p, i) => (
@@ -140,9 +133,6 @@ const nav = [
                                     </span>
                                     <span class="project-tagline">{p.tagline}</span>
                                     <span class="project-desc">{p.description}</span>
-                                    <span class="project-tags">
-                                        {p.tags.map((t) => <span>{t}</span>)}
-                                    </span>
                                 </a>
                             </li>
                         ))
@@ -186,28 +176,24 @@ const nav = [
                     <li><span>twitter</span><a href={links.twitter} target="_blank" rel="noopener">@mcreenan</a></li>
                     <li>
                         <span>email</span>
-                        <a class="email" data-user="mattcreenan" data-domain="gmail.com" href="#contact">mattcreenan [at] gmail [dot] com</a>
+                        <a class="email" href="#contact">show email</a>
                     </li>
                 </ul>
             </section>
         </main>
 
         <footer class="footer">
-            <p>built late at night with an agent, astro &amp; bun · <a href="#top">back to the rooftop ↑</a></p>
+            <p><a href="#top">back to top ↑</a></p>
         </footer>
 
         <script>
             import { initScene } from "../scripts/scene";
             import { initTerminal } from "../scripts/terminal";
+            import { initEmailLinks } from "../scripts/email";
 
             initTerminal(initScene());
 
-            // Assemble the email at runtime so HTML scrapers only see the obfuscated parts.
-            document.querySelectorAll<HTMLAnchorElement>("a.email[data-user][data-domain]").forEach((a) => {
-                const addr = `${a.dataset.user}@${a.dataset.domain}`;
-                a.href = `mailto:${addr}`;
-                a.textContent = addr;
-            });
+            initEmailLinks();
 
             // The scene stays pinned behind the page; dim it as the sections scroll over.
             const scene = document.getElementById("scene")!;

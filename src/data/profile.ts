@@ -20,7 +20,6 @@ export interface Project {
     slug: string;
     tagline: string;
     description: string;
-    tags: string[];
     url: string;
 }
 
@@ -31,7 +30,6 @@ export const projects: Project[] = [
         tagline: "An agent harness where the runtime drives and the model judges.",
         description:
             "A local coding workspace: chat with an agent, review proposed changes, approve edits, and watch every model, tool, and VM event in an Inspector. Skills are small ALLEN programs run as slash commands — the VM owns the control flow and asks the model only for typed judgments.",
-        tags: ["agent harness", "JavaScript", "Codex CLI"],
         url: "https://github.com/mcreenan/shout",
     },
     {
@@ -40,7 +38,6 @@ export const projects: Project[] = [
         tagline: "A programming language and runtime for agent-written programs.",
         description:
             "Instead of looping an agent through every shell command, the agent writes a small, typed ALLEN program up front. Rule-based work stays deterministic; the program makes typed, capability-scoped calls back into the agent only when it needs judgment.",
-        tags: ["language design", "Rust", "VM"],
         url: "https://github.com/mcreenan/josh-allen",
     },
     {
@@ -49,7 +46,6 @@ export const projects: Project[] = [
         tagline: "Build your org's engineering guide with agents.",
         description:
             "A starter kit and CLI (`pal`) for a living, single-file HTML engineering handbook: scrollspy ToC, zoomable Mermaid diagrams, linked code references, and an in-page \"Suggest a change\" flow. The tool does the scaffolding; an agent does the writing.",
-        tags: ["TypeScript", "npm", "docs-as-code"],
         url: "https://github.com/mcreenan/palimpsest",
     },
     {
@@ -58,7 +54,6 @@ export const projects: Project[] = [
         tagline: "A bare-bones design system for agent-made HTML artifacts.",
         description:
             "A framework-agnostic visual system for the things agents write for you to read — briefs, decision records, research notes, and decks — with a token contract and usage guidance written for agents.",
-        tags: ["CSS", "design system", "for agents"],
         url: "https://github.com/mcreenan/frost-design-system",
     },
     {
@@ -67,7 +62,6 @@ export const projects: Project[] = [
         tagline: "My dog, as an animated coding-agent companion.",
         description:
             "Apollo in three art styles for the Codex CLI and Orca. The base art came from the hatch-pet skill, and the animations were cut from Veo clips, then keyed, loop-matched, and assembled into spritesheets by a small script pipeline.",
-        tags: ["Python", "image gen", "Codex"],
         url: "https://github.com/mcreenan/apollo-codex-pet",
     },
     {
@@ -76,7 +70,6 @@ export const projects: Project[] = [
         tagline: "Claude Code + Codex rate limits on an e-ink display.",
         description:
             "A TRMNL private plugin that shows how much of the 5-hour and weekly Claude Code and Codex windows I have left, side by side on the e-ink screen on my desk.",
-        tags: ["Python", "TRMNL", "e-ink"],
         url: "https://github.com/mcreenan/trmnl-ai-usage-plugin",
     },
 ];

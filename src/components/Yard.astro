@@ -1,5 +1,6 @@
 ---
-// The night-time backyard seen through the sunroom glass.
+// A moonlit, snowy backyard seen through the glass: tree line, trees, a picket fence,
+// and a light snowfall.
 
 // Deterministic RNG so the yard is identical on every build.
 function mulberry32(a: number) {
@@ -25,20 +26,19 @@ for (let x = -40; x < W + 40; x += between(22, 38)) {
     farCanopy.push({ cx: r1(x), cy: r1(GROUND - between(80, 150)), r: r1(between(34, 60)) });
 }
 
-// Mid-ground trees: cedars and round deciduous trees, some with pale birch-like trunks.
+// Mid-ground trees: dark pines and round deciduous trees against the tree line.
 interface Tree {
     kind: "pine" | "round";
     x: number;
     h: number;
     w: number;
     blobs: { cx: number; cy: number; r: number }[];
-    pale: boolean;
 }
 const trees: Tree[] = [];
-for (const x of [40, 230, 400, 590, 760, 930, 1080, 1480]) {
-    const kind = rand() < 0.45 ? "pine" : "round";
-    const h = between(190, 310);
-    const w = kind === "pine" ? between(70, 110) : between(120, 180);
+for (const x of [60, 250, 420, 610, 800, 980, 1150, 1330, 1500]) {
+    const kind = rand() < 0.5 ? "pine" : "round";
+    const h = between(190, 300);
+    const w = kind === "pine" ? between(70, 110) : between(130, 190);
     const blobs =
         kind === "round"
             ? Array.from({ length: 6 }, () => ({
@@ -47,7 +47,7 @@ for (const x of [40, 230, 400, 590, 760, 930, 1080, 1480]) {
                   r: r1(between(w / 4, w / 2.4)),
               }))
             : [];
-    trees.push({ kind, x: r1(x + between(-30, 30)), h: r1(h), w: r1(w), blobs, pale: kind === "round" && rand() < 0.6 });
+    trees.push({ kind, x: r1(x + between(-30, 30)), h: r1(h), w: r1(w), blobs });
 }
 
 const pines = (t: Tree) =>
@@ -57,8 +57,12 @@ const pines = (t: Tree) =>
         return `${r1(t.x - half)},${r1(top + t.h * 0.34)} ${t.x},${r1(top)} ${r1(t.x + half)},${r1(top + t.h * 0.34)}`;
     });
 
-// Wooden A-frame swing set out on the lawn.
-const swing = { x: 1180, w: 190, h: 150, ground: GROUND + 40 };
+// Wooden picket fence along the back of the lawn: one path of pointed pickets.
+const FENCE = { top: GROUND - 34, bottom: GROUND + 14, gap: 16, w: 10 };
+const pickets = Array.from({ length: Math.ceil((W + 80) / FENCE.gap) }, (_, i) => {
+    const x = i * FENCE.gap - 40;
+    return `M${x},${FENCE.bottom} V${FENCE.top + 5} L${x + FENCE.w / 2},${FENCE.top} L${x + FENCE.w},${FENCE.top + 5} V${FENCE.bottom} Z`;
+}).join(" ");
 ---
 
 <div class="yard" aria-hidden="true">
@@ -67,18 +71,6 @@ const swing = { x: 1180, w: 190, h: 150, ground: GROUND + 40 };
         <g class="far-trees">
             {farCanopy.map((c) => <circle cx={c.cx} cy={c.cy} r={c.r} />)}
             <rect x="-40" y={GROUND - 110} width={W + 80} height={H} />
-        </g>
-
-        <g class="shed">
-            <rect x="30" y={GROUND - 96} width="130" height="116" />
-            <polygon points={`18,${GROUND - 96} 95,${GROUND - 140} 172,${GROUND - 96}`} />
-            <rect class="shed-window" x="72" y={GROUND - 74} width="40" height="30" />
-        </g>
-
-        <g class="chain-link">
-            <line x1="-40" y1={GROUND - 30} x2={W + 40} y2={GROUND - 30} />
-            <line x1="-40" y1={GROUND + 4} x2={W + 40} y2={GROUND + 4} />
-            {Array.from({ length: 80 }, (_, i) => <line x1={i * 20 - 20} y1={GROUND - 30} x2={i * 20 - 20} y2={GROUND + 4} />)}
         </g>
 
         <g class="trees">
@@ -91,7 +83,7 @@ const swing = { x: 1180, w: 190, h: 150, ground: GROUND + 40 };
                         </g>
                     ) : (
                         <g class="tree">
-                            <rect class:list={[{ pale: t.pale }]} x={t.x - 7} y={GROUND - t.h * 0.55} width="14" height={t.h * 0.55 + 20} />
+                            <rect x={t.x - 7} y={GROUND - t.h * 0.55} width="14" height={t.h * 0.55 + 20} />
                             {t.blobs.map((b) => <circle cx={b.cx} cy={b.cy} r={b.r} />)}
                         </g>
                     ),
@@ -99,29 +91,13 @@ const swing = { x: 1180, w: 190, h: 150, ground: GROUND + 40 };
             }
         </g>
 
-        <g class="swing-set">
-            <line x1={swing.x} y1={swing.ground} x2={swing.x + 22} y2={swing.ground - swing.h} />
-            <line x1={swing.x + 44} y1={swing.ground} x2={swing.x + 22} y2={swing.ground - swing.h} />
-            <line x1={swing.x + swing.w} y1={swing.ground} x2={swing.x + swing.w - 22} y2={swing.ground - swing.h} />
-            <line x1={swing.x + swing.w - 44} y1={swing.ground} x2={swing.x + swing.w - 22} y2={swing.ground - swing.h} />
-            <line class="beam" x1={swing.x + 10} y1={swing.ground - swing.h} x2={swing.x + swing.w - 10} y2={swing.ground - swing.h} />
-            <path class="slide" d={`M${swing.x + swing.w - 30} ${swing.ground - 70} L${swing.x + swing.w + 90} ${swing.ground - 4}`} />
-            <line x1={swing.x + swing.w - 60} y1={swing.ground - 70} x2={swing.x + swing.w - 22} y2={swing.ground - 70} />
-            <g class="swing">
-                <line x1={swing.x + 78} y1={swing.ground - swing.h} x2={swing.x + 78} y2={swing.ground - 40} />
-                <line x1={swing.x + 112} y1={swing.ground - swing.h} x2={swing.x + 112} y2={swing.ground - 40} />
-                <rect x={swing.x + 72} y={swing.ground - 42} width="46" height="7" rx="3" />
-            </g>
-        </g>
-
-        <g class="trees big-tree">
-            <g class="tree">
-                <rect x="1540" y={GROUND - 360} width="34" height="460" />
-                <circle cx="1560" cy={GROUND - 390} r="120" />
-                <circle cx="1470" cy={GROUND - 330} r="90" />
-                <circle cx="1620" cy={GROUND - 300} r="110" />
-                <circle cx="1500" cy={GROUND - 440} r="80" />
-            </g>
+        <g class="fence">
+            <rect class="fence-rail" x="-40" y={FENCE.top + 10} width={W + 80} height="5" />
+            <rect class="fence-rail" x="-40" y={FENCE.bottom - 14} width={W + 80} height="5" />
+            <path class="fence-pickets" d={pickets} />
+            <rect class="fence-snow" x="-40" y={FENCE.top + 8} width={W + 80} height="3" rx="1.5" />
         </g>
     </svg>
+    <!-- Buffalo, so: a slow, light snowfall. -->
+    <div class="snow"></div>
 </div>

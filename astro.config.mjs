@@ -25,6 +25,8 @@ export default defineConfig({
                 '/resume': {
                     path: '/resume.pdf',
                     waitUntil: 'networkidle0',
+                    // The email is click-to-reveal on the web; reveal it so the PDF carries it.
+                    callback: (page) => page.click('a.email'),
                     pdf: {
                         format: 'Letter',
                         printBackground: true,

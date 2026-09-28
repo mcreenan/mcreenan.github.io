@@ -1,4 +1,4 @@
-<button class="me" id="me" type="button" aria-label="Matt, vibing with headphones and a laptop. Click to say hi.">
+<button class="me" id="me" type="button" aria-label="Matt, with AirPods in and a laptop. Click to say hi.">
     <span class="me-bubble" id="me-bubble" aria-live="polite"></span>
     <span class="me-notes" id="me-notes" aria-hidden="true"></span>
     <svg viewBox="0 0 700 840" aria-hidden="true">
@@ -12,61 +12,62 @@
                 <stop offset="0.6" stop-color="#9fc4ff" stop-opacity="0.12" />
                 <stop offset="1" stop-color="#9fc4ff" stop-opacity="0" />
             </radialGradient>
-            <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#5d5fb8" />
-                <stop offset="1" stop-color="#34357a" />
-            </linearGradient>
-            <linearGradient id="chair-leather" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#101014" />
-                <stop offset="0.5" stop-color="#23232b" />
-                <stop offset="1" stop-color="#101014" />
-            </linearGradient>
+            <!-- Trims the art's own T-shirt off, leaving head and neck (image-local coords). -->
+            <clipPath id="me-neck">
+                <path transform="translate(70 112)" d="M-50 -50 H 610 V 490 L 345 510 L 290 560 H 150 L 95 500 L 55 450 L 42 400 H -50 Z" />
+            </clipPath>
+            <radialGradient id="beanbag" cx="0.45" cy="0.3" r="0.8">
+                <stop offset="0" stop-color="#a8733a" />
+                <stop offset="0.6" stop-color="#8a5a28" />
+                <stop offset="1" stop-color="#5e3a1a" />
+            </radialGradient>
         </defs>
 
-        <!-- Black gaming chair from the desk in the sunroom. -->
-        <g class="chair">
-            <path d="M-40 860 L-30 470 C -26 380, 726 380, 730 470 L740 860 Z" fill="url(#chair-leather)" />
-            <path class="chair-stitch" d="M40 860 L46 480 C 50 420, 650 420, 654 480 L660 860" />
-        </g>
+        <!-- Big comfy beanbag, sunk into from behind. -->
+        <path
+            class="beanbag"
+            d="M-40 880 C -80 760, -50 560, 50 500 C 150 444, 550 444, 650 500 C 750 560, 780 760, 740 880 Z"
+            fill="url(#beanbag)"
+        />
+        <path class="beanbag-seam" d="M120 478 C 90 600, 80 740, 96 880 M580 478 C 610 600, 620 740, 604 880" />
 
-        <!-- Hood bunched behind the neck, and the neck itself, so the head always sits on the body. -->
-        <path class="hood-back" d="M30 700 C 30 580, 110 500, 200 492 L 470 488 C 560 500, 640 570, 660 700 Z" />
-        <path class="neck" d="M150 470 L 440 470 L 430 640 L 160 640 Z" />
-
-        <g class="me-head">
-            <image href="/images/avatar-cut.webp" x="70" y="80" width="560" height="545" />
-            <ellipse class="me-glow" cx="350" cy="580" rx="300" ry="260" fill="url(#screen-spill)" />
-            <g class="headphones">
-                <path class="hp-band" d="M92 318 C 52 -40, 612 -20, 560 380" />
-                <path class="hp-band-hi" d="M92 318 C 52 -40, 612 -20, 560 380" />
-                <g transform="rotate(-8 96 362)">
-                    <rect class="hp-cup" x="52" y="296" width="88" height="132" rx="40" />
-                    <rect class="hp-ring" x="64" y="312" width="64" height="100" rx="30" />
+        <!--
+            The avatar art is drawn with the head tilted ~15°, so the head is rotated
+            upright (AirPods in both ears) and set on a neck that drops
+            straight into the hoodie collar. The hoodie is drawn over the base of the neck,
+            and everything bobs as one piece.
+        -->
+        <g class="me-upper">
+            <path class="hood-back" d="M200 650 C 200 530, 270 505, 350 505 C 430 505, 500 530, 500 650 Z" />
+            <g transform="translate(15 -80) rotate(-15 350 384)">
+                <image href="/images/avatar-cut.webp" x="70" y="112" width="560" height="545" clip-path="url(#me-neck)" />
+            </g>
+            <g class="airpods">
+                <g>
+                    <rect class="airpod-stem" x="134" y="386" width="12" height="60" rx="6" />
+                    <ellipse class="airpod-bud" cx="146" cy="384" rx="16" ry="14" />
+                    <circle class="airpod-grill" cx="150" cy="381" r="4" />
                 </g>
-                <g transform="rotate(-16 556 420)">
-                    <rect class="hp-cup" x="512" y="354" width="88" height="132" rx="40" />
-                    <rect class="hp-ring" x="524" y="370" width="64" height="100" rx="30" />
+                <g>
+                    <rect class="airpod-stem" x="530" y="392" width="12" height="60" rx="6" />
+                    <ellipse class="airpod-bud" cx="530" cy="390" rx="16" ry="14" />
+                    <circle class="airpod-grill" cx="526" cy="387" r="4" />
                 </g>
             </g>
+            <g class="me-hoodie">
+                <path
+                    class="me-torso"
+                    d="M0 880 C 2 760, 20 680, 90 640 C 140 612, 196 578, 236 574 C 262 600, 304 612, 350 612 C 396 612, 438 600, 464 574 C 504 578, 560 612, 610 640 C 680 680, 698 760, 700 880 Z"
+                />
+                <path class="me-hood" d="M228 570 C 256 612, 300 626, 350 626 C 400 626, 444 612, 472 570" />
+                <path class="me-crease" d="M90 700 C 110 750, 116 810, 112 880 M610 700 C 590 750, 584 810, 588 880" />
+                <path class="me-string" d="M318 632 C 314 652, 322 672, 314 700 M382 632 C 386 652, 378 672, 386 700" />
+            </g>
+            <ellipse class="me-glow" cx="350" cy="620" rx="300" ry="260" fill="url(#screen-spill)" />
         </g>
 
-        <!-- Hoodie drawn over the neck so the head can bob inside the collar. -->
-        <g class="me-body">
-            <path
-                d="M-30 860 C -34 730, 0 648, 80 612 C 140 590, 190 596, 222 604 Q 300 624, 382 606 C 430 594, 480 594, 528 610 C 612 640, 656 720, 660 860 Z"
-                fill="url(#hoodie)"
-            />
-            <path class="hood" d="M200 606 C 190 590, 150 588, 120 604 M222 604 Q 300 630, 382 606 M382 606 C 420 588, 470 588, 500 606" />
-            <path class="sleeve" d="M86 650 C 110 700, 118 760, 112 860 M520 650 C 500 700, 494 760, 500 860" />
-            <path class="drawstring" d="M268 620 C 266 640, 270 660, 264 686 M334 618 C 338 640, 332 660, 338 684" />
-        </g>
-
-        <g class="chair-arms">
-            <rect x="-60" y="720" width="150" height="40" rx="18" />
-            <rect x="610" y="720" width="150" height="40" rx="18" />
-            <rect x="-10" y="760" width="40" height="100" />
-            <rect x="670" y="760" width="40" height="100" />
-        </g>
+        <!-- The front of the beanbag, puffed up around his lap. -->
+        <path class="beanbag" d="M-60 880 C -40 790, 110 770, 350 784 C 590 770, 740 790, 760 880 Z" fill="url(#beanbag)" />
 
         <g class="laptop">
             <rect x="120" y="646" width="460" height="230" rx="18" fill="url(#lid)" />

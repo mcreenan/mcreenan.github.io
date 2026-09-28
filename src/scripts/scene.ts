@@ -6,8 +6,6 @@ const $ = <T extends Element = HTMLElement>(sel: string) => document.querySelect
 
 export interface SceneActions {
     music(): Promise<boolean>;
-    stars(count?: number): void;
-    fireflies(): void;
     lights(): boolean;
     say(text: string): void;
     bills(): void;
@@ -311,17 +309,12 @@ export function initScene(): SceneActions {
     });
 
     const bills = () => {
-        scene.classList.remove("bills");
-        void scene.offsetWidth;
-        scene.classList.add("bills");
         sky.stars(10);
         say("GO BILLS! 🦬");
     };
 
     return {
         music,
-        stars: sky.stars,
-        fireflies: () => sky.fireflies(),
         lights,
         say,
         bills,

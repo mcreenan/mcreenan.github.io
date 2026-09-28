@@ -431,9 +431,7 @@ const techRows = [
                     <h1>Matt Creenan</h1>
                     <p class="tagline">Experienced Software Builder</p>
                     <div class="contact">
-                        <a class="email" data-user="mattcreenan" data-domain="gmail.com" href="#" aria-label="email address (assembled by script to avoid scrapers)">
-                            <span>mattcreenan</span><span> [at] </span><span>gmail</span><span> [dot] </span><span>com</span>
-                        </a>
+                        <a class="email" href="#">show email</a>
                         <div class="contact-row">
                             <a href="https://www.linkedin.com/pub/matt-creenan/56/677/605">LinkedIn</a>
                             <span class="contact-sep">·</span>
@@ -488,15 +486,9 @@ const techRows = [
         </main>
 
         <script>
-            // Assemble the email at runtime so HTML scrapers see only obfuscated parts
-            document.querySelectorAll<HTMLAnchorElement>("a.email[data-user][data-domain]").forEach((a) => {
-                const user = a.dataset.user;
-                const domain = a.dataset.domain;
-                if (!user || !domain) return;
-                const addr = user + "@" + domain;
-                a.href = "mailto:" + addr;
-                a.textContent = addr;
-            });
+            import { initEmailLinks } from "../scripts/email";
+
+            initEmailLinks();
         </script>
     </body>
 </html>

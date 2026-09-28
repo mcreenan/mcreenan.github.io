@@ -1,82 +1,88 @@
 ---
-// The sunroom, drawn in a 100×100 box stretched to the viewport in one-point
-// perspective toward V. Walls are solid with window openings cut out so the
-// yard shows through; strokes use non-scaling widths so trim stays crisp.
+// A small, cozy room, drawn in a 100×100 box stretched to the viewport in one-point
+// perspective toward V. The back wall sits close, so it fills most of the view; its
+// window openings are cut out so the yard shows through. Strokes use non-scaling
+// widths so trim stays crisp.
 
-const V = { x: 50, y: 44 };
-const BACK = { l: 12, r: 88, ceiling: 14, floor: 72 };
-const WIN = { top: 24, sill: 58 };
+import { BACK, DOOR, V, WIN, WINDOWS as windows } from "../data/room";
 
 const r2 = (n: number) => Math.round(n * 100) / 100;
 
-// Where a back-wall height meets the left viewport edge (mirrored on the right).
-const edge = (y: number) => r2(V.y + (y - V.y) * ((0 - V.x) / (BACK.l - V.x)));
-// Height on the left side wall at x, for a given back-wall height.
-const side = (y: number, x: number) => r2(edge(y) + (y - edge(y)) * (x / BACK.l));
-
 type Line = { x1: number; y1: number; x2: number; y2: number };
 const line = (x1: number, y1: number, x2: number, y2: number): Line => ({ x1, y1, x2, y2 });
-const mirrorX = (x: number) => r2(100 - x);
 const rect = (x: number, y: number, w: number, h: number) => `M${x},${y} h${w} v${h} h${-w} Z`;
 const quad = (pts: [number, number][]) => `M${pts.map((p) => p.join(",")).join(" L")} Z`;
 
-// Openings on the back wall: French double doors, a big slider, and a smaller slider.
-const DOOR = { x: 14, y: 21, w: 22, h: BACK.floor - 21 };
+// French double doors: two leaves of glass.
 const doors = [0, 1].map((i) => {
     const x = DOOR.x + (DOOR.w / 2) * i;
-    return { x, glass: { x: r2(x + 1.3), y: 23.4, w: r2(DOOR.w / 2 - 2.6), h: 45.2 } };
+    return { x, glass: { x: r2(x + 1.3), y: DOOR.y + 2.4, w: r2(DOOR.w / 2 - 2.6), h: DOOR.h - 5.8 } };
 });
-const windows = [
-    { x: 40, w: 22, split: 51 },
-    { x: 66, w: 20, split: 76 },
-];
-
-// Side-wall windows: a quad between two x positions on each side.
-const sideWin = (x0: number, x1: number): [number, number][] => [
-    [x0, side(WIN.top, x0)],
-    [x1, side(WIN.top, x1)],
-    [x1, side(WIN.sill, x1)],
-    [x0, side(WIN.sill, x0)],
-];
-const leftWin = sideWin(2.5, 9.5);
-const rightWin = leftWin.map(([x, y]) => [mirrorX(x), y] as [number, number]);
 
 const holes = [
     ...doors.map((d) => rect(d.glass.x, d.glass.y, d.glass.w, d.glass.h)),
     ...windows.map((w) => rect(w.x, WIN.top, w.w, WIN.sill - WIN.top)),
 ];
 const backWall = `${rect(BACK.l, BACK.ceiling, BACK.r - BACK.l, BACK.floor - BACK.ceiling)} ${holes.join(" ")}`;
-const leftWall = `${quad([
-    [0, edge(BACK.ceiling)],
+// The side walls, ceiling, and floor run well past the stage edges, so wide viewports
+// see more of the room in the same perspective instead of a stretched one.
+const X0 = -120;
+const X1 = 220;
+// Height of a back-wall line (y) where it meets the side walls at x.
+const sideY = (y: number, x: number) => r2(V.y + (y - V.y) * ((x - V.x) / ((x < V.x ? BACK.l : BACK.r) - V.x)));
+
+const leftWall = quad([
+    [X0, sideY(BACK.ceiling, X0)],
     [BACK.l, BACK.ceiling],
     [BACK.l, BACK.floor],
-    [0, edge(BACK.floor)],
-])} ${quad(leftWin)}`;
-const rightWall = `${quad([
-    [100, edge(BACK.ceiling)],
+    [X0, sideY(BACK.floor, X0)],
+]);
+const rightWall = quad([
+    [X1, sideY(BACK.ceiling, X1)],
     [BACK.r, BACK.ceiling],
     [BACK.r, BACK.floor],
-    [100, edge(BACK.floor)],
-])} ${quad(rightWin)}`;
+    [X1, sideY(BACK.floor, X1)],
+]);
 const ceiling = quad([
-    [0, 0],
-    [100, 0],
-    [100, edge(BACK.ceiling)],
+    [X0, -400],
+    [X1, -400],
+    [X1, sideY(BACK.ceiling, X1)],
     [BACK.r, BACK.ceiling],
     [BACK.l, BACK.ceiling],
-    [0, edge(BACK.ceiling)],
+    [X0, sideY(BACK.ceiling, X0)],
 ]);
 
-const floorEdge = edge(BACK.floor);
-const floorPoly = `${BACK.l},${BACK.floor} ${BACK.r},${BACK.floor} 100,${floorEdge} 100,100 0,100 0,${floorEdge}`;
-// Rubber floor tiles: perspective seams plus cross seams that widen toward the viewer.
-const tileSeams = [
-    ...Array.from({ length: 17 }, (_, i) => {
-        const x = -30 + i * 10;
-        return line(x, BACK.floor, r2(V.x + (x - V.x) * 2), 100);
-    }),
-    ...[74.2, 77.2, 81.5, 87.5, 96].map((y) => line(0, y, 100, y)),
-];
+const FLOOR_END = 500;
+const floorPoly = `${BACK.l},${BACK.floor} ${BACK.r},${BACK.floor} ${X1},${sideY(BACK.floor, X1)} ${X1},${FLOOR_END} ${X0},${FLOOR_END} ${X0},${sideY(BACK.floor, X0)}`;
+// Wood floor: plank seams running toward the vanishing point.
+const toFront = (FLOOR_END - V.y) / (BACK.floor - V.y);
+const planks = Array.from({ length: 45 }, (_, i) => {
+    const x = -60 + i * 5;
+    return line(x, BACK.floor, r2(V.x + (x - V.x) * toFront), FLOOR_END);
+});
+
+// A rug in the middle of the floor, drawn in perspective, with an inset border.
+const onFloor = (x: number, y: number) => r2(V.x + (x - V.x) * ((y - V.y) / (BACK.floor - V.y)));
+const rugQuad = (l: number, r: number, back: number) =>
+    quad([
+        [onFloor(l, back), back],
+        [onFloor(r, back), back],
+        [onFloor(r, 104), 104],
+        [onFloor(l, 104), 104],
+    ]);
+const rug = rugQuad(32, 68, 84);
+const rugBorder = rugQuad(33.6, 66.4, 85.2);
+
+// Moonlight through the glass, falling on the floor a little in front of each opening
+// and slanting away from the moon (which hangs to the left).
+const beam = (l: number, r: number) =>
+    quad([
+        [onFloor(l + 3, 82), 82],
+        [onFloor(r + 3, 82), 82],
+        [onFloor(r + 9, 96), 96],
+        [onFloor(l + 9, 96), 96],
+    ]);
+const beams = [...doors.map((d) => beam(d.glass.x, d.glass.x + d.glass.w)), ...windows.map((w) => beam(w.x, w.x + w.w))];
 
 // White trim.
 const frames: Line[] = [];
@@ -86,16 +92,6 @@ windows.forEach((w) => {
     box(w.x, WIN.top, w.w, WIN.sill - WIN.top);
     frames.push(line(w.split, WIN.top, w.split, WIN.sill));
 });
-const sideFrame = (pts: [number, number][]) => {
-    pts.forEach((p, i) => {
-        const q = pts[(i + 1) % pts.length];
-        frames.push(line(p[0], p[1], q[0], q[1]));
-    });
-    const midX = r2((pts[0][0] + pts[1][0]) / 2);
-    frames.push(line(midX, r2((pts[0][1] + pts[1][1]) / 2), midX, r2((pts[2][1] + pts[3][1]) / 2)));
-};
-sideFrame(leftWin);
-sideFrame(rightWin);
 
 // Doors: outer frame, the meeting stile, and a 3×5 grid of lites in each.
 const doorTrim = [
@@ -117,32 +113,19 @@ for (const { glass: g } of doors) {
 }
 const doorSlab = `${rect(DOOR.x, DOOR.y, DOOR.w, DOOR.h)} ${doors.map((d) => rect(d.glass.x, d.glass.y, d.glass.w, d.glass.h)).join(" ")}`;
 const knobX = r2(DOOR.x + DOOR.w / 2 - 0.65);
+const knobY = r2(DOOR.y + DOOR.h * 0.52);
 
 const corners = [line(BACK.l, BACK.ceiling, BACK.l, BACK.floor), line(BACK.r, BACK.ceiling, BACK.r, BACK.floor)];
 const crown = [
-    line(0, edge(BACK.ceiling), BACK.l, BACK.ceiling),
+    line(X0, sideY(BACK.ceiling, X0), BACK.l, BACK.ceiling),
     line(BACK.l, BACK.ceiling, BACK.r, BACK.ceiling),
-    line(BACK.r, BACK.ceiling, 100, edge(BACK.ceiling)),
+    line(BACK.r, BACK.ceiling, X1, sideY(BACK.ceiling, X1)),
 ];
 const baseboards = [
-    line(0, floorEdge, BACK.l, BACK.floor),
+    line(X0, sideY(BACK.floor, X0), BACK.l, BACK.floor),
     line(BACK.l, BACK.floor, BACK.r, BACK.floor),
-    line(BACK.r, BACK.floor, 100, floorEdge),
+    line(BACK.r, BACK.floor, X1, sideY(BACK.floor, X1)),
 ];
-
-// String lights: one swag between window/door edges, just under the ceiling.
-const SAG = 4;
-const HANG = BACK.ceiling + 0.8;
-const stops = [BACK.l, 25, 38, 51, 64, 76, BACK.r];
-const swags = stops.slice(0, -1).map((x, i) => ({ x0: x, x1: stops[i + 1] }));
-const wire = swags.map((s) => `M${s.x0},${HANG} Q${(s.x0 + s.x1) / 2},${HANG + SAG * 2} ${s.x1},${HANG}`).join(" ");
-const bulbs = swags.flatMap((s, si) =>
-    [0.14, 0.32, 0.5, 0.68, 0.86].map((t, bi) => ({
-        x: r2(s.x0 + (s.x1 - s.x0) * t),
-        y: r2(HANG + 2 * t * (1 - t) * SAG * 2),
-        delay: r2(((si * 5 + bi) * 0.61) % 3),
-    })),
-);
 ---
 
 <svg class="room" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -155,16 +138,25 @@ const bulbs = swags.flatMap((s, si) =>
             <stop offset="1" stop-color="#ffd9a8" stop-opacity="0.05" />
         </linearGradient>
         <linearGradient id="wall-grad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#65503f" />
-            <stop offset="1" stop-color="#7a5e4b" />
+            <stop offset="0" stop-color="#2e201d" />
+            <stop offset="1" stop-color="#3f2b24" />
+        </linearGradient>
+        <linearGradient id="floor-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1f150f" />
+            <stop offset="1" stop-color="#2a1b12" />
+        </linearGradient>
+        <linearGradient id="beam-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#b9c8ff" stop-opacity="0.13" />
+            <stop offset="1" stop-color="#b9c8ff" stop-opacity="0" />
         </linearGradient>
         <clipPath id="floor-clip"><polygon points={floorPoly} /></clipPath>
     </defs>
 
     <g class="glass">
+        {holes.map((h) => <path d={h} />)}
+    </g>
+    <g class="glass-sheen">
         {holes.map((h) => <path d={h} fill="url(#glass-grad)" />)}
-        <path d={quad(leftWin)} fill="url(#glass-grad)" />
-        <path d={quad(rightWin)} fill="url(#glass-grad)" />
     </g>
 
     <path class="ceiling" d={ceiling} />
@@ -172,15 +164,17 @@ const bulbs = swags.flatMap((s, si) =>
     <path class="wall wall-side" d={leftWall} fill-rule="evenodd" />
     <path class="wall wall-side" d={rightWall} fill-rule="evenodd" />
 
-    <polygon class="floor" points={floorPoly} />
-    <g class="tiles" clip-path="url(#floor-clip)">{tileSeams.map((l) => <line {...l} />)}</g>
+    <polygon class="floor" points={floorPoly} fill="url(#floor-grad)" />
+    <g class="planks" clip-path="url(#floor-clip)">{planks.map((l) => <line {...l} />)}</g>
+    <path class="rug" d={rug} clip-path="url(#floor-clip)" />
+    <path class="rug-border" d={rugBorder} clip-path="url(#floor-clip)" />
+    <g class="moonbeams" clip-path="url(#floor-clip)">{beams.map((d) => <path d={d} fill="url(#beam-grad)" />)}</g>
 
     <path class="door-slab" d={doorSlab} fill-rule="evenodd" />
-    <path class="door-chip" d={`M${knobX - 0.2},38 L${knobX + 0.3},37.2 L${knobX + 0.5},40 L${knobX + 0.1},43.5 L${knobX - 0.3},44.5 L${knobX - 0.4},41 Z`} />
     <g class="trim lites">{lites.map((l) => <line {...l} />)}</g>
     <g class="trim door-trim">{doorTrim.map((l) => <line {...l} />)}</g>
-    <line class="knob" x1={knobX} y1="47.5" x2={knobX + 0.01} y2="47.5" />
-    <line class="knob" x1={knobX} y1="44.5" x2={knobX + 0.01} y2="44.5" />
+    <line class="knob" x1={knobX} y1={knobY} x2={knobX + 0.01} y2={knobY} />
+    <line class="knob" x1={knobX} y1={knobY - 3} x2={knobX + 0.01} y2={knobY - 3} />
 
     <g class="trim frames">{frames.map((l) => <line {...l} />)}</g>
     <g class="corners">{corners.map((l) => <line {...l} />)}</g>
@@ -188,7 +182,3 @@ const bulbs = swags.flatMap((s, si) =>
     <g class="trim baseboards">{baseboards.map((l) => <line {...l} />)}</g>
 </svg>
 
-<div class="string-lights" aria-hidden="true">
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d={wire} /></svg>
-    {bulbs.map((b) => <i style={`left:${b.x}%;top:${b.y}%;animation-delay:${b.delay}s`}></i>)}
-</div>

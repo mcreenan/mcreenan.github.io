@@ -51,9 +51,7 @@ export function initTerminal(scene: SceneActions) {
                 ["contact", "say hi"],
                 ["resume", "open the resume (pdf too)"],
                 ["play", "press play on the boombox"],
-                ["stars", "make a wish"],
-                ["fireflies", "wake up the yard"],
-                ["lights", "flip the ceiling light"],
+                ["lights", "flip the lamp"],
                 ["clear", "clean the glass"],
             ];
             for (const [c, d] of rows) print(`  <span class="t-col">${cmd(c)}</span><span class="dim">${d}</span>`);
@@ -103,16 +101,8 @@ export function initTerminal(scene: SceneActions) {
             const playing = await scene.music();
             print(playing ? "♪ now playing: midnight_commit.wav" : "■ paused.", "dim");
         },
-        stars() {
-            scene.stars(10);
-            print("✦ ✧ ✦  make a wish.", "dim");
-        },
         lights() {
             print(scene.lights() ? "lights back on." : "lights off. better for stargazing.", "dim");
-        },
-        fireflies() {
-            scene.fireflies();
-            print("·  ✺  ·  the yard lights up.", "dim");
         },
         clear() {
             out.innerHTML = "";
@@ -172,8 +162,6 @@ export function initTerminal(scene: SceneActions) {
         pause: "play",
         stop: "play",
         vibe: "play",
-        wish: "stars",
-        bugs: "fireflies",
         lamp: "lights",
         cls: "clear",
         "?": "help",
@@ -229,7 +217,7 @@ export function initTerminal(scene: SceneActions) {
         }
     });
 
-    // Clickable commands in output and on the monitor's chin.
+    // Clickable commands in the output.
     document.addEventListener("click", (e) => {
         const btn = (e.target as Element).closest<HTMLElement>("[data-cmd]");
         if (!btn) return;
@@ -255,13 +243,8 @@ export function initTerminal(scene: SceneActions) {
 
     const boot = async () => {
         const lines: [string, string?][] = [
-            ["CREENAN-BIOS v2.0  (c) 1994", "dim"],
-            ["memory test ........ 640K OK", "dim"],
-            ["detecting vibes .... OK", "dim"],
-            ["mounting ~/projects  OK", "dim"],
-            [""],
             ["hey, I'm <b>Matt</b>. I build software in Buffalo, NY."],
-            [`type ${cmd("help")} — or hit a key below.`],
+            [`type ${cmd("help")} to look around.`],
         ];
         for (const [html, cls] of lines) {
             if (!booting) break;
