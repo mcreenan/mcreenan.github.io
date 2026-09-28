@@ -1,35 +1,33 @@
 <button class="me" id="me" type="button" aria-label="Matt, vibing with headphones and a laptop. Click to say hi.">
     <span class="me-bubble" id="me-bubble" aria-live="polite"></span>
     <span class="me-notes" id="me-notes" aria-hidden="true"></span>
-    <svg viewBox="0 0 700 780" aria-hidden="true">
+    <svg viewBox="0 0 700 840" aria-hidden="true">
         <defs>
             <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#3a3752" />
-                <stop offset="1" stop-color="#1a1829" />
+                <stop offset="0" stop-color="#3a3d5c" />
+                <stop offset="1" stop-color="#1a1b2e" />
             </linearGradient>
             <radialGradient id="screen-spill" cx="0.5" cy="1" r="0.8">
-                <stop offset="0" stop-color="#7fe8ff" stop-opacity="0.55" />
-                <stop offset="0.6" stop-color="#7fe8ff" stop-opacity="0.12" />
-                <stop offset="1" stop-color="#7fe8ff" stop-opacity="0" />
+                <stop offset="0" stop-color="#9fc4ff" stop-opacity="0.5" />
+                <stop offset="0.6" stop-color="#9fc4ff" stop-opacity="0.12" />
+                <stop offset="1" stop-color="#9fc4ff" stop-opacity="0" />
             </radialGradient>
-            <linearGradient id="hoodie" x1="0" y1="0.45" x2="0" y2="1">
-                <stop offset="0" stop-color="#966480" />
-                <stop offset="1" stop-color="#5a3552" />
+            <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5d5fb8" />
+                <stop offset="1" stop-color="#34357a" />
             </linearGradient>
             <radialGradient id="beanbag" cx="0.4" cy="0.2" r="0.9">
-                <stop offset="0" stop-color="#3aa3a8" />
-                <stop offset="0.7" stop-color="#1d5f69" />
-                <stop offset="1" stop-color="#123e47" />
+                <stop offset="0" stop-color="#3f7fc4" />
+                <stop offset="0.7" stop-color="#244b86" />
+                <stop offset="1" stop-color="#16305a" />
             </radialGradient>
         </defs>
 
-        <path class="beanbag" d="M-60 820 C -70 640, 60 560, 170 600 C 260 520, 480 520, 560 590 C 680 560, 780 660, 760 820 Z" fill="url(#beanbag)" />
-
-        <path class="me-body" d="M0 780 C 0 610, 40 500, 150 492 L 520 560 C 620 580, 690 650, 700 780 Z" fill="url(#hoodie)" />
+        <path class="beanbag" d="M-60 860 C -80 690, 40 600, 160 640 C 250 570, 470 570, 560 630 C 690 600, 790 700, 760 860 Z" fill="url(#beanbag)" />
 
         <g class="me-head">
             <image href="/images/avatar-cut.webp" x="70" y="80" width="560" height="545" />
-            <ellipse class="me-glow" cx="350" cy="560" rx="300" ry="260" fill="url(#screen-spill)" />
+            <ellipse class="me-glow" cx="350" cy="580" rx="300" ry="260" fill="url(#screen-spill)" />
             <g class="headphones">
                 <path class="hp-band" d="M92 318 C 52 -40, 612 -20, 560 380" />
                 <path class="hp-band-hi" d="M92 318 C 52 -40, 612 -20, 560 380" />
@@ -44,24 +42,35 @@
             </g>
         </g>
 
+        <!-- Hoodie drawn over the neck so the head can bob inside the collar. -->
+        <g class="me-body">
+            <path
+                d="M-30 860 C -34 730, 0 648, 80 612 C 140 590, 190 596, 222 604 Q 300 624, 382 606 C 430 594, 480 594, 528 610 C 612 640, 656 720, 660 860 Z"
+                fill="url(#hoodie)"
+            />
+            <path class="hood" d="M200 606 C 190 590, 150 588, 120 604 M222 604 Q 300 630, 382 606 M382 606 C 420 588, 470 588, 500 606" />
+            <path class="sleeve" d="M86 650 C 110 700, 118 760, 112 860 M520 650 C 500 700, 494 760, 500 860" />
+            <path class="drawstring" d="M268 620 C 266 640, 270 660, 264 686 M334 618 C 338 640, 332 660, 338 684" />
+        </g>
+
         <g class="laptop">
-            <rect x="120" y="590" width="460" height="230" rx="18" fill="url(#lid)" />
-            <rect x="120" y="590" width="460" height="6" rx="3" fill="#7fe8ff" opacity="0.55" />
-            <g class="sticker" transform="rotate(-8 230 670)">
-                <rect x="178" y="638" width="104" height="44" rx="8" fill="#ff4fd8" />
-                <text x="230" y="669" text-anchor="middle" fill="#1a0b2e">SHOUT!</text>
+            <rect x="120" y="646" width="460" height="230" rx="18" fill="url(#lid)" />
+            <rect x="120" y="646" width="460" height="6" rx="3" fill="#9fc4ff" opacity="0.55" />
+            <g class="sticker" transform="rotate(-8 230 720)">
+                <rect x="178" y="688" width="104" height="44" rx="8" fill="#8b7bff" />
+                <text x="230" y="718" text-anchor="middle" fill="#14123a">SHOUT!</text>
             </g>
-            <g class="sticker" transform="rotate(6 440 690)">
-                <circle cx="440" cy="690" r="38" fill="#5ef2ff" />
-                <text x="440" y="704" text-anchor="middle" fill="#0c0a24" font-size="44">λ</text>
+            <g class="sticker" transform="rotate(6 440 740)">
+                <circle cx="440" cy="740" r="38" fill="#7fd4ff" />
+                <text x="440" y="754" text-anchor="middle" fill="#0c0a24" font-size="40">λ</text>
             </g>
-            <g class="sticker" transform="rotate(-3 320 735)">
-                <rect x="252" y="714" width="140" height="40" rx="6" fill="#ffb86b" />
-                <text x="322" y="742" text-anchor="middle" fill="#2a1406">JOSH/ALLEN</text>
+            <g class="sticker" transform="rotate(-3 322 790)">
+                <rect x="246" y="768" width="152" height="40" rx="6" fill="#ffb86b" />
+                <text x="322" y="795" text-anchor="middle" fill="#2a1406" font-size="21">JOSH/ALLEN</text>
             </g>
-            <g class="sticker" transform="rotate(10 530 632)">
-                <rect x="498" y="614" width="64" height="36" rx="18" fill="#1d4ed8" />
-                <text x="530" y="639" text-anchor="middle" fill="#fff">BUF</text>
+            <g class="sticker" transform="rotate(10 530 684)">
+                <rect x="498" y="666" width="64" height="36" rx="18" fill="#1d4ed8" />
+                <text x="530" y="691" text-anchor="middle" fill="#fff" font-size="21">BUF</text>
             </g>
         </g>
     </svg>

@@ -1,16 +1,23 @@
 @font-face {
-    font-family: "VT323";
+    font-family: "Space Grotesk";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300 700;
     font-display: swap;
-    src: url("/fonts/vt323.woff2") format("woff2");
+    src: url("/fonts/space-grotesk.woff2") format("woff2");
 }
 @font-face {
-    font-family: "JetBrains Mono";
+    font-family: "IBM Plex Mono";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/fonts/jetbrains-mono-regular.woff2") format("woff2");
+    src: url("/fonts/ibm-plex-mono-400.woff2") format("woff2");
+}
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/fonts/ibm-plex-mono-500.woff2") format("woff2");
 }
 
 :root {
@@ -19,14 +26,15 @@
     --ink: #e9e6ff;
     --ink-soft: #cbc6ee;
     --ink-mute: #8e89bd;
-    --pink: #ff4fd8;
-    --pink-soft: #ff9be9;
+    --violet: #9d7bff;
+    --violet-soft: #c9baff;
+    --blue: #6ea8ff;
     --cyan: #5ef2ff;
     --cyan-soft: #7fe8ff;
     --amber: #ffb86b;
     --phosphor: #8dff9e;
-    --pixel: "VT323", ui-monospace, monospace;
-    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
     --desk: clamp(96px, 17svh, 160px);
     --dim: 0;
     --px: 0;
@@ -95,8 +103,8 @@ button {
     justify-content: space-between;
     gap: 16px;
     padding: 12px clamp(16px, 4vw, 40px);
-    font-family: var(--pixel);
-    font-size: 21px;
+    font-family: var(--mono);
+    font-size: 14px;
     line-height: 1;
     transition:
         background 0.3s,
@@ -114,8 +122,8 @@ button {
 }
 .topnav a:hover,
 .topnav a.active {
-    color: var(--pink-soft);
-    text-shadow: 0 0 8px var(--pink);
+    color: var(--violet-soft);
+    text-shadow: 0 0 8px var(--violet);
 }
 .topnav ul {
     display: flex;
@@ -376,10 +384,10 @@ button {
     animation: twinkle 3s ease-in-out infinite;
 }
 .string-lights i:nth-child(3n) {
-    background: #ffb8d9;
+    background: #d2c4ff;
     box-shadow:
-        0 0 6px 2px rgba(255, 150, 210, 0.8),
-        0 0 22px 6px rgba(255, 110, 200, 0.3);
+        0 0 6px 2px rgba(180, 150, 255, 0.8),
+        0 0 22px 6px rgba(140, 110, 255, 0.3);
 }
 .string-lights i:nth-child(4n) {
     background: #b8f4ff;
@@ -484,15 +492,16 @@ button {
 }
 .marquee-name {
     display: block;
-    font-family: var(--pixel);
-    font-size: clamp(40px, min(7.5vw, 10svh), 100px);
-    letter-spacing: 0.04em;
-    color: #ffe6fb;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, min(6.4vw, 9svh), 90px);
+    letter-spacing: 0.01em;
+    color: #eef0ff;
     text-shadow:
-        0 0 4px #fff,
-        0 0 12px var(--pink),
-        0 0 30px var(--pink),
-        0 0 60px rgba(255, 79, 216, 0.6);
+        0 0 3px #fff,
+        0 0 10px var(--violet),
+        0 0 26px #7a7dff,
+        0 0 60px rgba(90, 120, 255, 0.6);
     animation: neon 9s infinite;
 }
 .marquee-sub {
@@ -519,7 +528,7 @@ button {
     background:
         radial-gradient(closest-side, transparent 62%, rgba(255, 184, 107, 0.35) 63% 66%, transparent 67%),
         radial-gradient(closest-side, transparent 78%, rgba(94, 242, 255, 0.28) 79% 82%, transparent 83%),
-        radial-gradient(closest-side, #5a2a4e, #3e1d3e 70%, #2a1530 96%, transparent 100%);
+        radial-gradient(closest-side, #302c66, #232050 70%, #19173a 96%, transparent 100%);
     opacity: 0.9;
 }
 .snake-plant {
@@ -693,9 +702,9 @@ button {
     display: flex;
     flex-direction: column;
     padding: 16px 22px 14px;
-    font-family: var(--pixel);
-    font-size: clamp(17px, 1.7vw, 21px);
-    line-height: 1.2;
+    font-family: var(--mono);
+    font-size: clamp(12.5px, 1.1vw, 14.5px);
+    line-height: 1.5;
     color: var(--phosphor);
     text-shadow:
         0 0 3px rgba(141, 255, 158, 0.7),
@@ -750,8 +759,8 @@ button {
     margin: 4px 0 0;
 }
 .ps1 {
-    color: var(--pink-soft);
-    text-shadow: 0 0 8px rgba(255, 79, 216, 0.6);
+    color: var(--violet-soft);
+    text-shadow: 0 0 8px rgba(157, 123, 255, 0.6);
     white-space: nowrap;
 }
 .term-line input {
@@ -820,9 +829,10 @@ button {
     background: #d6ccb2;
     box-shadow: 0 3px 0 #8c836b;
     color: #3a3528;
-    font-family: var(--pixel);
-    font-size: 17px;
-    line-height: 1.1;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.5;
     cursor: pointer;
 }
 .crt-keys button:hover {
@@ -853,9 +863,10 @@ button {
     padding: 8px 10px;
     background: #ffe26b;
     color: #3a2a00;
-    font-family: var(--pixel);
-    font-size: 19px;
-    line-height: 1;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.1;
     transform: rotate(7deg);
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
 }
@@ -900,7 +911,7 @@ button {
     box-shadow:
         inset 0 2px 0 rgba(255, 255, 255, 0.12),
         0 14px 30px rgba(0, 0, 0, 0.6),
-        0 0 30px rgba(255, 79, 216, 0.45);
+        0 0 30px rgba(157, 123, 255, 0.45);
 }
 .bb-speaker {
     display: grid;
@@ -931,15 +942,15 @@ button {
     border-radius: 3px;
     background: #0b1a1f;
     color: var(--cyan-soft);
-    font-family: var(--pixel);
-    font-size: clamp(11px, 1vw, 14px);
-    line-height: 1.2;
+    font-family: var(--mono);
+    font-size: clamp(9px, 0.75vw, 11px);
+    line-height: 1.5;
     white-space: nowrap;
     text-shadow: 0 0 6px var(--cyan);
 }
 .playing .bb-lcd {
-    color: var(--pink-soft);
-    text-shadow: 0 0 6px var(--pink);
+    color: var(--violet-soft);
+    text-shadow: 0 0 6px var(--violet);
 }
 .playing .bb-lcd span {
     display: inline-block;
@@ -972,7 +983,7 @@ button {
     width: 34px;
     height: 38px;
     border-radius: 3px 3px 9px 9px;
-    background: linear-gradient(90deg, #e04a7c, #ff79a8 40%, #c43a6a);
+    background: linear-gradient(90deg, #3d5bd6, #7090ff 40%, #2f47b5);
 }
 .mug::after {
     content: "";
@@ -981,7 +992,7 @@ button {
     top: 8px;
     width: 12px;
     height: 18px;
-    border: 4px solid #d04272;
+    border: 4px solid #3653c9;
     border-left: 0;
     border-radius: 0 10px 10px 0;
 }
@@ -1053,18 +1064,37 @@ button {
 }
 .hp-ring {
     fill: none;
-    stroke: var(--pink);
+    stroke: var(--violet);
     stroke-width: 5;
-    filter: drop-shadow(0 0 6px var(--pink));
+    filter: drop-shadow(0 0 6px var(--violet));
     opacity: 0.8;
 }
 .playing .hp-ring {
     opacity: 1;
     stroke-width: calc(5px + var(--level) * 5px);
 }
+.hood {
+    fill: none;
+    stroke: #4a4ca0;
+    stroke-width: 16;
+    stroke-linecap: round;
+}
+.sleeve {
+    fill: none;
+    stroke: rgba(20, 20, 60, 0.35);
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+.drawstring {
+    fill: none;
+    stroke: #d8dcff;
+    stroke-width: 5;
+    stroke-linecap: round;
+}
 .sticker text {
-    font-family: var(--pixel);
-    font-size: 30px;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 24px;
 }
 .me-bubble {
     position: absolute;
@@ -1075,11 +1105,12 @@ button {
     border-radius: 10px;
     background: #fff6d6;
     color: #1a1030;
-    font-family: var(--pixel);
-    font-size: 21px;
-    line-height: 1.1;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.3;
     white-space: nowrap;
-    box-shadow: 4px 4px 0 var(--pink);
+    box-shadow: 4px 4px 0 var(--violet);
     opacity: 0;
     transform: translateY(8px) scale(0.95);
     transform-origin: bottom right;
@@ -1109,8 +1140,8 @@ button {
     position: absolute;
     bottom: 30%;
     font-size: clamp(18px, 2vw, 28px);
-    color: var(--pink-soft);
-    text-shadow: 0 0 10px var(--pink);
+    color: var(--violet-soft);
+    text-shadow: 0 0 10px var(--violet);
     animation: note 3s ease-out forwards;
 }
 .me-notes span:nth-child(even) {
@@ -1125,8 +1156,8 @@ button {
     z-index: 12;
     transform: translateX(-50%);
     color: rgba(233, 230, 255, 0.55);
-    font-family: var(--pixel);
-    font-size: 19px;
+    font-family: var(--mono);
+    font-size: 13px;
     text-decoration: none;
     animation: cue 2.4s ease-in-out infinite;
     opacity: calc(1 - var(--dim) * 5);
@@ -1169,15 +1200,15 @@ main {
 }
 .prompt {
     margin: 0 0 28px;
-    font-family: var(--pixel);
-    font-size: clamp(28px, 3.6vw, 40px);
-    font-weight: 400;
-    line-height: 1.1;
+    font-family: var(--mono);
+    font-size: clamp(19px, 2.2vw, 24px);
+    font-weight: 500;
+    line-height: 1.3;
     color: var(--ink);
 }
 .prompt span {
-    color: var(--pink-soft);
-    text-shadow: 0 0 12px rgba(255, 79, 216, 0.6);
+    color: var(--violet-soft);
+    text-shadow: 0 0 12px rgba(157, 123, 255, 0.6);
 }
 .prompt::after {
     content: "▌";
@@ -1209,10 +1240,10 @@ main {
     flex: none;
     width: 128px;
     height: auto;
-    border: 3px solid var(--pink);
+    border: 3px solid var(--violet);
     border-radius: 50%;
     background: #1c1c1e;
-    box-shadow: 0 0 30px rgba(255, 79, 216, 0.4);
+    box-shadow: 0 0 30px rgba(157, 123, 255, 0.4);
 }
 
 .now-card {
@@ -1221,7 +1252,7 @@ main {
     padding: 24px 28px;
     border: 1px solid rgba(127, 232, 255, 0.35);
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(94, 242, 255, 0.08), rgba(255, 79, 216, 0.1));
+    background: linear-gradient(135deg, rgba(110, 168, 255, 0.1), rgba(157, 123, 255, 0.12));
     box-shadow: 0 0 40px rgba(94, 242, 255, 0.08);
 }
 .now-card p {
@@ -1235,16 +1266,17 @@ main {
 }
 .now-role {
     margin-top: 6px !important;
-    font-family: var(--pixel);
-    font-size: clamp(30px, 4vw, 42px);
-    line-height: 1.05;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(28px, 3.6vw, 40px);
+    line-height: 1.1;
     color: #fff;
 }
 .now-company {
-    font-family: var(--pixel);
-    font-size: 26px;
-    line-height: 1.2;
-    color: var(--pink-soft);
+    font-family: var(--display);
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--violet-soft);
 }
 .now-company span {
     color: var(--ink-mute);
@@ -1277,10 +1309,10 @@ main {
 .project a:hover,
 .project a:focus-visible {
     transform: translateY(-4px);
-    border-color: var(--pink);
+    border-color: var(--violet);
     box-shadow:
-        0 0 0 1px var(--pink),
-        0 12px 40px rgba(255, 79, 216, 0.25);
+        0 0 0 1px var(--violet),
+        0 12px 40px rgba(157, 123, 255, 0.25);
 }
 .project-head {
     display: flex;
@@ -1288,9 +1320,10 @@ main {
     justify-content: space-between;
 }
 .project-name {
-    font-family: var(--pixel);
-    font-size: 32px;
-    line-height: 1;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 1.15;
     color: #fff;
 }
 .project-arrow {
@@ -1328,7 +1361,7 @@ main {
     margin: 0;
     padding: 0;
     list-style: none;
-    border-left: 2px solid rgba(255, 79, 216, 0.35);
+    border-left: 2px solid rgba(157, 123, 255, 0.35);
 }
 .timeline > li {
     position: relative;
@@ -1345,8 +1378,8 @@ main {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: var(--pink);
-    box-shadow: 0 0 10px var(--pink);
+    background: var(--violet);
+    box-shadow: 0 0 10px var(--violet);
 }
 .timeline > li:first-child::before {
     background: var(--cyan);
@@ -1354,17 +1387,17 @@ main {
     animation: pulse 2s ease-in-out infinite;
 }
 .tl-dates {
-    font-family: var(--pixel);
-    font-size: 21px;
-    line-height: 1.3;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.8;
     color: var(--amber);
 }
 .timeline h3 {
     margin: 0;
-    font-family: var(--pixel);
-    font-size: 27px;
-    font-weight: 400;
-    line-height: 1.1;
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
     color: #fff;
 }
 .tl-company {
@@ -1397,9 +1430,10 @@ main {
     border: 2px solid var(--cyan);
     border-radius: 8px;
     color: var(--cyan);
-    font-family: var(--pixel);
-    font-size: 22px;
-    line-height: 1.1;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
     text-decoration: none;
     box-shadow: 0 0 14px rgba(94, 242, 255, 0.3);
     transition:
@@ -1433,9 +1467,9 @@ main {
     border-bottom: 1px dashed rgba(233, 230, 255, 0.14);
 }
 .contact span {
-    font-family: var(--pixel);
-    font-size: 23px;
-    color: var(--pink-soft);
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--violet-soft);
 }
 .contact a {
     color: var(--ink);
@@ -1705,9 +1739,13 @@ main {
     }
     .topnav {
         justify-content: center;
-        font-size: 19px;
+        font-size: 12.5px;
+    }
+    .topnav ul {
+        gap: 13px;
     }
     .marquee {
+        top: 50px;
         white-space: normal;
         width: 92vw;
     }
