@@ -7,7 +7,7 @@ The home page is a single page. A cozy night-time room scene is pinned behind it
 ## Tech stack
 
 - Astro 4, TypeScript (strict), plain CSS (no Tailwind)
-- Bun for packages and scripts (`bun.lock`)
+- Node 24 (what CI builds with); Bun for packages and scripts (`bun.lock`)
 - `@astrojs/sitemap` for the sitemap
 - `astro-pdf` renders `/resume` to `/resume.pdf` with Puppeteer during the build
 - Fonts are self-hosted in `public/fonts/`
